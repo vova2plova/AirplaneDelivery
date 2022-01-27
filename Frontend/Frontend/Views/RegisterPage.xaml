@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodels="clr-namespace:Frontend.ViewModels" x:DataType="viewmodels:RegisterViewModel"
+             mc:Ignorable="d"
+             x:Class="Frontend.Views.RegisterPage">
+    <ContentPage.Content>
+            <StackLayout Padding="10,0,10,0">
+                <Label TextTransform="Uppercase" FontSize="24" Text="Регистрация" Margin="0,100,0,100" HorizontalOptions="Center"/>
+                <Editor Keyboard="Telephone" Placeholder="Логин"/>
+                <Entry IsPassword="True" Placeholder="Пароль"/>
+                <Entry IsPassword="True" Placeholder="Повторите пароль"/>
+                <Button VerticalOptions="Center" Text="Регистрация" Command="{Binding RegisterCommand}"/>
+                <Button VerticalOptions="Center" Text="У меня уже есть аккаунт" Command="{Binding RouteToLogin}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

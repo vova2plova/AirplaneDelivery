@@ -6,25 +6,26 @@ using Xamarin.Forms;
 
 namespace Frontend.ViewModels
 {
-    public class LoginViewModel : BaseViewModel
+    internal class RegisterViewModel : BaseViewModel
     {
-        public Command LoginCommand { get; }
-        public Command RedirectRegister { get; }
+        public Command RegisterCommand { get; }
+        public Command RouteToLogin { get; }
 
-        public LoginViewModel()
+        public RegisterViewModel()
         {
-            LoginCommand = new Command(OnLoginClicked);
-            RedirectRegister = new Command(OnRegisterClicked);
+            RouteToLogin = new Command(OnLogginClicked);
+            RegisterCommand = new Command(OnRegisterClicked);
         }
 
         private async void OnRegisterClicked(object obj)
         {
-            await Shell.Current.GoToAsync($"//{nameof(RegisterPage)}");
-        }
-        private async void OnLoginClicked(object obj)
-        {
             // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
             await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
+        }
+
+        private async void OnLogginClicked(object obj)
+        {
+            await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
         }
     }
 }
