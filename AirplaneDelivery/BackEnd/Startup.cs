@@ -1,4 +1,3 @@
-using DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -12,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Npgsql;
+using Microsoft.EntityFrameworkCore;
 
 namespace BackEnd
 {
@@ -20,7 +21,6 @@ namespace BackEnd
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            Class1 
         }
 
         public IConfiguration Configuration { get; }
@@ -30,6 +30,8 @@ namespace BackEnd
         {
 
             services.AddControllers();
+            services.AddDbContext<DatabaseContext>(options =>
+                options.UseNpgsql("Host=localhost;Username=postgres;Password=admin;Database=AirplaneDelivery"));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BackEnd", Version = "v1" });
