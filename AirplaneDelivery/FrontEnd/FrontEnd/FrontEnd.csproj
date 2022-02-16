@@ -11,26 +11,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.1" />
   </ItemGroup>
 
   <ItemGroup>
-<<<<<<< HEAD
-    <ProjectReference Include="..\..\DAL\DAL.csproj" />
-=======
+
     <Folder Include="ViewsModels\" />
     <Folder Include="Service\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\DAL\DAL.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="Views\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
->>>>>>> 8bd1e02f9e23b6f5cc5f61a7e6ffe0063dd94b27
+
   </ItemGroup>
 </Project>

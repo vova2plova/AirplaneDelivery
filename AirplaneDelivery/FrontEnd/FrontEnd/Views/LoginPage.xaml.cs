@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FrontEnd.ViewsModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace FrontEnd.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginPage : ContentPage
     {
+        private readonly LoginPageViewModel _vm = new LoginPageViewModel();
         public LoginPage()
         {
             InitializeComponent();
