@@ -17,5 +17,12 @@ namespace FrontEnd.Views
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
         }
+         private void Enter(object sender, EventArgs e)
+        {
+            string loginTxt = login.Text;
+            string pass = password.Text;
+            
+
+        }
     }
 }
