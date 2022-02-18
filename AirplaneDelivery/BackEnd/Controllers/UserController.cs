@@ -14,13 +14,20 @@ namespace BackEnd.Controllers
     public class UserController : ControllerBase
     {
         private DatabaseContext db;
-        [HttpPost("SignUp")]
-        public ActionResult<User> SignUp(string login, string password)
+
+        public UserController(DatabaseContext context)
         {
-            var _user = db.Users.FirstOrDefault(x => x.Name == login);
+            db = context;
+        }
+
+        [HttpPost("SignUp")]
+        public ActionResult<User> SignUp(User user)
+        {
+            
+            var _user = db.Users.FirstOrDefault(x => x.Name == user.Name);
             if (_user == null)
             {
-                var newUser = new User { Name = login, Password = password };
+                var newUser = new User { Name = user.Name, Password = user.Password };
                 db.Users.Add(newUser);
                 db.SaveChanges();
                 return Ok(newUser);
