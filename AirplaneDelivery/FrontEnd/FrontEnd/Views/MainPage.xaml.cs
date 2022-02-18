@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FrontEnd.ViewsModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -10,9 +11,19 @@ namespace FrontEnd
 {
     public partial class MainPage : ContentPage
     {
+        private readonly MainPageViewModel _vm = new MainPageViewModel();
         public MainPage()
         {
             InitializeComponent();
+            BindingContext = _vm;
+
         }
+        protected override async void OnAppearing()
+        {
+            await _vm.LoadData();
+            base.OnAppearing();
+        }
+
+        
     }
 }

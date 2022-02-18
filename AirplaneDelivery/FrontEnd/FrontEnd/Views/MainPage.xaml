@@ -1,28 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:_vm="clr-namespace:FrontEnd.ViewsModels"
              x:Class="FrontEnd.MainPage">
+    <ContentPage.BindingContext>
+        <_vm:MainPageViewModel x:Name="vm"/>
+    </ContentPage.BindingContext>
+    <ScrollView >
+        <StackLayout BindableLayout.ItemsSource="{Binding Product}">
 
-    <StackLayout>
-        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-            <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
-        </Frame>
-        <StackLayout  BindableLayout.ItemsSource="{Binding MenuList}">
+
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Orientation="Horizontal" Spacing="20">
-                        <Grid Grid.Row="2" HorizontalOptions="Start" VerticalOptions="Start"
-                                      HeightRequest="46" WidthRequest="46">
-                            <Ellipse WidthRequest="46" HeightRequest="46" Fill="White" Opacity="0.5"/>
-                            <Image Source="{Binding Icon}" WidthRequest="22" HeightRequest="22"
+                    <StackLayout>
+                        <Grid HorizontalOptions="Center">
+                            <Image Source="{Binding Images}" WidthRequest="170" HeightRequest="130"
                                             HorizontalOptions="Center" VerticalOptions="Center" />
                         </Grid>
-                        <Label Text="{Binding Name}" TextColor="White" FontSize="16" VerticalOptions="Center"
-                                        FontFamily="NormalFont"/>
+                        <Label Margin="10,0,0,0" Text="{Binding Name }" TextColor="Black" FontSize="24" VerticalOptions="Center"  />
+                        <Label Margin="0,0,50,0" HorizontalOptions="End" FontSize="18" Text="{Binding Price, StringFormat={}{0} руб.}"></Label>
+                        <Label Text="&#10;"></Label>
                     </StackLayout>
                 </DataTemplate>
             </BindableLayout.ItemTemplate>
-        </StackLayout>
-    </StackLayout>
 
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
