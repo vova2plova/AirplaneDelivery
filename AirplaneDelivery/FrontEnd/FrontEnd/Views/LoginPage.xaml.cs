@@ -13,17 +13,27 @@ namespace FrontEnd.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginPage : ContentPage
     {
-        private readonly LoginPageViewModel _vm = new LoginPageViewModel();
+        private LoginPageViewModel _vm = new LoginPageViewModel();
         public LoginPage()
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
         }
-         private void Enter(object sender, EventArgs e)
+         private async  void Enter(object sender, EventArgs e)
         {
             string loginTxt = login.Text;
             string pass = password.Text;
-            
+            var getLoginDetails = await _vm.SignInUser(loginTxt, pass);
+            if (getLoginDetails != null)
+            {
+                Navigation.InsertPageBefore(new MainPage(), this);
+                await Navigation.PopAsync();
+            }
+            else
+            {
+               
+            }
+
 
         }
     }
