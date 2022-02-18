@@ -15,5 +15,6 @@ namespace DAL.Models
         public float Proteins { get; set; }
         public float Fats { get; set; }
         public float Carbohydrates { get; set; }
+        public string Images { get; set; }
     }
 }
