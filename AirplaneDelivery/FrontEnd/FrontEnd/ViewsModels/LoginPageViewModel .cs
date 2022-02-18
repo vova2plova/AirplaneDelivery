@@ -7,10 +7,10 @@ namespace FrontEnd.ViewsModels
 {
     class LoginPageViewModel
     {
-        const string url = "http://0e4a-176-52-96-105.ngrok.io/User/";
+        const string url = "http://10.0.2.2:5000/User/";
         private HttpClient GetCLient()
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = new HttpClient(GetInsecureHandler());
             return client;
         }
         public  async Task<User> SignInUser(string login, string password)
@@ -27,6 +27,17 @@ namespace FrontEnd.ViewsModels
             {
                 return null;
             }
+        }
+        public HttpClientHandler GetInsecureHandler()
+        {
+            HttpClientHandler handler = new HttpClientHandler();
+            handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) =>
+            {
+                if (cert.Issuer.Equals("CN=localhost"))
+                    return true;
+                return errors == System.Net.Security.SslPolicyErrors.None;
+            };
+            return handler;
         }
     }
 }
