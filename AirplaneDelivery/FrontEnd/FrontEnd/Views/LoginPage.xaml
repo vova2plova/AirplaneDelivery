@@ -18,7 +18,7 @@
                         <Label Text="Вход" TextColor="Black" FontSize="20" FontAttributes="Bold"/>
                         <StackLayout Spacing="10">
                             <Grid WidthRequest="160" Padding="10,0" BackgroundColor="Transparent" HorizontalOptions="Start">
-                                <Entry Placeholder="Номер телефона" x:Name="login" Keyboard="Telephone" FontSize="12"/>
+                                <Entry Placeholder="Номер телефона" x:Name="login"  FontSize="12"/>
                             </Grid>
                             <Grid WidthRequest="160" Padding="10,0" BackgroundColor="Transparent" HorizontalOptions="Start">
                                 <Entry Placeholder="Пароль" x:Name="password" FontSize="12"/>
