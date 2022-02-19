@@ -2,19 +2,16 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
 
 namespace DAL.Models
 {
-    public class User
+    public class Cart
     {
         [Key]
         public int Id { get; set; }
-        [Required]
-        public string Name { get; set; }
-        [Required]
-        public string Password { get; set; }
-        public Cart Cart { get; set; }
         [ForeignKey("UserHistoryFK")]
-        public List<Cart> HistoryOfOrders { get; set; }
+        public int UserId { get; set; }
+        public List<Product> Products { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace BackEnd.Controllers
 {
@@ -18,9 +19,9 @@ namespace BackEnd.Controllers
         }
 
         [HttpGet("GetAllProducts")]
-        public List<Product> GetAllProducts()
+        public Task<List<Product>> GetAllProducts()
         {
-            return db.Products.ToList();
+            return db.Products.ToListAsync();
         }
     }
 }
