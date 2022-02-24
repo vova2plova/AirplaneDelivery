@@ -7,7 +7,7 @@ namespace FrontEnd.ViewsModels
 {
     class LoginPageViewModel
     {
-        const string url = "http://10.0.2.2:5000/User/";
+        const string url = "http://10.0.0.2:5000/User/";
         private HttpClient GetCLient()
         {
             HttpClient client = new HttpClient(GetInsecureHandler());
@@ -16,7 +16,7 @@ namespace FrontEnd.ViewsModels
         public  async Task<User> SignInUser(string login, string password)
         {
             HttpClient client = GetCLient();
-            var result = await client.GetAsync(url + $"SignIn?login={login}&password={password}");
+            var result = await client.GetAsync(url + $"SignIn?login={login}&password={password}").ConfigureAwait(false);
             var json = await result.Content.ReadAsStringAsync();
             var user = JsonConvert.DeserializeObject<User>(json);
             if (user != null)

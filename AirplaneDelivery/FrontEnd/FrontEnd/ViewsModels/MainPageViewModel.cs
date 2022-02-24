@@ -11,7 +11,7 @@ namespace FrontEnd.ViewsModels
 {
     class MainPageViewModel
     {
-        const string url = "http://10.0.2.2:5000/Product/";
+        const string url = "http://10.0.0.2:5000/Product/";
         private HttpClient GetCLient()
         {
             HttpClient client = new HttpClient(GetInsecureHandler());
