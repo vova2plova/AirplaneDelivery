@@ -28,7 +28,7 @@ namespace BackEnd.Migrations
                 oldNullable: true);
 
             migrationBuilder.CreateTable(
-                name: "Cart",
+                name: "Carts",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -38,15 +38,15 @@ namespace BackEnd.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cart", x => x.Id);
+                    table.PrimaryKey("PK_Carts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Cart_Users_UserHistoryFK",
+                        name: "FK_Carts_Users_UserHistoryFK",
                         column: x => x.UserHistoryFK,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Cart_Users_UserId",
+                        name: "FK_Carts_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -62,6 +62,7 @@ namespace BackEnd.Migrations
                     Name = table.Column<string>(type: "text", nullable: false),
                     Price = table.Column<int>(type: "integer", nullable: false),
                     Category = table.Column<string>(type: "text", nullable: false),
+                    Count = table.Column<int>(type: "integer", nullable: false),
                     Kkal = table.Column<float>(type: "real", nullable: false),
                     Proteins = table.Column<float>(type: "real", nullable: false),
                     Fats = table.Column<float>(type: "real", nullable: false),
@@ -74,21 +75,21 @@ namespace BackEnd.Migrations
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Products_Cart_CartId",
+                        name: "FK_Products_Carts_CartId",
                         column: x => x.CartId,
-                        principalTable: "Cart",
+                        principalTable: "Carts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cart_UserHistoryFK",
-                table: "Cart",
+                name: "IX_Carts_UserHistoryFK",
+                table: "Carts",
                 column: "UserHistoryFK");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cart_UserId",
-                table: "Cart",
+                name: "IX_Carts_UserId",
+                table: "Carts",
                 column: "UserId",
                 unique: true);
 
@@ -104,7 +105,7 @@ namespace BackEnd.Migrations
                 name: "Products");
 
             migrationBuilder.DropTable(
-                name: "Cart");
+                name: "Carts");
 
             migrationBuilder.AlterColumn<string>(
                 name: "Password",

@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BackEnd.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20220225130052_CartAndProduct")]
+    [Migration("20220225132702_CartAndProduct")]
     partial class CartAndProduct
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,7 +41,7 @@ namespace BackEnd.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Cart");
+                    b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("DAL.Models.Product", b =>
@@ -60,6 +60,9 @@ namespace BackEnd.Migrations
                     b.Property<string>("Category")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("integer");
 
                     b.Property<int>("CountInStorage")
                         .HasColumnType("integer");

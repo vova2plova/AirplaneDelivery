@@ -39,7 +39,7 @@ namespace BackEnd.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Cart");
+                    b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("DAL.Models.Product", b =>
@@ -58,6 +58,9 @@ namespace BackEnd.Migrations
                     b.Property<string>("Category")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("integer");
 
                     b.Property<int>("CountInStorage")
                         .HasColumnType("integer");

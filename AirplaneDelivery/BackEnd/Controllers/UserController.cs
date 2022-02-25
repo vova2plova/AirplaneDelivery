@@ -43,5 +43,25 @@ namespace BackEnd.Controllers
                 return (Ok(_user));
             return NotFound("Пользователь не найден");
         }
+
+        [HttpPut("AddProductToUserCart/UserId/{id}")]
+        public ActionResult AddProductTocart(Product product, int UserId)
+        {
+            var user = db.Users.FirstOrDefault(u => u.Id == UserId);
+            var productInCart = user.Cart.Products.FirstOrDefault(p => p.Name == product.Name);
+            if (productInCart != null)
+            {
+                product.Count += productInCart.Count;
+                user.Cart.Products.Remove(productInCart);
+            }
+            if (db.Products.FirstOrDefault(p => p.Name == product.Name).CountInStorage > product.Count)
+            {
+                db.Products.FirstOrDefault(p => p.Name == product.Name).CountInStorage -= product.Count;
+                db.Users.FirstOrDefault(u => u.Id == UserId).Cart.Products.Add(product);
+                db.SaveChangesAsync();
+                return Ok();
+            }
+            return BadRequest("На складе меньше продуктов, чем вы добавили в корзину");
+        }
     }
 }
