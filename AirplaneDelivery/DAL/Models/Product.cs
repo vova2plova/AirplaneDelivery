@@ -14,6 +14,8 @@ namespace DAL.Models
         [Required]
         public int Price { get; set; }
         [Required]
+        public string Category { get; set; }
+        [Required]
         public float Kkal { get; set; }
         [Required]
         public float Proteins { get; set; }

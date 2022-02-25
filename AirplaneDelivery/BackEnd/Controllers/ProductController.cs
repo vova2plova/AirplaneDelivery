@@ -23,5 +23,16 @@ namespace BackEnd.Controllers
         {
             return db.Products.ToListAsync();
         }
+
+        [HttpGet("GetProductByCategory/{Category}")]
+        public Task<List<Product>> GetProductsByCategory(string Category)
+        {
+            return db.Products.Where(p => p.Category == Category).ToListAsync();
+        }
+        [HttpGet("GetProductById/{id}")]
+        public Task<Product> GetProductById(int id)
+        {
+            return db.Products.FirstOrDefaultAsync(p => p.Id == id);
+        }
     }
 }
