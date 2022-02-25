@@ -7,7 +7,7 @@ namespace FrontEnd.ViewsModels
 {
     class LoginPageViewModel
     {
-        const string url = "http://10.0.0.2:5000/User/";
+        const string url = "http://192.168.1.5:5000/User/";
         private HttpClient GetCLient()
         {
             HttpClient client = new HttpClient(GetInsecureHandler());
