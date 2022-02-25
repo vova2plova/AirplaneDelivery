@@ -55,6 +55,10 @@ namespace BackEnd.Migrations
                     b.Property<int?>("CartId")
                         .HasColumnType("integer");
 
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<int>("CountInStorage")
                         .HasColumnType("integer");
 
