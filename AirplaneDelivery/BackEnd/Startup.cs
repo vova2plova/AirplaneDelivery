@@ -31,7 +31,7 @@ namespace BackEnd
 
             services.AddControllers();
             services.AddDbContext<DatabaseContext>(options =>
-                options.UseNpgsql("Host=localhost;Username=postgres;Password=42a98w06;Database=AirplaneDelivery1"));
+                options.UseNpgsql("Host=localhost;Username=postgres;Password=42a98w06;Database=AirplaneDeliveryDB"));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BackEnd", Version = "v1" });
