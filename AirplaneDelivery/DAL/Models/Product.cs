@@ -15,17 +15,18 @@ namespace DAL.Models
         public int Price { get; set; }
         [Required]
         public string Category { get; set; }
-        [Required]
+        public int Count { get; set; }
+        
         public float Kkal { get; set; }
-        [Required]
+        
         public float Proteins { get; set; }
-        [Required]
+        
         public float Fats { get; set; }
-        [Required]
+        
         public float Carbohydrates { get; set; }
-        [Required]
+        
         public string Images { get; set; }
-        [Required]
+        
         public int CountInStorage { get; set; }
     }
 }

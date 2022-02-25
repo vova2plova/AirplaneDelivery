@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BackEnd.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20220225132702_CartAndProduct")]
+    [Migration("20220225185026_CartAndProduct")]
     partial class CartAndProduct
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,7 +71,6 @@ namespace BackEnd.Migrations
                         .HasColumnType("real");
 
                     b.Property<string>("Images")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<float>("Kkal")

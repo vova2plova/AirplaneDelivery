@@ -67,7 +67,7 @@ namespace BackEnd.Migrations
                     Proteins = table.Column<float>(type: "real", nullable: false),
                     Fats = table.Column<float>(type: "real", nullable: false),
                     Carbohydrates = table.Column<float>(type: "real", nullable: false),
-                    Images = table.Column<string>(type: "text", nullable: false),
+                    Images = table.Column<string>(type: "text", nullable: true),
                     CountInStorage = table.Column<int>(type: "integer", nullable: false),
                     CartId = table.Column<int>(type: "integer", nullable: true)
                 },

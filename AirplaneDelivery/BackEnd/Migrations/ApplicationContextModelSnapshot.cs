@@ -69,7 +69,6 @@ namespace BackEnd.Migrations
                         .HasColumnType("real");
 
                     b.Property<string>("Images")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<float>("Kkal")
