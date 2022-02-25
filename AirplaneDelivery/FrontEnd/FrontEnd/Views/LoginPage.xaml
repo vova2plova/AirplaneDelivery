@@ -1,11 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct = "http://xamarin.com/schemas/2020/toolkit"   
              x:Class="FrontEnd.Views.LoginPage">
     <ContentPage.Content>
-        <StackLayout>
+       
             <Grid BackgroundColor="#E5EBEE">
-                
+                <xct:MediaElement x:Name="mediaelement" Source="ms-appx:///video.mp4" ShowsPlaybackControls="False" 
+                      IsLooping="True" Aspect="AspectFill" AutoPlay="True" 
+                      HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
                <BoxView Opacity="0.3" BackgroundColor="#00C2FF"/>
                 <Grid HeightRequest="520" Margin="30">
                     <Path Fill="White" Aspect="Uniform" HorizontalOptions="Center"
@@ -45,6 +48,6 @@
                     </StackLayout>
                 </Grid>
             </Grid>
-        </StackLayout>
+        
     </ContentPage.Content>
 </ContentPage>

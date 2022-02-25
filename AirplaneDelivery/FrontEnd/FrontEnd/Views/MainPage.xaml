@@ -16,8 +16,8 @@
                             <Image Source="{Binding Images}" WidthRequest="170" HeightRequest="130"
                                             HorizontalOptions="Center" VerticalOptions="Center" />
                         </Grid>
-                        <Label Margin="10,0,0,0" Text="{Binding Name }" TextColor="Black" FontSize="24" VerticalOptions="Center"  />
-                        <Label Margin="0,0,50,0" HorizontalOptions="End" FontSize="18" Text="{Binding Price, StringFormat={}{0} руб.}"></Label>
+                        <Label Margin="10,0,0,0" Text="{Binding Name}" TextColor="Black" FontSize="24" VerticalOptions="Center"  />
+                       
                         <Label Text="&#10;"></Label>
                     </StackLayout>
                 </DataTemplate>

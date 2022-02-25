@@ -10,7 +10,7 @@ namespace FrontEnd
         public App()
         {
             InitializeComponent();
-
+            Device.SetFlags(new string[] { "MediaElement_Experimental" });
             MainPage = new NavigationPage(new LoginPage());
 
         }
