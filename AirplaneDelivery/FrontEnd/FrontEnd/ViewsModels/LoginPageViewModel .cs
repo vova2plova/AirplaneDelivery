@@ -1,33 +1,23 @@
 ﻿using DAL.Models;
+using FrontEnd.OnlineServices;
 using Newtonsoft.Json;
+using System;
+using System.Globalization;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
+using FrontEnd.Views;
+using Acr.UserDialogs;
 
 namespace FrontEnd.ViewsModels
 {
     class LoginPageViewModel
     {
-        const string url = "http://192.168.1.5:5000/User/";
-        private HttpClient GetCLient()
-        {
-            HttpClient client = new HttpClient(GetInsecureHandler());
-            return client;
-        }
-        public  async Task<User> SignInUser(string login, string password)
-        {
-            HttpClient client = GetCLient();
-            var result = await client.GetAsync(url + $"SignIn?login={login}&password={password}").ConfigureAwait(false);
-            var json = await result.Content.ReadAsStringAsync();
-            var user = JsonConvert.DeserializeObject<User>(json);
-            if (user != null)
-            {
-                return user;
-            }
-            else
-            {
-                return null;
-            }
-        }
+        
+        
+        
+     
         public HttpClientHandler GetInsecureHandler()
         {
             HttpClientHandler handler = new HttpClientHandler();
@@ -39,5 +29,24 @@ namespace FrontEnd.ViewsModels
             };
             return handler;
         }
+
+        public ICommand EnterCommand => new Command<User>(async value =>
+        {
+
+            Console.WriteLine(value.Name, value.Password);
+            var response = await MainService.UserService.SignIn(value.Name,value.Password);
+            if (response.IsSuccessStatusCode)
+            {
+
+                Console.WriteLine(value.Name, value.Password);
+            }
+            else
+            {
+                UserDialogs.Instance.Toast("Введены неверные данные!");
+            }
+        });
+
+     
     }
+
 }

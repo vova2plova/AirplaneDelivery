@@ -1,4 +1,5 @@
-﻿using FrontEnd.ViewsModels;
+﻿using DAL.Models;
+using FrontEnd.ViewsModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,22 +20,24 @@ namespace FrontEnd.Views
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
         }
-         private async  void Enter(object sender, EventArgs e)
+
+         public async  void ok()
         {
-            string loginTxt = login.Text;
-            string pass = password.Text;
-            var getLoginDetails = await _vm.SignInUser(loginTxt, pass);
-            if (getLoginDetails != null)
-            {
+        
                 Navigation.InsertPageBefore(new MainPage(), this);
                 await Navigation.PopAsync();
-            }
-            else
+     
+        }
+
+        private void Enter(object sender, EventArgs e)
+        {
+            _vm.EnterCommand.Execute(new User()
             {
-               
-            }
-
-
+                Name = login.Text,
+                Password = password.Text
+                
+            });
+            Console.WriteLine(login.Text, password.Text);
         }
     }
 }
