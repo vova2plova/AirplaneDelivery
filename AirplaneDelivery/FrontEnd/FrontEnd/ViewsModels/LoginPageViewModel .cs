@@ -14,9 +14,9 @@ namespace FrontEnd.ViewsModels
 {
     class LoginPageViewModel
     {
-        
-        
-        
+
+
+        private LoginPage loginPage;
      
         public HttpClientHandler GetInsecureHandler()
         {
@@ -38,7 +38,7 @@ namespace FrontEnd.ViewsModels
             if (response.IsSuccessStatusCode)
             {
 
-                Console.WriteLine(value.Name, value.Password);
+                loginPage.ok();
             }
             else
             {
@@ -46,7 +46,22 @@ namespace FrontEnd.ViewsModels
             }
         });
 
-     
+        public ICommand EnterCommand2 => new Command<User>(async value =>
+        {
+
+
+            var response = await MainService.UserService.SignUp(value);
+            if (response.IsSuccessStatusCode)
+            {
+
+                UserDialogs.Instance.Toast("Вы успешно зарегестрировались!");
+                loginPage.CloseSignUp();
+            }
+            else
+            {
+                UserDialogs.Instance.Toast("Пользовтаель с таким номером телефона уже зарегестрирован!");
+            }
+        });
     }
 
 }

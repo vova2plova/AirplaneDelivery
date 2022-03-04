@@ -11,7 +11,11 @@ namespace FrontEnd.OnlineServices.UserService
     {
         [Get("/User/SignIn?login={login}&password={password}")]
         Task<ApiResponse<User>> SignIn(string login, string password);
-       
-        
+
+        [Post("/User/SignUp")]
+        Task<ApiResponse<User>> SignUp(
+            [Body] User newUser);
+
+
     }
 }

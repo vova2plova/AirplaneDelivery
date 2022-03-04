@@ -14,7 +14,11 @@ namespace FrontEnd.OnlineServices.UserService
            return await InstanceInterface.SignIn(login, password);
         }
 
-     
+        public async Task<ApiResponse<User>> SignUp(User newUser)
+        {
+            return await InstanceInterface.SignUp(newUser);
+        }
+
     }
 
 }

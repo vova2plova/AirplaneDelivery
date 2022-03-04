@@ -1,4 +1,5 @@
-﻿using DAL.Models;
+﻿using Acr.UserDialogs;
+using DAL.Models;
 using FrontEnd.ViewsModels;
 using System;
 using System.Collections.Generic;
@@ -39,8 +40,22 @@ namespace FrontEnd.Views
             });
            
         }
-        
-        
+        private void Enter2(object sender, EventArgs e)
+        {
+            if (passwordNew == passwordRepeat)
+            {
+                _vm.EnterCommand2.Execute(new User()
+                {
+                    Name = loginNew.Text,
+                    Password = passwordNew.Text
+                });
+            }
+            else
+            {
+                UserDialogs.Instance.Toast("Введенные пароли не одинаковые!");
+            }
+        }
+
         private void OpenSignUp()
         {
             
@@ -50,7 +65,7 @@ namespace FrontEnd.Views
             SignUpView.Animate("anim", callback, -260, 0, 16, 300, Easing.CubicInOut);
         }
 
-        private void CloseSignUp()
+        public void CloseSignUp()
         {
             Action<double> callback = input => SignUpView.TranslationX = input;
             SignUpView.Animate("anim", callback, 0, -260, 16, 300, Easing.CubicInOut);
