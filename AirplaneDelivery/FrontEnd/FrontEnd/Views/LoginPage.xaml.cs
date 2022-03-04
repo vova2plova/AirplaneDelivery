@@ -21,23 +21,52 @@ namespace FrontEnd.Views
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
-         public async  void ok()
+        public async void ok()
         {
-        
-                Navigation.InsertPageBefore(new MainPage(), this);
-                await Navigation.PopAsync();
-     
+
+            Navigation.InsertPageBefore(new MainPage(), this);
+            await Navigation.PopAsync();
+
         }
 
         private void Enter(object sender, EventArgs e)
         {
             _vm.EnterCommand.Execute(new User()
-            {
+            {    
                 Name = login.Text,
                 Password = password.Text
-                
+
             });
-            Console.WriteLine(login.Text, password.Text);
+           
+        }
+        
+        
+        private void OpenSignUp()
+        {
+            
+            SignUpFrame.IsVisible = true;
+
+            Action<double> callback = input => SignUpView.TranslationX = input;
+            SignUpView.Animate("anim", callback, -260, 0, 16, 300, Easing.CubicInOut);
+        }
+
+        private void CloseSignUp()
+        {
+            Action<double> callback = input => SignUpView.TranslationX = input;
+            SignUpView.Animate("anim", callback, 0, -260, 16, 300, Easing.CubicInOut);
+            
+            SignUpFrame.IsVisible = false;
+        }
+
+        
+        private void SignUpTapped(object sender, EventArgs e)
+        {
+            OpenSignUp();
+        }
+
+        private void OverlayTapped(object sender, EventArgs e)
+        {
+           CloseSignUp();
         }
     }
 }
