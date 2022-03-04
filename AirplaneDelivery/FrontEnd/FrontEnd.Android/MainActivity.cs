@@ -5,6 +5,7 @@ using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
 using Acr.UserDialogs;
+using Android.Content;
 
 namespace FrontEnd.Droid
 {
@@ -24,6 +25,14 @@ namespace FrontEnd.Droid
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+        public override void OnBackPressed()
+        {
+            Intent startMain = new Intent(Intent.ActionMain);
+            startMain.AddCategory(Intent.CategoryHome);
+            startMain.SetFlags(ActivityFlags.NewTask);
+            StartActivity(startMain);
+
         }
     }
 }
