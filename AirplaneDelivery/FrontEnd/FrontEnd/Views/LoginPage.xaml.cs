@@ -42,7 +42,7 @@ namespace FrontEnd.Views
         }
         private void Enter2(object sender, EventArgs e)
         {
-            if (passwordNew == passwordRepeat)
+            if (passwordNew.Text == passwordRepeat.Text)
             {
                 _vm.EnterCommand2.Execute(new User()
                 {

@@ -59,7 +59,7 @@ namespace FrontEnd.ViewsModels
             }
             else
             {
-                UserDialogs.Instance.Toast("Пользовтаель с таким номером телефона уже зарегестрирован!");
+                UserDialogs.Instance.Toast("Пользовтаель с таким номером телефона уже зарегистрирован!");
             }
         });
     }
