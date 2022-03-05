@@ -1,4 +1,5 @@
-﻿using FrontEnd.Views;
+﻿using FrontEnd.OnlineServices;
+using FrontEnd.Views;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -11,6 +12,7 @@ namespace FrontEnd
         {
             InitializeComponent();
             Device.SetFlags(new string[] { "MediaElement_Experimental" });
+            MainService.Init();
             MainPage = new NavigationPage(new LoginPage());
 
         }

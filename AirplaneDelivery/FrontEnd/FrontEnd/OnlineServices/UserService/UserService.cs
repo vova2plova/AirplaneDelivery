@@ -16,7 +16,8 @@ namespace FrontEnd.OnlineServices.UserService
 
         public async Task<ApiResponse<User>> SignUp(User newUser)
         {
-            return await InstanceInterface.SignUp(newUser);
+            var user = InstanceInterface.SignUp(newUser);
+            return await user;
         }
 
     }

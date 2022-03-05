@@ -30,7 +30,8 @@ namespace BackEnd.Controllers
                 var newUser = new User { Name = user.Name, Password = user.Password };
                 db.Users.Add(newUser);
                 db.SaveChanges();
-                return Ok(db.Users.FirstOrDefault(x => x.Name == newUser.Name));
+                var userWithId = db.Users.FirstOrDefault(x => x.Name == newUser.Name);
+                return (userWithId);
             }
             return BadRequest("Пользователь с такими данными уже зарегистрирован");
         }

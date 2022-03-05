@@ -32,12 +32,13 @@ namespace FrontEnd.Views
 
         private void Enter(object sender, EventArgs e)
         {
-            _vm.EnterCommand.Execute(new User()
-            {    
+            var user = new User()
+            {
                 Name = login.Text,
                 Password = password.Text
 
-            });
+            };
+            _vm.EnterCommand.Execute(user);
            
         }
         private void Enter2(object sender, EventArgs e)

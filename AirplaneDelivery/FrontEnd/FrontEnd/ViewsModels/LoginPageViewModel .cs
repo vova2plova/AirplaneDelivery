@@ -32,8 +32,6 @@ namespace FrontEnd.ViewsModels
 
         public ICommand EnterCommand => new Command<User>(async value =>
         {
-
-            Console.WriteLine(value.Name, value.Password);
             var response = await MainService.UserService.SignIn(value.Name,value.Password);
             if (response.IsSuccessStatusCode)
             {
@@ -48,14 +46,11 @@ namespace FrontEnd.ViewsModels
 
         public ICommand EnterCommand2 => new Command<User>(async value =>
         {
-
-
             var response = await MainService.UserService.SignUp(value);
             if (response.IsSuccessStatusCode)
             {
-
                 UserDialogs.Instance.Toast("Вы успешно зарегестрировались!");
-                loginPage.CloseSignUp();
+                loginPage.ok();
             }
             else
             {
