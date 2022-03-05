@@ -45,24 +45,20 @@ namespace BackEnd.Controllers
             return NotFound("Пользователь не найден");
         }
 
-        [HttpPut("AddProductToUserCart/UserId/{id}")]
-        public ActionResult AddProductTocart(Product product, int UserId)
+        [HttpPost("AddProductToUserCart/UserId/{id}")]
+        public ActionResult AddProductTocart(List<Product> product, int idUser)
         {
-            var user = db.Users.FirstOrDefault(u => u.Id == UserId);
-            var productInCart = user.Cart.Products.FirstOrDefault(p => p.Name == product.Name);
-            if (productInCart != null)
+            var user = db.Users.FirstOrDefault(u => u.Id == idUser);
+            try
             {
-                product.Count += productInCart.Count;
-                user.Cart.Products.Remove(productInCart);
-            }
-            if (db.Products.FirstOrDefault(p => p.Name == product.Name).CountInStorage > product.Count)
-            {
-                db.Products.FirstOrDefault(p => p.Name == product.Name).CountInStorage -= product.Count;
-                db.Users.FirstOrDefault(u => u.Id == UserId).Cart.Products.Add(product);
+                user.Cart = new Cart{ Products = product , UserId = idUser};
                 db.SaveChangesAsync();
-                return Ok();
+                return Ok("Продукты добавлены в корзину");
             }
-            return BadRequest("На складе меньше продуктов, чем вы добавили в корзину");
+            catch
+            {
+                return BadRequest("Ошибка");
+            }
         }
     }
 }
