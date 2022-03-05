@@ -45,11 +45,12 @@ namespace FrontEnd.Views
         {
             if (passwordNew.Text == passwordRepeat.Text)
             {
-                _vm.EnterCommand2.Execute(new User()
+                var user = new User()
                 {
                     Name = loginNew.Text,
                     Password = passwordNew.Text
-                });
+                };
+                _vm.EnterCommand2.Execute(user);
             }
             else
             {
