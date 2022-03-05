@@ -1,6 +1,7 @@
 ﻿using FrontEnd.OnlineServices;
 using FrontEnd.Views;
 using System;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,8 +14,10 @@ namespace FrontEnd
             InitializeComponent();
             Device.SetFlags(new string[] { "MediaElement_Experimental" });
             MainService.Init();
-            MainPage = new NavigationPage(new LoginPage());
-
+            if (Preferences.Get("user_id", 0) == 0)
+                MainPage = new NavigationPage(new LoginPage());
+            else
+                MainPage = new NavigationPage(new MainPage());
         }
 
         protected override void OnStart()

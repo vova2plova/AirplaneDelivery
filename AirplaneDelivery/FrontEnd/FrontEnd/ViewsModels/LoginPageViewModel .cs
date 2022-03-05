@@ -15,8 +15,6 @@ namespace FrontEnd.ViewsModels
 {
     class LoginPageViewModel
     {
-        /*private LoginPage loginPage;*/
-
         public ICommand EnterCommand => new Command<User>(async value =>
         {
             var response = await MainService.UserService.SignIn(value.Name,value.Password);
@@ -24,7 +22,6 @@ namespace FrontEnd.ViewsModels
             {
                 Application.Current.MainPage = new NavigationPage(new MainPage());
                 Preferences.Set("user_id", response.Content.Id);
-                /*loginPage.ok();*/
             }
             else
             {
