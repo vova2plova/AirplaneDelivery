@@ -16,14 +16,45 @@ namespace FrontEnd
         {
             InitializeComponent();
             BindingContext = _vm;
-
+            NavigationPage.SetHasNavigationBar(this, false);
         }
-        protected override async void OnAppearing()
+
+        private void OpenMenu()
         {
-            await _vm.LoadData();
-            base.OnAppearing();
+            MenuGrid.IsVisible = true;
+
+            Action<double> callback = input => MenuView.TranslationX = input;
+            MenuView.Animate("anim", callback, -260, 0, 16, 300, Easing.CubicInOut);
         }
 
-        
+        private void CloseMenu()
+        {
+            Action<double> callback = input => MenuView.TranslationX = input;
+            MenuView.Animate("anim", callback, 0, -260, 16, 300, Easing.CubicInOut);
+
+            MenuGrid.IsVisible = false;
+        }
+
+
+        private void MenuTapped(object sender, EventArgs e)
+        {
+            OpenMenu();
+        }
+
+        private void OverlayTapped(object sender, EventArgs e)
+        {
+            CloseMenu();
+        }
+        private void SeachTapped(object sender, EventArgs e)
+        {
+            searchIcon.IsVisible = false;
+            searchbar.IsVisible = true;
+        }
+        private void SeachAnTapped(object sender, EventArgs e)
+        {
+            searchIcon.IsVisible = true;
+            searchbar.IsVisible = false;
+        }
+
     }
 }

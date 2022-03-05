@@ -3,46 +3,39 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace FrontEnd.ViewsModels
 {
-    class MainPageViewModel
+    class MainPageViewModel : INotifyPropertyChanged
     {
-        const string url = "http://192.168.1.86:5000/Product/";
-        private HttpClient GetCLient()
+        public MainPageViewModel()
         {
-            HttpClient client = new HttpClient(GetInsecureHandler());
-            return client;
+
+            MenuList = GetMenus();
         }
-        public HttpClientHandler GetInsecureHandler()
+        private ObservableCollection<Menu> menuList;
+        public ObservableCollection<Menu> MenuList
         {
-            HttpClientHandler handler = new HttpClientHandler();
-            handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) =>
+            get { return menuList; }
+            set { menuList = value; }
+        }
+        private ObservableCollection<Menu> GetMenus()
+        {
+            return new ObservableCollection<Menu>
             {
-                if (cert.Issuer.Equals("CN=localhost"))
-                    return true;
-                return errors == System.Net.Security.SslPolicyErrors.None;
+                new Menu { Icon = "order.png", Name = "Мои заказы"},
+                new Menu { Icon = "settings.png", Name = "Мои данные"}
             };
-            return handler;
         }
-
-        private ObservableCollection<Product> _product;
-        public ObservableCollection<Product> Product
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string name = "")
         {
-            get { return _product; }
-            set { _product = value; }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
-        public async Task LoadData()
-        {
-            var client = new HttpClient(GetInsecureHandler());
-            var result = await client.GetAsync(url+ "GetAllProducts").ConfigureAwait(false);
-            var json = await result.Content.ReadAsStringAsync();
-            var products = JsonConvert.DeserializeObject<ObservableCollection<Product>>(json);
-            Product = products;
-        }
-
     }
 }

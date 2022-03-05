@@ -5,24 +5,101 @@
     <ContentPage.BindingContext>
         <_vm:MainPageViewModel x:Name="vm"/>
     </ContentPage.BindingContext>
-    <ScrollView >
-        <StackLayout BindableLayout.ItemsSource="{Binding Product}">
+    <ContentPage.Content>
+        <ScrollView Margin="0,-40,0,0">
 
+            <Grid BackgroundColor="White">
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="SeachAnTapped"></TapGestureRecognizer>
+                </Grid.GestureRecognizers>
+                <Path
+                    Margin="0,30,0,0"
+                    Data="M119 240C331.4 126.8 198.167 16.8333 105 -24L-179.5 -71L-261 436.5C-222.833 418.167 -93.4 353.2 119 240Z"
+                    Fill="#E6E6FA" />
+                <Grid ColumnDefinitions="*, auto, auto" RowDefinitions="auto, auto, 200, 330, auto, 330">
+                    <Grid
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="20,70,0,0"
+                        ColumnDefinitions="25, *">
+                        <StackLayout Spacing="5">
+                            <Image Source="menu">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="MenuTapped"></TapGestureRecognizer>
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </StackLayout>
+                    </Grid>
+                    <Image
+                        x:Name="searchIcon"
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        Margin="0,0,30,8"
+                        HeightRequest="18"
+                        Source="search"
+                        VerticalOptions="End"
+                        WidthRequest="18">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="SeachTapped"></TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <SearchBar  
+                        x:Name="searchbar"
+                        Margin="50,0,0,0"
+                        Placeholder="Поищем..."
+                        VerticalOptions="End"      
+                        IsVisible="false"
+                        >
 
-            <BindableLayout.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout>
-                        <Grid HorizontalOptions="Center">
-                            <Image Source="{Binding Images}" WidthRequest="170" HeightRequest="130"
+                    </SearchBar>
+
+                    <Label
+                        Grid.Row="1"
+                        Grid.ColumnSpan="3"
+                        Margin="20,30,0,0">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span FontSize="23" Text="Продукты&#10;" />
+                                <Span FontSize="23" Text="Специально&#10;" />
+                                <Span FontSize="23" Text="Для тебя"></Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                </Grid>
+                <Grid x:Name="MenuGrid" IsVisible="False">
+                    <BoxView x:Name="MenuOverlay"  BackgroundColor="Black" Opacity="0.2" >
+                        <BoxView.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OverlayTapped"/>
+                        </BoxView.GestureRecognizers>
+                    </BoxView>
+                    <Grid x:Name="MenuView" WidthRequest="260" HeightRequest="0" BackgroundColor="#696969" 
+                  HorizontalOptions="Start" TranslationX="-2">
+                        <Grid.Clip>
+                            <PathGeometry Figures="M139 260C351.4 146.8 218.167 36.8333 125 -4L-159.5 -51L-241 456.5C-202.833 438.167 -73.4 373.2 139 260Z"/>
+                        </Grid.Clip>
+                        <StackLayout Margin="30,100" Spacing="20" BindableLayout.ItemsSource="{Binding MenuList}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout Orientation="Horizontal" Spacing="20">
+                                        <Grid Grid.Row="2" HorizontalOptions="Start" VerticalOptions="Start"
+                                      HeightRequest="46" WidthRequest="46">
+                                            <Ellipse WidthRequest="46" HeightRequest="46" Fill="White" Opacity="0.5"/>
+                                            <Image Source="{Binding Icon}" WidthRequest="22" HeightRequest="22"
                                             HorizontalOptions="Center" VerticalOptions="Center" />
-                        </Grid>
-                        <Label Margin="10,0,0,0" Text="{Binding Name}" TextColor="Black" FontSize="24" VerticalOptions="Center"  />
-                       
-                        <Label Text="&#10;"></Label>
-                    </StackLayout>
-                </DataTemplate>
-            </BindableLayout.ItemTemplate>
+                                        </Grid>
+                                        <Label Text="{Binding Name}" TextColor="White" FontSize="16" VerticalOptions="Center"
+                                        FontFamily="NormalFont"/>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                    </Grid>
+                </Grid>
+            </Grid>
 
-        </StackLayout>
-    </ScrollView>
+        </ScrollView>
+
+
+    </ContentPage.Content>
 </ContentPage>
