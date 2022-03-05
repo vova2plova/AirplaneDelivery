@@ -6,6 +6,6 @@ namespace FrontEnd.OnlineServices
 {
     class AppSettings
     {
-        public static string BaseURI = "http://192.168.1.86:5000";
+        public static string BaseURI = "http://192.168.1.5:5000";
     }
 }
