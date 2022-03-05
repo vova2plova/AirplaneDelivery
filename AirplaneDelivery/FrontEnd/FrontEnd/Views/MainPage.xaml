@@ -76,7 +76,7 @@
                     <Grid x:Name="MenuView" WidthRequest="260" HeightRequest="0" BackgroundColor="#696969" 
                   HorizontalOptions="Start" TranslationX="-2">
                         <Grid.Clip>
-                            <PathGeometry Figures="M139 260C351.4 146.8 218.167 36.8333 125 -4L-159.5 -51L-241 456.5C-202.833 438.167 -73.4 373.2 139 260Z"/>
+                            <PathGeometry Figures="M149 290C351.4 156.8 218.167 36.8333 125 -1L-159.5 -52L-341 596.5C-344.833 578.167 -83.4 400.2 183 270Z"/>
                         </Grid.Clip>
                         <StackLayout Margin="30,100" Spacing="20" BindableLayout.ItemsSource="{Binding MenuList}">
                             <BindableLayout.ItemTemplate>

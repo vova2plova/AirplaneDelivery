@@ -29,7 +29,8 @@ namespace FrontEnd.ViewsModels
             return new ObservableCollection<Menu>
             {
                 new Menu { Icon = "order.png", Name = "Мои заказы"},
-                new Menu { Icon = "settings.png", Name = "Мои данные"}
+                new Menu { Icon = "settings.png", Name = "Мои данные"},
+                new Menu{Icon = "settings.png", Name = "Выйти из аккаунта"}
             };
         }
         public event PropertyChangedEventHandler PropertyChanged;
