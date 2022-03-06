@@ -34,7 +34,7 @@ namespace FrontEnd.Views
         {
             var user = new User()
             {
-                Name = login.Text,
+                Number = login.Text,
                 Password = password.Text
 
             };
@@ -47,7 +47,7 @@ namespace FrontEnd.Views
             {
                 var user = new User()
                 {
-                    Name = loginNew.Text,
+                    Number = loginNew.Text,
                     Password = passwordNew.Text
                 };
                 _vm.EnterCommand2.Execute(user);

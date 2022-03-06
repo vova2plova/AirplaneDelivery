@@ -9,13 +9,9 @@ namespace DAL.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required]
         public string Name { get; set; }
-        [Required]
         public int Price { get; set; }
-        [Required]
         public string Category { get; set; }
-        public int Count { get; set; }
         
         public float Kkal { get; set; }
         
@@ -28,5 +24,7 @@ namespace DAL.Models
         public string Images { get; set; }
         
         public int CountInStorage { get; set; }
+
+        public List<Spot> Spot { get; set; }
     }
 }

@@ -3,17 +3,15 @@ using System;
 using BackEnd;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace BackEnd.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20220225185026_CartAndProduct")]
-    partial class CartAndProduct
+    partial class DatabaseContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,18 +26,12 @@ namespace BackEnd.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int?>("UserHistoryFK")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserHistoryFK");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
                     b.ToTable("Carts");
                 });
@@ -54,15 +46,8 @@ namespace BackEnd.Migrations
                     b.Property<float>("Carbohydrates")
                         .HasColumnType("real");
 
-                    b.Property<int?>("CartId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Category")
-                        .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<int>("Count")
-                        .HasColumnType("integer");
 
                     b.Property<int>("CountInStorage")
                         .HasColumnType("integer");
@@ -77,7 +62,6 @@ namespace BackEnd.Migrations
                         .HasColumnType("real");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("Price")
@@ -88,9 +72,32 @@ namespace BackEnd.Migrations
 
                     b.HasKey("Id");
 
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("DAL.Models.Spot", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int?>("CartId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("ProductsId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
                     b.HasIndex("CartId");
 
-                    b.ToTable("Products");
+                    b.HasIndex("ProductsId");
+
+                    b.ToTable("Spots");
                 });
 
             modelBuilder.Entity("DAL.Models.User", b =>
@@ -100,15 +107,24 @@ namespace BackEnd.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+                    b.Property<string>("Adres")
+                        .HasColumnType("text");
+
+                    b.Property<int?>("CartId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Name")
-                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Number")
                         .HasColumnType("text");
 
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CartId");
 
                     b.ToTable("Users");
                 });
@@ -117,31 +133,43 @@ namespace BackEnd.Migrations
                 {
                     b.HasOne("DAL.Models.User", null)
                         .WithMany("HistoryOfOrders")
-                        .HasForeignKey("UserHistoryFK");
-
-                    b.HasOne("DAL.Models.User", null)
-                        .WithOne("Cart")
-                        .HasForeignKey("DAL.Models.Cart", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("DAL.Models.Product", b =>
+            modelBuilder.Entity("DAL.Models.Spot", b =>
                 {
                     b.HasOne("DAL.Models.Cart", null)
-                        .WithMany("Products")
+                        .WithMany("Spots")
                         .HasForeignKey("CartId");
-                });
 
-            modelBuilder.Entity("DAL.Models.Cart", b =>
-                {
+                    b.HasOne("DAL.Models.Product", "Products")
+                        .WithMany("Spot")
+                        .HasForeignKey("ProductsId");
+
                     b.Navigation("Products");
                 });
 
             modelBuilder.Entity("DAL.Models.User", b =>
                 {
-                    b.Navigation("Cart");
+                    b.HasOne("DAL.Models.Cart", "Cart")
+                        .WithMany()
+                        .HasForeignKey("CartId");
 
+                    b.Navigation("Cart");
+                });
+
+            modelBuilder.Entity("DAL.Models.Cart", b =>
+                {
+                    b.Navigation("Spots");
+                });
+
+            modelBuilder.Entity("DAL.Models.Product", b =>
+                {
+                    b.Navigation("Spot");
+                });
+
+            modelBuilder.Entity("DAL.Models.User", b =>
+                {
                     b.Navigation("HistoryOfOrders");
                 });
 #pragma warning restore 612, 618
