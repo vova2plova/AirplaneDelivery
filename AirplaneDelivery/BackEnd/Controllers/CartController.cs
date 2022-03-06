@@ -65,5 +65,19 @@ namespace BackEnd.Controllers
             }
             return BadRequest();
         }
+
+        [HttpDelete("ClearCart/{UserId}")]
+        public async Task<ActionResult> ClearCart(int UserId)
+        {
+            var user = db.Users.FirstOrDefault(u => u.Id == UserId);
+            if (user != null)
+            {
+                var cart = user.Cart;
+                cart.Spots.Clear();
+                await db.SaveChangesAsync();
+                return Ok();
+            }
+            return BadRequest();
+        }
     }
 }
