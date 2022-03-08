@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:_vm="clr-namespace:FrontEnd.ViewsModels"
+             xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:shadows="clr-namespace:Sharpnado.Shades;assembly=Sharpnado.Shadows"
              x:Class="FrontEnd.MainPage">
     <ContentPage.BindingContext>
         <_vm:MainPageViewModel x:Name="vm"/>
@@ -35,10 +37,11 @@
                         Grid.Row="0"
                         Grid.Column="2"
                         Margin="0,0,30,8"
-                        HeightRequest="18"
+                        HeightRequest="20"
                         Source="search"
                         VerticalOptions="End"
-                        WidthRequest="18">
+                        WidthRequest="20"
+                        >
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Tapped="SeachTapped"></TapGestureRecognizer>
                         </Image.GestureRecognizers>
@@ -65,7 +68,67 @@
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
-
+                    <CollectionView
+                        x:Name="listGroups"
+                        Grid.Row="2"
+                        Grid.ColumnSpan="3"
+                        Margin="20,10,0,0"
+                        HorizontalScrollBarVisibility="Never"
+                        ItemsSource="{Binding Groups}"
+                        SelectionMode="None">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="0" Orientation="Horizontal" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <shadows:Shadows CornerRadius="40" Shades="{shadows:SingleShade BlurRadius=22, Offset='5,2', Opacity=0.2, Color=Gray }">
+                                    <pancake:PancakeView
+                                        Margin="0,15,15,15"
+                                        Padding="0,0,0,25"
+                                        BackgroundColor="{Binding backgroundColor}"
+                                        CornerRadius="40"
+                                        HasShadow="False"
+                                        WidthRequest="85">
+                                        <Grid RowDefinitions="auto, *">
+                                            <pancake:PancakeView
+                                                Grid.Row="0"
+                                                Margin="12,12,12,0"
+                                                Padding="0"
+                                                BackgroundColor="Wheat"
+                                                BorderColor="Gray"
+                                                BorderThickness="1"
+                                                CornerRadius="30"
+                                                HeightRequest="60"
+                                                HorizontalOptions="Center"
+                                                IsClippedToBounds="True"
+                                                WidthRequest="60">
+                                                <Image
+                                                    Aspect="AspectFit"
+                                                    HeightRequest="30"
+                                                    HorizontalOptions="CenterAndExpand"
+                                                    Source="{Binding image}"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="30" />
+                                            </pancake:PancakeView>
+                                            <Label
+                                                Grid.Row="1"
+                                                FontSize="16"
+                                                HorizontalOptions="FillAndExpand"
+                                                HorizontalTextAlignment="Center"
+                                                Text="{Binding description}"
+                                                VerticalOptions="EndAndExpand" />
+                                        </Grid>
+                                        <pancake:PancakeView.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                Command="{Binding Path=BindingContext.SelectGroupCommand, Source={x:Reference listGroups}}"
+                                                CommandParameter="{Binding .}"
+                                                NumberOfTapsRequired="1" />
+                                        </pancake:PancakeView.GestureRecognizers>
+                                    </pancake:PancakeView>
+                                </shadows:Shadows>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
                 </Grid>
                 <Grid x:Name="MenuGrid" IsVisible="False">
                     <BoxView x:Name="MenuOverlay"  BackgroundColor="Black" Opacity="0.2" >
@@ -78,22 +141,34 @@
                         <Grid.Clip>
                             <PathGeometry Figures="M149 290C351.4 156.8 218.167 36.8333 125 -1L-159.5 -52L-341 596.5C-344.833 578.167 -83.4 400.2 183 270Z"/>
                         </Grid.Clip>
-                        <StackLayout Margin="30,100" Spacing="20" BindableLayout.ItemsSource="{Binding MenuList}">
+                        <StackLayout x:Name="List" Margin="30,100" Spacing="20" BindableLayout.ItemsSource="{Binding MenuList}">
+                            
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
                                     <StackLayout Orientation="Horizontal" Spacing="20">
                                         <Grid Grid.Row="2" HorizontalOptions="Start" VerticalOptions="Start"
                                       HeightRequest="46" WidthRequest="46">
                                             <Ellipse WidthRequest="46" HeightRequest="46" Fill="White" Opacity="0.5"/>
-                                            <Image Source="{Binding Icon}" WidthRequest="22" HeightRequest="22"
+                                            <Image Source="{Binding Icon}"  WidthRequest="22" HeightRequest="22"
                                             HorizontalOptions="Center" VerticalOptions="Center" />
                                         </Grid>
                                         <Label Text="{Binding Name}" TextColor="White" FontSize="16" VerticalOptions="Center"
-                                        FontFamily="NormalFont"/>
+                                        FontFamily="NormalFont"></Label>
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer  Command="{Binding BindingContext.SelectMenuCommand ,
+                                                                        Source={x:Reference List}}"
+                                                                         CommandParameter="{Binding Id}"
+                                                                         NumberOfTapsRequired="1">
+
+                                            </TapGestureRecognizer>
+                                        </StackLayout.GestureRecognizers>
                                     </StackLayout>
+                                    
                                 </DataTemplate>
                             </BindableLayout.ItemTemplate>
+                            
                         </StackLayout>
+                        
                     </Grid>
                 </Grid>
             </Grid>

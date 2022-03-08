@@ -4,10 +4,10 @@ using System.Text;
 
 namespace FrontEnd.ViewsModels
 {
-    class Menu
+   public class Menu
     {
-        public string Name { get; set; }
-        public string Icon { get; set; }
-
+     public   int Id { get; set; }
+     public   string Name { get; set; }
+     public   string Icon { get; set; }
     }
 }

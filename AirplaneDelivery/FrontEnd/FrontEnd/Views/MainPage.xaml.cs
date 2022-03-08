@@ -1,10 +1,12 @@
-﻿using FrontEnd.ViewsModels;
+﻿using FrontEnd.Views;
+using FrontEnd.ViewsModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace FrontEnd
@@ -54,7 +56,9 @@ namespace FrontEnd
         {
             searchIcon.IsVisible = true;
             searchbar.IsVisible = false;
+            
         }
 
+      
     }
 }
