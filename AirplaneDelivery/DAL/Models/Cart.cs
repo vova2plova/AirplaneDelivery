@@ -8,10 +8,7 @@ namespace DAL.Models
 {
     public class Cart
     {
-        [Key]
         public int Id { get; set; }
-        [ForeignKey("UserHistoryFK")]
-        public int UserId { get; set; }
-        public List<Product> Products { get; set; }
+        public List<Spot> Spots {get;set ;}
     }
 }

@@ -24,13 +24,13 @@ namespace BackEnd.Controllers
         public ActionResult<User> SignUp(User user)
         {
             
-            var _user = db.Users.FirstOrDefault(x => x.Name == user.Name);
+            var _user = db.Users.FirstOrDefault(x => x.Number == user.Number);
             if (_user == null)
             {
-                var newUser = new User { Name = user.Name, Password = user.Password };
+                var newUser = new User { Number = user.Number, Password = user.Password };
                 db.Users.Add(newUser);
                 db.SaveChanges();
-                var userWithId = db.Users.FirstOrDefault(x => x.Name == newUser.Name);
+                var userWithId = db.Users.FirstOrDefault(x => x.Number == newUser.Number);
                 return (userWithId);
             }
             return BadRequest("Пользователь с такими данными уже зарегистрирован");
@@ -39,26 +39,10 @@ namespace BackEnd.Controllers
         [HttpGet("SignIn")]
         public ActionResult<User> SignIn(string login, string password)
         {
-            var _user = db.Users.FirstOrDefault(x => x.Name == login && x.Password == password);
+            var _user = db.Users.FirstOrDefault(x => x.Number == login && x.Password == password);
             if (_user != null)
                 return (Ok(_user));
             return NotFound("Пользователь не найден");
-        }
-
-        [HttpPost("AddProductToUserCart/UserId/{id}")]
-        public ActionResult AddProductTocart(List<Product> product, int idUser)
-        {
-            var user = db.Users.FirstOrDefault(u => u.Id == idUser);
-            try
-            {
-                user.Cart = new Cart{ Products = product , UserId = idUser};
-                db.SaveChangesAsync();
-                return Ok("Продукты добавлены в корзину");
-            }
-            catch
-            {
-                return BadRequest("Ошибка");
-            }
         }
     }
 }

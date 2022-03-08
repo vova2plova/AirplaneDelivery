@@ -9,12 +9,11 @@ namespace DAL.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required]
+        public string Number { get; set; }
         public string Name { get; set; }
-        [Required]
         public string Password { get; set; }
+        public string Adres { get; set; }
         public Cart Cart { get; set; }
-        [ForeignKey("UserHistoryFK")]
         public List<Cart> HistoryOfOrders { get; set; }
     }
 }
