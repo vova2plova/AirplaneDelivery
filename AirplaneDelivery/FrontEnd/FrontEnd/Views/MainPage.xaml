@@ -129,6 +129,80 @@
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
+                    <CollectionView
+                        x:Name="listProducts"
+                        Grid.Row="3"
+                        Grid.ColumnSpan="3"
+                        Margin="20,30,0,0"
+                        HorizontalScrollBarVisibility="Never"
+                        ItemsSource="{Binding Products}"
+                        SelectionMode="Single">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="20" Orientation="Horizontal" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <pancake:PancakeView
+                                    Margin="0,8"
+                                    Padding="15"
+                                    BackgroundColor="White"
+                                    CornerRadius="18"
+                                    HasShadow="False"
+                                    WidthRequest="165">
+                                    <Grid
+                                        ColumnDefinitions="auto, *, auto"
+                                        RowDefinitions="auto, auto, auto, auto, auto"
+                                        RowSpacing="0">
+                                        <Image
+                                            Grid.Row="0"
+                                            Grid.Column="0"
+                                            HeightRequest="16"
+                                            HorizontalOptions="Start"
+                                            Source="calories"
+                                            WidthRequest="16" />
+                                        <Label
+                                            Grid.Row="0"
+                                            Grid.Column="1"
+                                            FontSize="Small"
+                                            HorizontalOptions="StartAndExpand"
+                                            Text="{Binding weight, StringFormat='{0} г'}"
+                                            VerticalOptions="Center" />
+
+                                        <Image
+                                            Grid.Row="1"
+                                            Grid.ColumnSpan="3"
+                                            Margin="0,10,0,20"
+                                            HeightRequest="136"
+                                            HorizontalOptions="Center"
+                                            Source="{Binding image}"
+                                            WidthRequest="136" />
+                                        <Label
+                                            Grid.Row="2"
+                                            Grid.ColumnSpan="3"
+                                            Margin="0,-10,0,0"
+                                            FontFamily="FontPoppinsMedium"
+                                            FontSize="18"
+                                            Text="{Binding description}" />
+
+                                        <Label
+                                            Grid.Row="4"
+                                            Grid.ColumnSpan="3"
+                                            Margin="0,10,0,0"
+                                            FontFamily="FontPoppinsMedium"
+                                            FontSize="22"
+                                            Text="{Binding price, StringFormat='Р {0}'}"
+                                            VerticalOptions="Center" />
+                                    </Grid>
+                                    <pancake:PancakeView.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command=" "
+                                            CommandParameter="{Binding .}"
+                                            NumberOfTapsRequired="1" />
+                                    </pancake:PancakeView.GestureRecognizers>
+                                </pancake:PancakeView>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
                 </Grid>
                 <Grid x:Name="MenuGrid" IsVisible="False">
                     <BoxView x:Name="MenuOverlay"  BackgroundColor="Black" Opacity="0.2" >
