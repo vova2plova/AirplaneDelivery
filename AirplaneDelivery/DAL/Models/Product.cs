@@ -11,7 +11,9 @@ namespace DAL.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public int Price { get; set; }
-        public string Category { get; set; }
+        public Category CategoryProduct { get; set; }
+
+        public int Weight { get; set; }
         
         public float Kkal { get; set; }
         
@@ -21,7 +23,7 @@ namespace DAL.Models
         
         public float Carbohydrates { get; set; }
         
-        public string Images { get; set; }
+        public Uri Image { get; set; }
         
         public int CountInStorage { get; set; }
 

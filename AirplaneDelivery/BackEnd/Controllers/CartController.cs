@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 
 namespace BackEnd.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class CartController : Controller
     {
         private DatabaseContext db;

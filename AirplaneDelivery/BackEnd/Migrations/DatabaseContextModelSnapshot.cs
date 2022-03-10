@@ -36,6 +36,24 @@ namespace BackEnd.Migrations
                     b.ToTable("Carts");
                 });
 
+            modelBuilder.Entity("DAL.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Image")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("DAL.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -46,8 +64,8 @@ namespace BackEnd.Migrations
                     b.Property<float>("Carbohydrates")
                         .HasColumnType("real");
 
-                    b.Property<string>("Category")
-                        .HasColumnType("text");
+                    b.Property<int?>("CategoryProductId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("CountInStorage")
                         .HasColumnType("integer");
@@ -55,7 +73,7 @@ namespace BackEnd.Migrations
                     b.Property<float>("Fats")
                         .HasColumnType("real");
 
-                    b.Property<string>("Images")
+                    b.Property<string>("Image")
                         .HasColumnType("text");
 
                     b.Property<float>("Kkal")
@@ -70,7 +88,12 @@ namespace BackEnd.Migrations
                     b.Property<float>("Proteins")
                         .HasColumnType("real");
 
+                    b.Property<int>("Weight")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryProductId");
 
                     b.ToTable("Products");
                 });
@@ -107,7 +130,7 @@ namespace BackEnd.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<string>("Adres")
+                    b.Property<string>("Address")
                         .HasColumnType("text");
 
                     b.Property<int?>("CartId")
@@ -134,6 +157,15 @@ namespace BackEnd.Migrations
                     b.HasOne("DAL.Models.User", null)
                         .WithMany("HistoryOfOrders")
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("DAL.Models.Product", b =>
+                {
+                    b.HasOne("DAL.Models.Category", "CategoryProduct")
+                        .WithMany()
+                        .HasForeignKey("CategoryProductId");
+
+                    b.Navigation("CategoryProduct");
                 });
 
             modelBuilder.Entity("DAL.Models.Spot", b =>
