@@ -1,4 +1,5 @@
-﻿using FrontEnd.OnlineServices;
+﻿using DLToolkit.Forms.Controls;
+using FrontEnd.OnlineServices;
 using FrontEnd.Views;
 using System;
 using Xamarin.Essentials;
@@ -14,6 +15,7 @@ namespace FrontEnd
             InitializeComponent();
             Device.SetFlags(new string[] { "MediaElement_Experimental" });
             MainService.Init();
+            FlowListView.Init();
             if (Preferences.Get("user_id", 0) == 0)
                 MainPage = new NavigationPage(new LoginPage());
             else
