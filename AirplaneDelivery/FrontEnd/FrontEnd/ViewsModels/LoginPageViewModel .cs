@@ -24,9 +24,7 @@ namespace FrontEnd.ViewsModels
                 Preferences.Set("user_id", response.Content.Id);
             }
             else
-            {
                 UserDialogs.Instance.Toast("Введены неверные данные!");
-            }
         });
 
         public ICommand EnterCommand2 => new Command<User>(async value =>
@@ -39,9 +37,7 @@ namespace FrontEnd.ViewsModels
                 Preferences.Set("user_id", response.Content.Id);
             }
             else
-            {
                 UserDialogs.Instance.Toast("Пользовтаель с таким номером телефона уже зарегистрирован!");
-            }
         });
     }
 

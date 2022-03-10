@@ -37,6 +37,12 @@ namespace FrontEnd
             MenuGrid.IsVisible = false;
         }
 
+        protected override void OnAppearing()
+        {
+            _vm.LoadCategory(listGroups);
+            _vm.LoadProducts(listProducts);
+            base.OnAppearing();
+        }
 
         private void MenuTapped(object sender, EventArgs e)
         {

@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:_vm="clr-namespace:FrontEnd.ViewsModels"
+             xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
              xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:shadows="clr-namespace:Sharpnado.Shades;assembly=Sharpnado.Shadows"
              x:Class="FrontEnd.MainPage">
@@ -8,31 +9,31 @@
         <_vm:MainPageViewModel x:Name="vm"/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <ScrollView Margin="0,-40,0,0">
-
-            <Grid BackgroundColor="White">
-                <Grid.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="SeachAnTapped"></TapGestureRecognizer>
-                </Grid.GestureRecognizers>
-                <Path
+        <ScrollView Margin="0,-40,0,0" BackgroundColor="White">
+            <StackLayout BackgroundColor="White">
+                <Grid BackgroundColor="White">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="SeachAnTapped"></TapGestureRecognizer>
+                    </Grid.GestureRecognizers>
+                    <Path
                     Margin="0,30,0,0"
                     Data="M119 240C331.4 126.8 198.167 16.8333 105 -24L-179.5 -71L-261 436.5C-222.833 418.167 -93.4 353.2 119 240Z"
                     Fill="#E6E6FA" />
-                <Grid ColumnDefinitions="*, auto, auto" RowDefinitions="auto, auto, 200, 330, auto, 330">
-                    <Grid
+                    <Grid ColumnDefinitions="*, auto, auto" RowDefinitions="auto, auto, 200">
+                        <Grid
                         Grid.Row="0"
                         Grid.Column="0"
                         Margin="20,70,0,0"
                         ColumnDefinitions="25, *">
-                        <StackLayout Spacing="5">
-                            <Image Source="menu">
-                                <Image.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="MenuTapped"></TapGestureRecognizer>
-                                </Image.GestureRecognizers>
-                            </Image>
-                        </StackLayout>
-                    </Grid>
-                    <Image
+                            <StackLayout Spacing="5">
+                                <Image Source="menu">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="MenuTapped"></TapGestureRecognizer>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </StackLayout>
+                        </Grid>
+                        <Image
                         x:Name="searchIcon"
                         Grid.Row="0"
                         Grid.Column="2"
@@ -42,11 +43,11 @@
                         VerticalOptions="End"
                         WidthRequest="20"
                         >
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="SeachTapped"></TapGestureRecognizer>
-                        </Image.GestureRecognizers>
-                    </Image>
-                    <SearchBar  
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="SeachTapped"></TapGestureRecognizer>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <SearchBar  
                         x:Name="searchbar"
                         Margin="50,0,0,0"
                         Placeholder="Поищем..."
@@ -54,65 +55,188 @@
                         IsVisible="false"
                         >
 
-                    </SearchBar>
+                        </SearchBar>
 
-                    <Label
+                        <Label
                         Grid.Row="1"
                         Grid.ColumnSpan="3"
                         Margin="20,30,0,0">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span FontSize="23" Text="Продукты&#10;" />
-                                <Span FontSize="23" Text="Специально&#10;" />
-                                <Span FontSize="23" Text="Для тебя"></Span>
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
-                   
-                </Grid>
-                <Grid  x:Name="MenuGrid" IsVisible="False">
-                    <BoxView x:Name="MenuOverlay"  BackgroundColor="Black" Opacity="0.2" >
-                        <BoxView.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OverlayTapped"/>
-                        </BoxView.GestureRecognizers>
-                    </BoxView>
-                    <Grid x:Name="MenuView" WidthRequest="290" HeightRequest="365" VerticalOptions="Start" BackgroundColor="#696969" 
-                  HorizontalOptions="Start" TranslationX="0" TranslationY="5">
-                        <Grid.Clip>
-                            <PathGeometry Figures="M176 264C388.4 150.8 255.167 40.8333 162 0L-122.5 -47L-204 460.5C-165.833 442.167 -36.4 377.2 176 264Z"/>
-                        </Grid.Clip>
-                        <StackLayout x:Name="List" Margin="10,50" Spacing="20" BindableLayout.ItemsSource="{Binding MenuList}">
-                            
-                            <BindableLayout.ItemTemplate>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span FontSize="23" Text="Продукты&#10;" />
+                                    <Span FontSize="23" Text="Специально&#10;" />
+                                    <Span FontSize="23" Text="Для тебя"></Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <CollectionView
+                        x:Name="listGroups"
+                        Grid.Row="2"
+                        Grid.ColumnSpan="3"
+                        Margin="20,10,0,0"
+                        HorizontalScrollBarVisibility="Never"
+                        SelectionMode="None">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout ItemSpacing="0" Orientation="Horizontal" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
                                 <DataTemplate>
-                                    <StackLayout Orientation="Horizontal" Spacing="20">
-                                        <Grid Grid.Row="2" HorizontalOptions="Start" VerticalOptions="Start"
+                                    <shadows:Shadows CornerRadius="40" Shades="{shadows:SingleShade BlurRadius=22, Offset='5,2', Opacity=0.2, Color=Gray }">
+                                        <pancake:PancakeView
+                                        Margin="0,15,15,15"
+                                        Padding="0,0,0,25"
+                                        BackgroundColor="White"
+                                        CornerRadius="40"
+                                        HasShadow="False"
+                                        WidthRequest="85">
+                                            <Grid RowDefinitions="auto, *">
+                                                <pancake:PancakeView
+                                                Grid.Row="0"
+                                                Margin="12,12,12,0"
+                                                Padding="0"
+                                                BackgroundColor="Wheat"
+                                                BorderColor="Gray"
+                                                BorderThickness="1"
+                                                CornerRadius="30"
+                                                HeightRequest="60"
+                                                HorizontalOptions="Center"
+                                                IsClippedToBounds="True"
+                                                WidthRequest="60">
+                                                    <Image
+                                                    Aspect="AspectFit"
+                                                    HeightRequest="30"
+                                                    HorizontalOptions="CenterAndExpand"
+                                                    Source="{Binding Image}"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="30" />
+                                                </pancake:PancakeView>
+                                                <Label
+                                                Grid.Row="1"
+                                                FontSize="16"
+                                                HorizontalOptions="FillAndExpand"
+                                                HorizontalTextAlignment="Center"
+                                                TextColor="Black"
+                                                Text="{Binding Title}"
+                                                VerticalOptions="EndAndExpand" />
+                                            </Grid>
+                                            <pancake:PancakeView.GestureRecognizers>
+                                                <TapGestureRecognizer
+                                                Command="{Binding BindingContext.SelectCategoryCommand, Source={x:Reference listGroups}}"
+                                                CommandParameter="{Binding .}"
+                                                NumberOfTapsRequired="1"/>
+                                            </pancake:PancakeView.GestureRecognizers>
+                                        </pancake:PancakeView>
+                                    </shadows:Shadows>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Grid>
+                    <Grid x:Name="MenuGrid" IsVisible="False">
+                        <BoxView x:Name="MenuOverlay"  BackgroundColor="Black" Opacity="0.2" >
+                            <BoxView.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OverlayTapped"/>
+                            </BoxView.GestureRecognizers>
+                        </BoxView>
+                        <Grid x:Name="MenuView" WidthRequest="260" HeightRequest="0" BackgroundColor="#696969" 
+                  HorizontalOptions="Start" TranslationX="-2">
+                            <Grid.Clip>
+                                <PathGeometry Figures="M149 290C351.4 156.8 218.167 36.8333 125 -1L-159.5 -52L-341 596.5C-344.833 578.167 -83.4 400.2 183 270Z"/>
+                            </Grid.Clip>
+                            <StackLayout x:Name="List" Margin="30,100" Spacing="20" BindableLayout.ItemsSource="{Binding MenuList}">
+
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackLayout Orientation="Horizontal" Spacing="20">
+                                            <Grid Grid.Row="2" HorizontalOptions="Start" VerticalOptions="Start"
                                       HeightRequest="46" WidthRequest="46">
-                                            <Ellipse WidthRequest="46" HeightRequest="46" Fill="White" Opacity="0.5"/>
-                                            <Image Source="{Binding Icon}"  WidthRequest="22" HeightRequest="22"
+                                                <Ellipse WidthRequest="46" HeightRequest="46" Fill="White" Opacity="0.5"/>
+                                                <Image Source="{Binding Icon}"  WidthRequest="22" HeightRequest="22"
                                             HorizontalOptions="Center" VerticalOptions="Center" />
-                                        </Grid>
-                                        <Label Text="{Binding Name}" TextColor="White" FontSize="16" VerticalOptions="Center"
+                                            </Grid>
+                                            <Label Text="{Binding Name}" TextColor="White" FontSize="16" VerticalOptions="Center"
                                         FontFamily="NormalFont"></Label>
-                                        <StackLayout.GestureRecognizers>
-                                            <TapGestureRecognizer  Command="{Binding BindingContext.SelectMenuCommand ,
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer  Command="{Binding BindingContext.SelectMenuCommand ,
                                                                         Source={x:Reference List}}"
                                                                          CommandParameter="{Binding Id}"
                                                                          NumberOfTapsRequired="1">
 
-                                            </TapGestureRecognizer>
-                                        </StackLayout.GestureRecognizers>
-                                    </StackLayout>
-                                    
-                                </DataTemplate>
-                            </BindableLayout.ItemTemplate>
-                            
-                        </StackLayout>
-                        
+                                                </TapGestureRecognizer>
+                                            </StackLayout.GestureRecognizers>
+                                        </StackLayout>
+
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+
+                            </StackLayout>
+
+                        </Grid>
                     </Grid>
                 </Grid>
-            </Grid>
+                <flv:FlowListView FlowColumnCount="2"
+                                      x:Name="listProducts"
+                                      SeparatorVisibility="None"
+                                      HasUnevenRows="True">
+                    <flv:FlowListView.FlowColumnTemplate>
+                        <DataTemplate>
+                            <pancake:PancakeView
+                            Margin="0,8"
+                            Padding="15"
+                            BackgroundColor="White"
+                            CornerRadius="18"
+                            HasShadow="False"
+                            WidthRequest="165">
+                                <Grid
+                                ColumnDefinitions="auto, *, auto"
+                                RowDefinitions="auto, auto, auto, auto, auto"
+                                RowSpacing="0">
+                                    <Label
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    FontSize="Small"
+                                    HorizontalOptions="StartAndExpand"
+                                    TextColor="Black"
+                                    Text="{Binding Weight, StringFormat='{0} г'}"
+                                    VerticalOptions="Center" />
 
+                                    <Image
+                                    Grid.Row="1"
+                                    Grid.ColumnSpan="3"
+                                    Margin="0,10,0,20"
+                                    HeightRequest="136"
+                                    HorizontalOptions="Center"
+                                    Source="{Binding Image}"
+                                    WidthRequest="136" />
+                                    <Label
+                                    Grid.Row="2"
+                                    Grid.ColumnSpan="3"
+                                    TextColor="Black"
+                                    Margin="0,-10,0,0"
+                                    FontFamily="FontPoppinsMedium"
+                                    FontSize="18"
+                                    Text="{Binding Name}" />
+
+                                    <Label
+                                    Grid.Row="4"
+                                    Grid.ColumnSpan="3"
+                                    Margin="0,10,0,0"
+                                    TextColor="Black"
+                                    FontFamily="FontPoppinsMedium"
+                                    FontSize="22"
+                                    Text="{Binding Price, StringFormat='Р {0}'}"
+                                    VerticalOptions="Center" />
+                                </Grid>
+                                <pancake:PancakeView.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                    Command="{Binding BindingContext.SelectProductCommand, Source={x:Reference listProducts}}"
+                                    CommandParameter="{Binding .}" 
+                                    NumberOfTapsRequired="1" />
+                                </pancake:PancakeView.GestureRecognizers>
+                            </pancake:PancakeView>
+                        </DataTemplate>
+                    </flv:FlowListView.FlowColumnTemplate>
+                </flv:FlowListView>
+            </StackLayout>
         </ScrollView>
 
 

@@ -19,15 +19,18 @@ namespace BackEnd.Controllers
         }
 
         [HttpGet("GetAllProducts")]
-        public Task<List<Product>> GetAllProducts()
+        public async Task<ActionResult<List<Product>>> GetAllProducts()
         {
-            return db.Products.ToListAsync();
+            var products = await db.Products.ToListAsync();
+            return products == null ?
+                NotFound() :
+                Ok(products); 
         }
 
-        [HttpGet("GetProductByCategory/{Category}")]
-        public Task<List<Product>> GetProductsByCategory(string Category)
+        [HttpGet("GetProductByCategory/{id}")]
+        public Task<List<Product>> GetProductsByCategory(int id)
         {
-            return db.Products.Where(p => p.Category == Category).ToListAsync();
+            return db.Products.Where(p => p.CategoryProduct.Id == id).ToListAsync();
         }
         [HttpGet("GetProductById/{id}")]
         public Task<Product> GetProductById(int id)

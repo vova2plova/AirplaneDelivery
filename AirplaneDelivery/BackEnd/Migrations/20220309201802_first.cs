@@ -3,10 +3,24 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace BackEnd.Migrations
 {
-    public partial class First : Migration
+    public partial class first : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Title = table.Column<string>(type: "varchar(20)", nullable: true),
+                    Image = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
@@ -15,17 +29,24 @@ namespace BackEnd.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "varchar(20)", nullable: true),
                     Price = table.Column<int>(type: "integer", nullable: false),
-                    Category = table.Column<string>(type: "varchar(20)", nullable: true),
+                    CategoryProductId = table.Column<int>(type: "integer", nullable: true),
+                    Weight = table.Column<int>(type: "integer", nullable: false),
                     Kkal = table.Column<float>(type: "real", nullable: false),
                     Proteins = table.Column<float>(type: "real", nullable: false),
                     Fats = table.Column<float>(type: "real", nullable: false),
                     Carbohydrates = table.Column<float>(type: "real", nullable: false),
-                    Images = table.Column<string>(type: "varchar(20)", nullable: true),
+                    Image = table.Column<string>(type: "text", nullable: true),
                     CountInStorage = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Products_Categories_CategoryProductId",
+                        column: x => x.CategoryProductId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -58,7 +79,7 @@ namespace BackEnd.Migrations
                     Number = table.Column<string>(type: "varchar(20)", nullable: true),
                     Name = table.Column<string>(type: "varchar(20)", nullable: true),
                     Password = table.Column<string>(type: "varchar(20)", nullable: true),
-                    Adres = table.Column<string>(type: "varchar(20)", nullable: true),
+                    Address = table.Column<string>(type: "varchar(20)", nullable: true),
                     CartId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
@@ -89,6 +110,11 @@ namespace BackEnd.Migrations
                 name: "IX_Carts_UserId",
                 table: "Carts",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_CategoryProductId",
+                table: "Products",
+                column: "CategoryProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Spots_CartId",
@@ -133,6 +159,9 @@ namespace BackEnd.Migrations
 
             migrationBuilder.DropTable(
                 name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Users");
