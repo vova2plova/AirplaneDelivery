@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:_vm="clr-namespace:FrontEnd.ViewsModels"
+             
+             x:Class="FrontEnd.Views.ProfilePage">
+   
+    <ContentPage.Content>
+        <ScrollView>
+            
+                <Grid >
+                    <Grid VerticalOptions="Start">
+                        <StackLayout Spacing="0">
+                        <Grid WidthRequest="280" Padding="0,15" BackgroundColor="Transparent" HorizontalOptions="Center">
+                            <Image Margin="0,0,220,10" Source="user"></Image>
+                            <Entry  x:Name="name" Margin="39,0,39,0" FontSize="12" PlaceholderColor="Black" TextColor="Black"/>
+                        </Grid>
+                        <Grid WidthRequest="280" Padding="10,0" BackgroundColor="Transparent" HorizontalOptions="Center">
+                            <Image Margin="0,0,220,10" Source="phone"></Image>
+                            <Entry  x:Name="phone" Margin="39,0,39,0" FontSize="12" PlaceholderColor="Black" TextColor="Black"/>
+                        </Grid>
+                    </StackLayout>
+                     </Grid>
+                    <Grid VerticalOptions="Center"  Margin="20,0,0,300"  >
+                    <Label Grid.Row="1" Text="История заказов"></Label>
+                </Grid>
+                <Grid  TranslationY="65" VerticalOptions="CenterAndExpand" Margin="20,0,0,80">
+
+                    <StackLayout x:Name="List"  Spacing="10" BindableLayout.ItemsSource="{Binding MenuList}">
+                        <Frame></Frame>
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Frame Padding="0" BackgroundColor="Transparent" BorderColor="Orange" HeightRequest="88" 
+                       WidthRequest="125" CornerRadius="48">
+                                    <StackLayout Orientation="Horizontal" >
+
+                                        <Grid>
+                                            <Label Text="{Binding Name}"  TextColor="Black"  FontSize="16" Margin="50,0,0,0" HorizontalOptions="Start" VerticalOptions="Start"
+                                        FontFamily="NormalFont"></Label>
+                                            <Label Text="190 р" Margin="0,0,140,10" FontSize="12" TextColor="Black" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand"></Label>
+                                            <Label Text="07.03.2022 в 13:22" FontSize="12" Margin="110,0,0,10" TextColor="Black" HorizontalOptions="Start" VerticalOptions="EndAndExpand"></Label>
+                                        </Grid>
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+
+                    </StackLayout>
+                </Grid>
+            </Grid>
+        
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

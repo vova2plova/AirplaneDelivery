@@ -17,7 +17,7 @@ namespace FrontEnd.ViewsModels
     {
         public ICommand EnterCommand => new Command<User>(async value =>
         {
-            var response = await MainService.UserService.SignIn(value.Name,value.Password);
+            var response = await MainService.UserService.SignIn(value.Number,value.Password);
             if (response.IsSuccessStatusCode)
             {
                 Application.Current.MainPage = new NavigationPage(new MainPage());
