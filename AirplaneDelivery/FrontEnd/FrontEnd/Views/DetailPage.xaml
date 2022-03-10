@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:shadows="clr-namespace:Sharpnado.Shades;assembly=Sharpnado.Shadows"
+             x:Class="FrontEnd.Views.DetailPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid BackgroundColor="White">
+                <shadows:Shadows
+                    CornerRadius="175"
+                    HorizontalOptions="End"
+                    Shades="{shadows:SingleShade BlurRadius=20,
+                                                 Offset='-8,8',
+                                                 Opacity='0.28',
+                                                 Color=Black}"
+                    TranslationX="110"
+                    TranslationY="-90"
+                    VerticalOptions="Start">
+                    <Image
+                        Aspect="AspectFill"
+                        HeightRequest="350"
+                        HorizontalOptions="End"
+                        Source="{Binding Item.image}"
+                        VerticalOptions="Start"
+                        WidthRequest="350" />
+                    <!-- Каритнка продукта -->
+                </shadows:Shadows>
+                <Grid
+                    Margin="30,20,0,30"
+                    ColumnDefinitions=".3*, .7*"
+                    RowDefinitions="auto, auto, auto, auto, 80, auto, 140, *">
+
+                    <shadows:Shadows
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="0,90,0,0"
+                        CornerRadius="24"
+                        HeightRequest="48"
+                        HorizontalOptions="Start"
+                        Shades="{shadows:SingleShade BlurRadius=15,
+                                                     Offset='10,10',
+                                                     Opacity=0.15,
+                                                     Color=Black}"
+                        WidthRequest="48">
+
+                    </shadows:Shadows>
+                    <shadows:Shadows
+                        Grid.Row="2"
+                        Grid.ColumnSpan="2"
+                        Margin="0,60,0,0"
+                        CornerRadius="20"
+                        HorizontalOptions="Start"
+                        Shades="{shadows:SingleShade BlurRadius=15,
+                                                     Offset='10,10',
+                                                     Opacity=0.15,
+                                                     Color=Black}">
+                        <pancake:PancakeView
+                            Padding="15"
+                            BackgroundColor="White"
+                            CornerRadius="20"
+                            HasShadow="False"
+                            HeightRequest="30"
+                            HorizontalOptions="Start"
+                            WidthRequest="270">
+                            <Grid>
+                                <Label Text="Узнайте, что вы можете приготовить с этим продуктом!"></Label>
+                            </Grid>
+                        </pancake:PancakeView>
+                    </shadows:Shadows>
+                    <Label
+                        Grid.Row="3"
+                        Grid.ColumnSpan="2"
+                        Margin="0,50,0,15"
+                        FontSize="20"
+                        Text="Название продукта"
+                        VerticalOptions="Center" />
+                    <Label
+                        Grid.Row="4"
+                        Grid.ColumnSpan="2"
+                        Margin="0,0,20,0"
+                        FontSize="Small"
+                        Text="Описание" />
+                    <Label
+                        Grid.Row="5"
+                        Grid.ColumnSpan="2"
+                        Margin="0,20,0,10" 
+                        FontSize="20"
+                        Text="Количество"
+                        VerticalOptions="Center" />
+                    <Grid
+                        Grid.Row="6"
+                        Grid.ColumnSpan="2"
+                        ColumnDefinitions="auto, 80"
+                        VerticalOptions="StartAndExpand">
+                        <pancake:PancakeView
+                            Padding="0"
+                            BorderColor="Gray"
+                            BorderThickness="1"
+                            CornerRadius="26"
+                            HeightRequest="50"
+                            HorizontalOptions="Start"
+                            WidthRequest="120">
+                            <Grid ColumnDefinitions="*, auto, *" ColumnSpacing="0">
+                                <Label
+                                    Grid.Column="0"
+                                    FontFamily="FontFontello"
+                                    FontSize="28"
+                                    HorizontalOptions="FillAndExpand"
+                                    HorizontalTextAlignment="Center"
+                                    Text="\uE801"
+                                    TextColor="Gray"
+                                    VerticalOptions="FillAndExpand"
+                                    VerticalTextAlignment="Center">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="Минус" NumberOfTapsRequired="1" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                                <BoxView
+                                    Grid.Column="1"
+                                    BackgroundColor="Gray"
+                                    HorizontalOptions="Center"
+                                    Opacity="0.6"
+                                    VerticalOptions="Fill"
+                                    WidthRequest="2" />
+                                <Label
+                                    Grid.Column="2"
+                                    FontFamily="FontFontello"
+                                    FontSize="28"
+                                    HorizontalOptions="FillAndExpand"
+                                    HorizontalTextAlignment="Center"
+                                    Text="\uE800"
+                                    TextColor="Gray"
+                                    VerticalOptions="FillAndExpand"
+                                    VerticalTextAlignment="Center">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="Плюс" NumberOfTapsRequired="1" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Grid>
+                        </pancake:PancakeView>
+                        <Label
+                            Grid.Column="1"
+                            Margin="20,0,0,0"
+                            FontSize="25"
+                            HorizontalOptions="FillAndExpand"
+                            Text="{Binding Quant}" 
+                            VerticalOptions="Center" />
+                        <!-- Binding Quant должно меняться число при нажатии на + и - -->
+                    </Grid>
+                    <StackLayout
+                        Grid.Row="7"
+                        Grid.ColumnSpan="2"
+                        Margin="0"
+                        Spacing="0"
+                        VerticalOptions="EndAndExpand">
+                        <Label
+                            FontSize="Small"
+                            Opacity="0.6"
+                            Text="Цена" />
+                        <Label
+                            FontSize="25"
+                            Text="{Binding Item.price, StringFormat='Р{0:N0}'}" />
+                    </StackLayout>
+                    <shadows:Shadows
+                        Grid.Row="7"
+                        Grid.Column="1"
+                        Margin="0,0,30,0"
+                        CornerRadius="20"
+                        HorizontalOptions="End"
+                        Shades="{shadows:SingleShade BlurRadius=20,
+                                                     Offset='2,10',
+                                                     Opacity=0.4,
+                                                     Color=Black}"
+                        VerticalOptions="EndAndExpand">
+                        <pancake:PancakeView
+                            Padding="28,8"
+                            BackgroundColor="Black"
+                            CornerRadius="36"
+                            HeightRequest="54">
+                            <Grid>
+                                <BoxView
+                                    BackgroundColor="White"
+                                    CornerRadius="24"
+                                    HeightRequest="48"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    WidthRequest="48" />
+                                <BoxView
+                                    BackgroundColor="Orange"
+                                    CornerRadius="22"
+                                    HeightRequest="44"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="CenterAndExpand"
+                                    WidthRequest="44" />
+                                <Image
+                                    Aspect="AspectFit"
+                                    HeightRequest="22"
+                                    HorizontalOptions="Center"
+                                    Source="cart"
+                                    VerticalOptions="Center"
+                                    WidthRequest="22" />
+                            </Grid>
+                        </pancake:PancakeView>
+                    </shadows:Shadows>
+                </Grid>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
