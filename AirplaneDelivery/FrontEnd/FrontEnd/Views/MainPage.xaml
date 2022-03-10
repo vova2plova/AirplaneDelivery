@@ -137,19 +137,19 @@
                                 <TapGestureRecognizer Tapped="OverlayTapped"/>
                             </BoxView.GestureRecognizers>
                         </BoxView>
-                        <Grid x:Name="MenuView" WidthRequest="260" HeightRequest="0" BackgroundColor="#696969" 
-                  HorizontalOptions="Start" TranslationX="-2">
+                        <Grid x:Name="MenuView" WidthRequest="299"  VerticalOptions="Start" HeightRequest="390" BackgroundColor="#696969" 
+                  HorizontalOptions="Start">
                             <Grid.Clip>
-                                <PathGeometry Figures="M149 290C351.4 156.8 218.167 36.8333 125 -1L-159.5 -52L-341 596.5C-344.833 578.167 -83.4 400.2 183 270Z"/>
+                                <PathGeometry Figures="M176 264C388.4 150.8 255.167 40.8333 162 0L-122.5 -47L-204 460.5C-165.833 442.167 -36.4 377.2 176 264Z"/>
                             </Grid.Clip>
-                            <StackLayout x:Name="List" Margin="30,100" Spacing="20" BindableLayout.ItemsSource="{Binding MenuList}">
+                            <StackLayout x:Name="List" Margin="10,60" Spacing="20" BindableLayout.ItemsSource="{Binding MenuList}">
 
                                 <BindableLayout.ItemTemplate>
                                     <DataTemplate>
                                         <StackLayout Orientation="Horizontal" Spacing="20">
                                             <Grid Grid.Row="2" HorizontalOptions="Start" VerticalOptions="Start"
                                       HeightRequest="46" WidthRequest="46">
-                                                <Ellipse WidthRequest="46" HeightRequest="46" Fill="White" Opacity="0.5"/>
+                                                
                                                 <Image Source="{Binding Icon}"  WidthRequest="22" HeightRequest="22"
                                             HorizontalOptions="Center" VerticalOptions="Center" />
                                             </Grid>
@@ -176,13 +176,16 @@
                 <flv:FlowListView FlowColumnCount="2"
                                       x:Name="listProducts"
                                       SeparatorVisibility="None"
-                                      HasUnevenRows="True">
-                    <flv:FlowListView.FlowColumnTemplate>
+                                      HasUnevenRows="True"
+                                  
+                                        Margin="10,0,10,0">
+                    <flv:FlowListView.FlowColumnTemplate >
                         <DataTemplate>
                             <pancake:PancakeView
-                            Margin="0,8"
+                            Margin="10,8,10,0"
                             Padding="15"
-                            BackgroundColor="White"
+                             
+                            BackgroundColor="#F3F8FC"
                             CornerRadius="18"
                             HasShadow="False"
                             WidthRequest="165">
@@ -203,10 +206,10 @@
                                     Grid.Row="1"
                                     Grid.ColumnSpan="3"
                                     Margin="0,10,0,20"
-                                    HeightRequest="136"
+                                    HeightRequest="116"
                                     HorizontalOptions="Center"
                                     Source="{Binding Image}"
-                                    WidthRequest="136" />
+                                    WidthRequest="116" />
                                     <Label
                                     Grid.Row="2"
                                     Grid.ColumnSpan="3"

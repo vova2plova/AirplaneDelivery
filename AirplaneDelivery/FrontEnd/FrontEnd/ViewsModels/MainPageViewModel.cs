@@ -50,8 +50,8 @@ namespace FrontEnd.ViewsModels
         { 
             return new ObservableCollection<Menu>
             {
-                new Menu {Id=1, Icon = "order.png", Name = "Мои заказы"},
-                new Menu {Id=2, Icon = "settings.png", Name = "Мои данные"},
+                new Menu {Id=1, Icon = "order.png", Name = "Мои данные"},
+                new Menu {Id=2, Icon = "cart.png", Name = "Корзина"},
                 new Menu{Id=3 ,Icon = "settings.png", Name = "Выйти из аккаунта"}
             };
         }
@@ -95,10 +95,10 @@ namespace FrontEnd.ViewsModels
                     switch (id)
                     {
                         case 1:
-                            Application.Current.MainPage.DisplayAlert("Selected item", id.ToString(), "Ok");
+                            Application.Current.MainPage.Navigation.PushAsync(new ProfilePage());
                             break;
                         case 2:
-                            Application.Current.MainPage.DisplayAlert("Selected item", id.ToString(), "Ok");
+                            Application.Current.MainPage.Navigation.PushAsync(new CartPage());
                             break;
                         case 3:
                             Preferences.Clear();
