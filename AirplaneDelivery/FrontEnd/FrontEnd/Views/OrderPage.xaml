@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FrontEnd.Views.OrderPage">
+    <ContentPage.Content>
+        <Grid >
+            <ScrollView>
+                <StackLayout Margin="10,10,10,0" x:Name="ProductList"  Spacing="10">
+                    <Label Text="Статус заказа" ></Label>
+                    <Frame Padding="0" BackgroundColor="Transparent" BorderColor="Orange" HeightRequest="88" 
+                       WidthRequest="120" CornerRadius="48">
+                        <StackLayout Orientation="Horizontal" >
+                            <Grid  Grid.Row="2" HorizontalOptions="Start" VerticalOptions="Start"
+                                      HeightRequest="90" WidthRequest="90">
+
+                                <Image Source="water.png"  WidthRequest="122" HeightRequest="122" Margin="0,0,0,0"
+                                            HorizontalOptions="Center" VerticalOptions="Center" />
+                            </Grid>
+
+                            <Grid   >
+                                <Label Text="Вода"  TextColor="Black"  FontSize="16"  HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" ></Label>
+                                <Label Text="190р"  FontSize="14" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="EndAndExpand"></Label>
+                            </Grid>
+                            <Label 
+                            FontSize="16"
+                            HorizontalOptions="EndAndExpand"
+                            Margin="0,0,10,0"
+                            Text="2 шт." 
+                            VerticalOptions="Center" />
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </ScrollView>
+            <StackLayout VerticalOptions="End" HeightRequest="220" HorizontalOptions="Center" WidthRequest="340" >
+                <Label Text="Дата\Время заказа:"></Label>
+                <Entry Text="3 марта в 16:43" IsReadOnly="True"></Entry>
+                <Label Text="Адрес доставки:"></Label>
+                <Entry  Text="Муштари, 32" IsReadOnly="True"></Entry>
+                <Label >
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Общая цена:"></Span>
+                            <Span Text=" 380 ₽"></Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>
