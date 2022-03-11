@@ -3,94 +3,86 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:shadows="clr-namespace:Sharpnado.Shades;assembly=Sharpnado.Shadows"
-             x:Class="FrontEnd.Views.DetailPage">
+             x:Class="FrontEnd.Views.DetailPage"
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <ScrollView>
-            <Grid BackgroundColor="White">
-                <shadows:Shadows
-                    CornerRadius="175"
-                    HorizontalOptions="End"
-                    Shades="{shadows:SingleShade BlurRadius=20,
-                                                 Offset='-8,8',
-                                                 Opacity='0.28',
-                                                 Color=Black}"
-                    TranslationX="110"
-                    TranslationY="-90"
-                    VerticalOptions="Start">
+        <ScrollView BackgroundColor="White">
+            <StackLayout BackgroundColor="White">
+                <StackLayout HeightRequest="250">
                     <Image
-                        Aspect="AspectFill"
-                        HeightRequest="350"
-                        HorizontalOptions="End"
-                        Source="{Binding Item.image}"
-                        VerticalOptions="Start"
-                        WidthRequest="350" />
-                    <!-- Каритнка продукта -->
-                </shadows:Shadows>
-                <Grid
-                    Margin="30,20,0,30"
-                    ColumnDefinitions=".3*, .7*"
-                    RowDefinitions="auto, auto, auto, auto, 80, auto, 140, *">
-
+                        Aspect="AspectFill" 
+                        HeightRequest="250"
+                        HorizontalOptions="Center"
+                        Source="{Binding Image}"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="250" />
+                </StackLayout>
+                <!-- Каритнка продукта -->
+                <StackLayout Margin="0,15,0,0">
                     <shadows:Shadows
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        Margin="0,90,0,0"
-                        CornerRadius="24"
-                        HeightRequest="48"
-                        HorizontalOptions="Start"
-                        Shades="{shadows:SingleShade BlurRadius=15,
-                                                     Offset='10,10',
-                                                     Opacity=0.15,
-                                                     Color=Black}"
-                        WidthRequest="48">
-
-                    </shadows:Shadows>
-                    <shadows:Shadows
-                        Grid.Row="2"
-                        Grid.ColumnSpan="2"
-                        Margin="0,60,0,0"
+                        Margin="20,0,0,0"
                         CornerRadius="20"
-                        HorizontalOptions="Start"
+                        WidthRequest="300"
+                        HeightRequest="50"
+                        HorizontalOptions="Center"
                         Shades="{shadows:SingleShade BlurRadius=15,
                                                      Offset='10,10',
                                                      Opacity=0.15,
                                                      Color=Black}">
                         <pancake:PancakeView
-                            Padding="15"
                             BackgroundColor="White"
                             CornerRadius="20"
                             HasShadow="False"
-                            HeightRequest="30"
+                            HeightRequest="40"
                             HorizontalOptions="Start"
                             WidthRequest="270">
-                            <Grid>
-                                <Label Text="Узнайте, что вы можете приготовить с этим продуктом!"></Label>
-                            </Grid>
+                            <Label Padding="5" TextColor="Black" Text="Узнайте, что вы можете приготовить с этим продуктом!"></Label>
                         </pancake:PancakeView>
                     </shadows:Shadows>
+                    <StackLayout Orientation="Horizontal" Margin="20,50,0,15">
+                        <Label
+                            FontSize="20"
+                            TextColor="Black"
+                            Text="{Binding Name}"
+                            VerticalOptions="Center" />
+                        <Label Text=">Фирма>"
+                               FontSize="20"
+                               TextColor="Black"/>
+                    </StackLayout>
+                    <StackLayout Margin="20,0,0,0" BackgroundColor="#EEEBEB" HorizontalOptions="Start">
                     <Label
-                        Grid.Row="3"
-                        Grid.ColumnSpan="2"
-                        Margin="0,50,0,15"
+                        TextColor="Black"
                         FontSize="20"
-                        Text="Название продукта"
-                        VerticalOptions="Center" />
-                    <Label
-                        Grid.Row="4"
-                        Grid.ColumnSpan="2"
-                        Margin="0,0,20,0"
-                        FontSize="Small"
                         Text="Описание" />
+                        <StackLayout Orientation="Horizontal">
+                            <StackLayout WidthRequest="50">
+                                <Label Text="{Binding Kkal}" TextColor="Black"/>
+                                <Label Text="Ккал" TextColor="Black"/>
+                            </StackLayout>
+                            <StackLayout WidthRequest="50">
+                                <Label Text="{Binding Proteins}" TextColor="Black"/>
+                                <Label Text="Белки" TextColor="Black"/>
+                            </StackLayout>
+                            <StackLayout WidthRequest="50">
+                                <Label Text="{Binding Fats}" TextColor="Black"/>
+                                <Label Text="Жиры" TextColor="Black"/>
+                            </StackLayout>
+                            <StackLayout>
+                                <Label Text="{Binding Carbohydrates}" TextColor="Black"/>
+                                <Label Text="Углеводы" TextColor="Black"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
                     <Label
                         Grid.Row="5"
                         Grid.ColumnSpan="2"
-                        Margin="0,20,0,10" 
+                        TextColor="Black"
+                        Margin="20,20,0,10" 
                         FontSize="20"
                         Text="Количество"
                         VerticalOptions="Center" />
                     <Grid
-                        Grid.Row="6"
-                        Grid.ColumnSpan="2"
+                        Margin="20,0,0,0"
                         ColumnDefinitions="auto, 80"
                         VerticalOptions="StartAndExpand">
                         <pancake:PancakeView
@@ -108,11 +100,13 @@
                                     FontSize="28"
                                     HorizontalOptions="FillAndExpand"
                                     HorizontalTextAlignment="Center"
-                                    Text="\uE801"
+                                    Text="-"
                                     TextColor="Gray"
                                     VerticalOptions="FillAndExpand"
                                     VerticalTextAlignment="Center">
-                                    
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="Dec_Tapped"/>
+                                    </Label.GestureRecognizers>
                                 </Label>
                                 <BoxView
                                     Grid.Column="1"
@@ -127,11 +121,13 @@
                                     FontSize="28"
                                     HorizontalOptions="FillAndExpand"
                                     HorizontalTextAlignment="Center"
-                                    Text="\uE800"
+                                    Text="+"
                                     TextColor="Gray"
                                     VerticalOptions="FillAndExpand"
                                     VerticalTextAlignment="Center">
-                                   
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="Inc_Tapped"/>
+                                    </Label.GestureRecognizers>
                                 </Label>
                             </Grid>
                         </pancake:PancakeView>
@@ -139,68 +135,67 @@
                             Grid.Column="1"
                             Margin="20,0,0,0"
                             FontSize="25"
+                            TextColor="Black"
                             HorizontalOptions="FillAndExpand"
-                            Text="{Binding Quant}" 
+                            Text="{Binding Count}" 
                             VerticalOptions="Center" />
                         <!-- Binding Quant должно меняться число при нажатии на + и - -->
                     </Grid>
-                    <StackLayout
-                        Grid.Row="7"
-                        Grid.ColumnSpan="2"
-                        Margin="0"
-                        Spacing="0"
-                        VerticalOptions="EndAndExpand">
+                    
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Margin="20,20,20,0">
+                    <StackLayout HorizontalOptions="Start">
                         <Label
-                            FontSize="Small"
-                            Opacity="0.6"
-                            Text="Цена" />
+                                FontSize="Small"
+                                Opacity="0.6"
+                                TextColor="Black"
+                                Text="Цена" />
                         <Label
-                            FontSize="25"
-                            Text="{Binding Item.price, StringFormat='Р{0:N0}'}" />
+                                TextColor="Black"
+                                FontSize="25"
+                                Text="{Binding Price, StringFormat='{0:N0} ₽'}" />
                     </StackLayout>
-                    <shadows:Shadows
-                        Grid.Row="7"
-                        Grid.Column="1"
-                        Margin="0,0,30,0"
-                        CornerRadius="20"
-                        HorizontalOptions="End"
-                        Shades="{shadows:SingleShade BlurRadius=20,
-                                                     Offset='2,10',
-                                                     Opacity=0.4,
-                                                     Color=Black}"
-                        VerticalOptions="EndAndExpand">
-                        <pancake:PancakeView
-                            Padding="28,8"
-                            BackgroundColor="Black"
-                            CornerRadius="36"
-                            HeightRequest="54">
-                            <Grid>
-                                <BoxView
+                    <StackLayout HorizontalOptions="EndAndExpand">
+                        <shadows:Shadows
+                                CornerRadius="20"
+                                Shades="{shadows:SingleShade BlurRadius=20,
+                                                             Offset='2,10',
+                                                             Opacity=0.4,
+                                                             Color=Black}"
+                                VerticalOptions="EndAndExpand">
+                            <pancake:PancakeView
+                                    Padding="28,8"
                                     BackgroundColor="White"
-                                    CornerRadius="24"
-                                    HeightRequest="48"
-                                    HorizontalOptions="Center"
-                                    VerticalOptions="Center"
-                                    WidthRequest="48" />
-                                <BoxView
-                                    BackgroundColor="Orange"
-                                    CornerRadius="22"
-                                    HeightRequest="44"
-                                    HorizontalOptions="Center"
-                                    VerticalOptions="CenterAndExpand"
-                                    WidthRequest="44" />
-                                <Image
-                                    Aspect="AspectFit"
-                                    HeightRequest="22"
-                                    HorizontalOptions="Center"
-                                    Source="cart"
-                                    VerticalOptions="Center"
-                                    WidthRequest="22" />
-                            </Grid>
-                        </pancake:PancakeView>
-                    </shadows:Shadows>
-                </Grid>
-            </Grid>
+                                    CornerRadius="36"
+                                    HeightRequest="54">
+                                <Grid>
+                                    <BoxView
+                                            BackgroundColor="White"
+                                            CornerRadius="24"
+                                            HeightRequest="48"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center"
+                                            WidthRequest="48" />
+                                    <BoxView
+                                            BackgroundColor="Orange"
+                                            CornerRadius="22"
+                                            HeightRequest="44"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="CenterAndExpand"
+                                            WidthRequest="44" />
+                                    <Image
+                                            Aspect="AspectFit"
+                                            HeightRequest="22"
+                                            HorizontalOptions="Center"
+                                            Source="cart"
+                                            VerticalOptions="Center"
+                                            WidthRequest="22" />
+                                </Grid>
+                            </pancake:PancakeView>
+                        </shadows:Shadows>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>
