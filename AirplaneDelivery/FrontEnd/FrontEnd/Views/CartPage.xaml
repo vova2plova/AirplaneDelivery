@@ -75,6 +75,8 @@
         </StackLayout>
             <Grid VerticalOptions="End"  HorizontalOptions="Center" WidthRequest="350" HeightRequest="200"  >
                 <Label Text="Адрес доставки" FontSize="20"></Label>
+                <Label Margin="240,0,0,0" FontSize="14" Text="Общая цена:"></Label>
+                <Label Text="300 р" Margin="285,30,0,0"></Label>
                 <Grid Margin="15,50,0,0">
                     <Label Text="Адрес:" FontSize="16"></Label>
                     <Label Margin="60,0,0,0" FontSize="16" Text="Муштари, 32"></Label>
