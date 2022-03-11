@@ -5,8 +5,11 @@
              x:Class="FrontEnd.Views.CartPage">
     <ContentPage.Content>
         <Grid >
-            <StackLayout Margin="10,30,10,0" x:Name="List"  Spacing="10">
-           
+            <ScrollView>
+            <StackLayout Margin="10,10,10,0" x:Name="List"  Spacing="10">
+                <StackLayout>
+                    <Image Source="delete.png" HorizontalOptions="End" Margin="0,0,0,0" WidthRequest="35" HeightRequest="35"></Image>
+                </StackLayout>
             <Frame Padding="0" BackgroundColor="Transparent" BorderColor="Orange" HeightRequest="88" 
                        WidthRequest="120" CornerRadius="48">
                 <StackLayout Orientation="Horizontal" >
@@ -73,6 +76,7 @@
                     </StackLayout>
             </Frame>
         </StackLayout>
+            </ScrollView>
             <Grid VerticalOptions="End"  HorizontalOptions="Center" WidthRequest="350" HeightRequest="200"  >
                 <Label Text="Адрес доставки" FontSize="20"></Label>
                 <Label Margin="240,0,0,0" FontSize="14" Text="Общая цена:"></Label>
