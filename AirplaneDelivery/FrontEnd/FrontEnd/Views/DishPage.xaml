@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FrontEnd.Views.DishPage">
+    <ContentPage.Content>
+        <Grid >
+            <StackLayout Margin="10,30,10,0" x:Name="List"  Spacing="10">
+
+                <Frame Padding="0" BackgroundColor="Transparent" BorderColor="Orange" HeightRequest="88" 
+                       WidthRequest="120" CornerRadius="48">
+                    <StackLayout Orientation="Horizontal" >
+                        <Grid  Grid.Row="2" HorizontalOptions="Start" VerticalOptions="Start"
+                                      HeightRequest="90" WidthRequest="90">
+
+                            <Image Source="water.png"  WidthRequest="122" HeightRequest="122" Margin="0,0,0,0"
+                                            HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Grid>
+
+                        <Grid   >
+                            <Label Text="Вода"  TextColor="Black"  FontSize="20"  HorizontalOptions="Center" VerticalOptions="Center" ></Label>
+                          
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
