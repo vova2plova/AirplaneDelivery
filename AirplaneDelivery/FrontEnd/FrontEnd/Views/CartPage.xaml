@@ -1,12 +1,101 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              x:Class="FrontEnd.Views.CartPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <Grid >
+            <StackLayout Margin="10,30,10,0" x:Name="List"  Spacing="10">
+           
+            <Frame Padding="0" BackgroundColor="Transparent" BorderColor="Orange" HeightRequest="88" 
+                       WidthRequest="120" CornerRadius="48">
+                <StackLayout Orientation="Horizontal" >
+                    <Grid  Grid.Row="2" HorizontalOptions="Start" VerticalOptions="Start"
+                                      HeightRequest="90" WidthRequest="90">
+
+                        <Image Source="water.png"  WidthRequest="122" HeightRequest="122" Margin="0,0,0,0"
+                                            HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Grid>
+
+                        <Grid   >
+                        <Label Text="Вода"  TextColor="Black"  FontSize="16"  HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" ></Label>
+                            <Label Text="190р"  FontSize="14" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="EndAndExpand"></Label>
+                        </Grid>
+                        <Label 
+                            FontSize="25"
+                            HorizontalOptions="EndAndExpand"
+                            Margin="90,0,0,0"
+                            Text="2" 
+                            VerticalOptions="Center" />
+                        <Grid 
+                              HorizontalOptions="EndAndExpand"  VerticalOptions="CenterAndExpand" Margin="0,0,15,0" WidthRequest="65" HeightRequest="45">
+                            <pancake:PancakeView
+                            BorderColor="Gray"
+                            BorderThickness="1"
+                            CornerRadius="48"
+                            HeightRequest="45"
+                            HorizontalOptions="Start"
+                            WidthRequest="65">
+                                <Grid ColumnDefinitions="*, auto, *" ColumnSpacing="0">
+                                    <Label
+                                    Grid.Column="0"
+                                    FontSize="30"
+                                    HorizontalOptions="FillAndExpand"
+                                    HorizontalTextAlignment="Center"
+                                    Text="+"
+                                    TextColor="Gray"
+                                    VerticalOptions="FillAndExpand"
+                                    VerticalTextAlignment="Center">
+
+                                    </Label>
+                                    <BoxView
+                                    Grid.Column="1"
+                                    BackgroundColor="Gray"
+                                    HorizontalOptions="Center"
+                                    Opacity="0.6"
+                                    VerticalOptions="Fill"
+                                    WidthRequest="2" />
+                                    <Label
+                                    Grid.Column="2"
+                                    FontSize="30"
+                                    HorizontalOptions="FillAndExpand"
+                                    HorizontalTextAlignment="Center"
+                                    Text="-"
+                                    TextColor="Gray"
+                                    VerticalOptions="FillAndExpand"
+                                    VerticalTextAlignment="Center">
+
+                                    </Label>
+                                </Grid>
+                            </pancake:PancakeView>
+                          
+                        </Grid>
+                    </StackLayout>
+            </Frame>
         </StackLayout>
+            <Grid VerticalOptions="End"  HorizontalOptions="Center" WidthRequest="350" HeightRequest="200"  >
+                <Label Text="Адрес доставки" FontSize="20"></Label>
+                <Grid Margin="15,50,0,0">
+                    <Label Text="Адрес:" FontSize="16"></Label>
+                    <Label Margin="60,0,0,0" FontSize="16" Text="Муштари, 32"></Label>
+                </Grid>
+            </Grid>
+            <Grid HorizontalOptions="Center" Padding="10" VerticalOptions="End" WidthRequest="120" HeightRequest="40">
+                <StackLayout>
+
+                    <Frame Padding="0" BackgroundColor="Transparent" BorderColor="Orange" HeightRequest="60" 
+                       WidthRequest="200" CornerRadius="48">
+                        <StackLayout  >
+
+                            <Grid  HeightRequest="40">
+                                <Label Text="Оплатить"  TextColor="Black"  FontSize="16"  VerticalOptions="Center" HorizontalOptions="Center" ></Label>
+                                
+                            </Grid>
+
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </Grid>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -26,7 +26,7 @@
                 <Grid  TranslationY="65" VerticalOptions="CenterAndExpand" Margin="20,0,0,80">
 
                     <StackLayout x:Name="List"  Spacing="10" BindableLayout.ItemsSource="{Binding MenuList}">
-                        <Frame></Frame>
+                       
                         <BindableLayout.ItemTemplate>
                             <DataTemplate>
                                 <Frame Padding="0" BackgroundColor="Transparent" BorderColor="Orange" HeightRequest="88" 

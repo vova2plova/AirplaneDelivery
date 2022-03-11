@@ -112,9 +112,7 @@
                                     TextColor="Gray"
                                     VerticalOptions="FillAndExpand"
                                     VerticalTextAlignment="Center">
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer Command="Минус" NumberOfTapsRequired="1" />
-                                    </Label.GestureRecognizers>
+                                    
                                 </Label>
                                 <BoxView
                                     Grid.Column="1"
@@ -133,9 +131,7 @@
                                     TextColor="Gray"
                                     VerticalOptions="FillAndExpand"
                                     VerticalTextAlignment="Center">
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer Command="Плюс" NumberOfTapsRequired="1" />
-                                    </Label.GestureRecognizers>
+                                   
                                 </Label>
                             </Grid>
                         </pancake:PancakeView>
