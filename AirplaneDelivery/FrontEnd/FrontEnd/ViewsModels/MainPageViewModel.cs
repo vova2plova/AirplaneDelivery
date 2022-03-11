@@ -37,12 +37,12 @@ namespace FrontEnd.ViewsModels
         }
         public Command<Category> SelectCategoryCommand => new Command<Category>(Category =>
         {
-            Application.Current.MainPage.DisplayAlert("Selected Plan", "название плана : " + Category.Title, "Ok");
+            Application.Current.MainPage.DisplayAlert("Selected Plan", "название категории : " + Category.Title, "Ok");
         });
 
         public Command<Product> SelectProductCommand => new Command<Product>(Product =>
         {
-            Application.Current.MainPage.DisplayAlert("Selected Plan", "название плана : " + Product.Name, "Ok");
+            Application.Current.MainPage.Navigation.PushAsync(new DetailPage(Product));
         });
 
 
@@ -63,17 +63,6 @@ namespace FrontEnd.ViewsModels
             {
                 Products = new ObservableCollection<Product>(response.Content);
                 ProdutList.FlowItemsSource = Products;
-            }
-        }
-
-        public Command ItemTappedCommand
-        {
-            get
-            {
-                return new Command((data) =>
-                {
-                    Application.Current.MainPage.DisplayAlert("FlowListView", data + "", "Ok");
-                });
             }
         }
 
