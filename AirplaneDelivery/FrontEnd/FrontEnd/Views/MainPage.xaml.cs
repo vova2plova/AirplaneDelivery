@@ -19,6 +19,8 @@ namespace FrontEnd
             InitializeComponent();
             BindingContext = _vm;
             NavigationPage.SetHasNavigationBar(this, false);
+            _vm.LoadCategory(listGroups);
+            _vm.LoadProducts(listProducts);
         }
 
         private void OpenMenu()
@@ -39,8 +41,7 @@ namespace FrontEnd
 
         protected override void OnAppearing()
         {
-            _vm.LoadCategory(listGroups);
-            _vm.LoadProducts(listProducts);
+
             base.OnAppearing();
         }
 
