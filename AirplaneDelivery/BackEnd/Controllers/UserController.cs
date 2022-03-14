@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using System.Text;
 using DAL.Models;
 
@@ -22,12 +23,16 @@ namespace BackEnd.Controllers
 
         [HttpPost("SignUp")]
         public ActionResult<User> SignUp(User user)
-        {
-            
+        {   
             var _user = db.Users.FirstOrDefault(x => x.Number == user.Number);
             if (_user == null)
             {
-                var newUser = new User { Number = user.Number, Password = user.Password };
+                var newUser = new User {
+                    Number = user.Number,
+                    Password = user.Password,
+                    Cart = new Cart(),
+                    HistoryOfOrders = new List<Cart>()
+                };
                 db.Users.Add(newUser);
                 db.SaveChanges();
                 var userWithId = db.Users.FirstOrDefault(x => x.Number == newUser.Number);
@@ -36,13 +41,22 @@ namespace BackEnd.Controllers
             return BadRequest("Пользователь с такими данными уже зарегистрирован");
         }
 
-        [HttpGet("SignIn")]
+        [HttpGet("SignIn/{login}/{password}")]
         public ActionResult<User> SignIn(string login, string password)
         {
             var _user = db.Users.FirstOrDefault(x => x.Number == login && x.Password == password);
             if (_user != null)
                 return (Ok(_user));
             return NotFound("Пользователь не найден");
+        }
+
+        [HttpGet("GetUserById/{id}")]
+        public async Task<ActionResult<User>> GetUserById(int id)
+        {
+            var user = await db.Users.FirstOrDefaultAsync(x => x.Id == id);
+            if (user != null)
+                return Ok(user);
+            return BadRequest();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FrontEnd.ViewsModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,10 +13,17 @@ namespace FrontEnd.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CartPage : ContentPage
     {
+        CartViewModel vm = new CartViewModel();
         public CartPage()
         {
-            Title = "Корзина";
+            this.BindingContext = vm;
             InitializeComponent();
+            vm.LoadCart(List);
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
         }
     }
 }

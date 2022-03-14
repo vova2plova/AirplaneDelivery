@@ -342,7 +342,9 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
-
+#Ip
+AirplaneDelivery\BackEnd\Properties\launchSettings.json
+AirplaneDelivery\FrontEnd\FrontEnd\OnlineServices\AppSettings.cs
 # Backup folder for Package Reference Convert tool in Visual Studio 2017
 MigrationBackup/
 

@@ -192,6 +192,9 @@
                                             WidthRequest="22" />
                                 </Grid>
                             </pancake:PancakeView>
+                            <shadows:Shadows.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="AddSlotToCart_Tapped"/>
+                            </shadows:Shadows.GestureRecognizers>
                         </shadows:Shadows>
                     </StackLayout>
                 </StackLayout>

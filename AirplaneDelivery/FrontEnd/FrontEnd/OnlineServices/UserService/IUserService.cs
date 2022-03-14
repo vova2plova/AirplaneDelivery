@@ -16,6 +16,7 @@ namespace FrontEnd.OnlineServices.UserService
         Task<ApiResponse<User>> SignUp(
             [Body] User newUser);
 
-
+        [Get("/User/GetUserById/{id}")]
+        Task<ApiResponse<User>> GetUserById(int id);
     }
 }
