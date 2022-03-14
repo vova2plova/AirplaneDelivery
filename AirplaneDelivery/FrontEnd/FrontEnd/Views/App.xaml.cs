@@ -1,4 +1,5 @@
-﻿using DLToolkit.Forms.Controls;
+﻿using DAL.Models;
+using DLToolkit.Forms.Controls;
 using FrontEnd.OnlineServices;
 using FrontEnd.Views;
 using System;

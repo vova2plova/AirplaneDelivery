@@ -173,72 +173,9 @@
                         </Grid>
                     </Grid>
                 </Grid>
-                <flv:FlowListView FlowColumnCount="2"
-                                      x:Name="listProducts"
-                                      SeparatorVisibility="None"
-                                      HasUnevenRows="True"
-                                  
-                                        Margin="10,0,10,0">
-                    <flv:FlowListView.FlowColumnTemplate >
-                        <DataTemplate>
-                            <pancake:PancakeView
-                            Margin="10,8,10,0"
-                            Padding="15"
-                             
-                            BackgroundColor="#F3F8FC"
-                            CornerRadius="18"
-                            HasShadow="False"
-                            WidthRequest="165">
-                                <Grid
-                                ColumnDefinitions="auto, *, auto"
-                                RowDefinitions="auto, auto, auto, auto, auto"
-                                RowSpacing="0">
-                                    <Label
-                                    Grid.Row="0"
-                                    Grid.Column="1"
-                                    FontSize="Small"
-                                    HorizontalOptions="StartAndExpand"
-                                    TextColor="Black"
-                                    Text="{Binding Weight, StringFormat='{0} г'}"
-                                    VerticalOptions="Center" />
-
-                                    <Image
-                                    Grid.Row="1"
-                                    Grid.ColumnSpan="3"
-                                    Margin="0,10,0,20"
-                                    HeightRequest="116"
-                                    HorizontalOptions="Center"
-                                    Source="{Binding Image}"
-                                    WidthRequest="116" />
-                                    <Label
-                                    Grid.Row="2"
-                                    Grid.ColumnSpan="3"
-                                    TextColor="Black"
-                                    Margin="0,-10,0,0"
-                                    FontFamily="FontPoppinsMedium"
-                                    FontSize="18"
-                                    Text="{Binding Name}" />
-
-                                    <Label
-                                    Grid.Row="4"
-                                    Grid.ColumnSpan="3"
-                                    Margin="0,10,0,0"
-                                    TextColor="Black"
-                                    FontFamily="FontPoppinsMedium"
-                                    FontSize="22"
-                                    Text="{Binding Price, StringFormat='Р {0}'}"
-                                    VerticalOptions="Center" />
-                                </Grid>
-                                <pancake:PancakeView.GestureRecognizers>
-                                    <TapGestureRecognizer
-                                    Command="{Binding BindingContext.SelectProductCommand, Source={x:Reference listProducts}}"
-                                    CommandParameter="{Binding .}" 
-                                    NumberOfTapsRequired="1" />
-                                </pancake:PancakeView.GestureRecognizers>
-                            </pancake:PancakeView>
-                        </DataTemplate>
-                    </flv:FlowListView.FlowColumnTemplate>
-                </flv:FlowListView>
+                <StackLayout x:Name="listProducts">
+                    
+                </StackLayout>
             </StackLayout>
         </ScrollView>
 

@@ -27,6 +27,5 @@ namespace DAL.Models
         
         public int CountInStorage { get; set; }
 
-        public List<Spot> Spot { get; set; }
     }
 }

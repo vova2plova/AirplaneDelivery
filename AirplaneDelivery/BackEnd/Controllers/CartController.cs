@@ -1,6 +1,8 @@
 ﻿using DAL.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
 namespace BackEnd.Controllers
@@ -16,35 +18,39 @@ namespace BackEnd.Controllers
             db = context;
         }
 
-        [HttpPost("AddSpotToUserCart/{id}")]
-        public async Task<ActionResult> AddSpotToCart(Spot spot, int id)
+        [HttpGet("GetUserCart/{id}")]
+        public async Task<ActionResult<List<Spot>>> GetUserSpots(int id)
         {
-            if (spot.Products != null && spot.Count > 0)
+            var users = await db.Users.Include(u => u.Cart).ToListAsync();
+            var user = users.FirstOrDefault(u => u.Id == id);
+            if (user != null)
             {
-                var user = db.Users.FirstOrDefault(u => u.Id == id);
+                var Spots = db.Spots.Where(s => s.CartId == user.Cart.Id);
+                await Spots.Include(s => s.Products).ToListAsync();
+                return Ok(Spots);
+            }
+            return BadRequest();
+        }
+
+
+        [HttpPost("AddSpotToUserCart/{id}")]
+        public async Task<ActionResult<Spot>> AddSpotToCart(Spot spot, int id)
+        {
+            if (spot.Products != null)
+            {
+                var users = await db.Users.Include(u => u.Cart).ToListAsync();
+                var user = users.FirstOrDefault(u => u.Id == id);
+                user.Cart.Spots = db.Spots.Where(s => s.CartId == user.Cart.Id).ToList();
                 if (user != null)
                 {
-                    var spotInCart = user.Cart.Spots.FirstOrDefault(s => s.Products.Name == spot.Products.Name);
-                    var productInStorage = db.Products.FirstOrDefault(p => p.Name == spot.Products.Name);
-                    if (productInStorage != null)
+                    if (user.Cart.Spots == null)
                     {
-                        if (spotInCart != null)
-                        {
-                            if ((productInStorage.CountInStorage - (spotInCart.Count + spot.Count)) > 0)
-                                spotInCart.Count += spot.Count;
-                            else
-                                return BadRequest($"Можно добавить только {productInStorage.CountInStorage} продуктов");
-                        }
-                        else
-                        {
-                            if ((productInStorage.CountInStorage - spot.Count) > 0)
-                                user.Cart.Spots.Add(spot);
-                            else
-                                return BadRequest($"Можно добавить только {productInStorage.CountInStorage} продуктов");
-                        }
-                        await db.SaveChangesAsync();
-                        return Ok("Продукт добавлен в корзину");
+                        user.Cart.Status = "Shoping";
+                        user.Cart.Spots = new List<Spot>();
                     }
+                    user.Cart.Spots.Add(spot);
+                    await db.SaveChangesAsync();
+                    return Ok("Продукт добавлен в корзину");
                 }
             }
             return BadRequest();

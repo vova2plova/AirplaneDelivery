@@ -9,5 +9,6 @@ namespace DAL.Models
         public int Id { get; set; }
         public Product Products { get; set; }
         public int Count { get; set; }
+        public int CartId { get; set; }
     }
 }

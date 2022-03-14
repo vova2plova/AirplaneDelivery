@@ -1,8 +1,11 @@
-﻿using DAL.Models;
+﻿using Acr.UserDialogs;
+using DAL.Models;
+using FrontEnd.OnlineServices;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace FrontEnd.ViewsModels
@@ -26,7 +29,20 @@ namespace FrontEnd.ViewsModels
             Count = 1.ToString();
         }
 
-        
+        public async void AddSlotToCart()
+        {
+            Spot spot = new Spot
+            {
+                Count = _count,
+                Products = _product
+            };
+            var response = await MainService.CartService.AddSpotToCart(spot, Preferences.Get("user_id", 0));
+            if (response.IsSuccessStatusCode)
+                UserDialogs.Instance.Toast("Продукт добавлен в корзину", new TimeSpan(100));
+            else
+                UserDialogs.Instance.Toast("Произошла ошибка" , new TimeSpan(100));
+        }
+
         public string Count 
         {
             get

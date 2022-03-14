@@ -30,5 +30,10 @@ namespace FrontEnd.Views
         {
             vm.IncCount();
         }
+
+        private void AddSlotToCart_Tapped(object sender, EventArgs e)
+        {
+            vm.AddSlotToCart();
+        }
     }
 }

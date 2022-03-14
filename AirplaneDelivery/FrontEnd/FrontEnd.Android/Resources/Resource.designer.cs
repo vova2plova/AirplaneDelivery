@@ -14,7 +14,7 @@ namespace FrontEnd.Droid
 {
 	
 	
-	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "1.0.0.0")]
+	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "12.2.0.155")]
 	public partial class Resource
 	{
 		
@@ -22171,10 +22171,10 @@ namespace FrontEnd.Droid
 			public const int chocolate = 2131165280;
 			
 			// aapt resource value: 0x7F070061
-			public const int cucumber = 2131165281;
+			public const int ClearCart = 2131165281;
 			
 			// aapt resource value: 0x7F070062
-			public const int delete = 2131165282;
+			public const int cucumber = 2131165282;
 			
 			// aapt resource value: 0x7F070063
 			public const int design_fab_background = 2131165283;
