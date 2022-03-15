@@ -7,59 +7,59 @@
         <_vm:ProfilePageViewModel x:Name="vm"/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <ScrollView>
-            
-                <Grid >
-                    <Grid VerticalOptions="Start">
-                        <StackLayout Spacing="0">
-                        <Grid WidthRequest="280" Padding="0,15" BackgroundColor="Transparent" HorizontalOptions="Center">
-                            <Image Margin="0,0,240,10"  Source="user"></Image>
-                            <Entry  x:Name="name" Margin="39,0,39,0" FontSize="12" PlaceholderColor="Black" TextColor="Black"/>
-                        </Grid>
-                        <Grid WidthRequest="280" Padding="10,0" BackgroundColor="Transparent" HorizontalOptions="Center">
-                            <Image Margin="0,0,240,10" Source="phone"></Image>
-                            <Entry  x:Name="phone" Margin="39,0,39,0" FontSize="12" PlaceholderColor="Black" TextColor="Black"/>
-                        </Grid>
-                        <StackLayout WidthRequest="100" HeightRequest="80" HorizontalOptions="Center" >
-                            
-                            <Frame Padding="0" BackgroundColor="Transparent" BorderColor="Orange" HeightRequest="60" 
+
+        <Grid >
+            <Grid VerticalOptions="Start">
+                <StackLayout Spacing="0">
+                    <Grid WidthRequest="280" Padding="0,15" BackgroundColor="Transparent" HorizontalOptions="Center">
+                        <Image Margin="0,0,240,10"  Source="user"></Image>
+                        <Entry  x:Name="name" Margin="39,0,39,0" FontSize="12" PlaceholderColor="Black" TextColor="Black"/>
+                    </Grid>
+                    <Grid WidthRequest="280" Padding="10,0" BackgroundColor="Transparent" HorizontalOptions="Center">
+                        <Image Margin="0,0,240,10" Source="phone"></Image>
+                        <Entry  x:Name="phone" Margin="39,0,39,0" FontSize="12" PlaceholderColor="Black" TextColor="Black"/>
+                    </Grid>
+                    <StackLayout WidthRequest="100" HeightRequest="80" HorizontalOptions="Center" >
+
+                        <Frame Padding="0" BackgroundColor="Transparent" BorderColor="Orange" HeightRequest="60" 
                     WidthRequest="100" CornerRadius="48" Margin="0,20,0,20">
-                                <Label Text="Сохранить"  TextColor="Black" HorizontalTextAlignment="Center" FontSize="14"  VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="100"></Label>
-                            </Frame>
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="SaveCommand" NumberOfTapsRequired="1"></TapGestureRecognizer>
-                            </StackLayout.GestureRecognizers>
-                        </StackLayout>
+                            <Label Text="Сохранить"  TextColor="Black" HorizontalTextAlignment="Center" FontSize="14"  VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="100"></Label>
+                        </Frame>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="SaveCommand" NumberOfTapsRequired="1"></TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
                     </StackLayout>
-                     </Grid>
-                    <Grid VerticalOptions="Center"  Margin="20,0,0,250"  >
-                    <Label Grid.Row="1" Text="История заказов"></Label>
-                </Grid>
-                <Grid  TranslationY="65" VerticalOptions="CenterAndExpand" Margin="20,0,0,80">
-
-                    <StackLayout x:Name="List"  Spacing="10" BindableLayout.ItemsSource="{Binding MenuList}">
-                       
-                        <BindableLayout.ItemTemplate>
-                            <DataTemplate>
-                                <Frame Padding="0" BackgroundColor="Transparent" BorderColor="Orange" HeightRequest="88" 
-                       WidthRequest="125" CornerRadius="48">
-                                    <StackLayout Orientation="Horizontal" >
-
-                                        <Grid>
-                                            <Label Text="{Binding Name}"  TextColor="Black"  FontSize="16" Margin="50,0,0,0" HorizontalOptions="Start" VerticalOptions="Start"
-                                        FontFamily="NormalFont"></Label>
-                                            <Label Text="190 р" Margin="0,0,140,10" FontSize="12" TextColor="Black" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand"></Label>
-                                            <Label Text="07.03.2022 в 13:22" FontSize="12" Margin="110,0,0,10" TextColor="Black" HorizontalOptions="Start" VerticalOptions="EndAndExpand"></Label>
-                                        </Grid>
-                                    </StackLayout>
-                                </Frame>
-                            </DataTemplate>
-                        </BindableLayout.ItemTemplate>
-
-                    </StackLayout>
-                </Grid>
+                </StackLayout>
+            </Grid>
+            <Grid VerticalOptions="Center"  Margin="20,0,0,250"  >
+                <Label Grid.Row="1" Text="История заказов"></Label>
             </Grid>
         
-        </ScrollView>
+        <ScrollView HeightRequest="700">
+                        <StackLayout Margin="10,250,10,0" x:Name="List"  Spacing="10">
+                    <Label Text="3123"></Label>
+                    <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame Padding="0" BackgroundColor="Transparent" BorderColor="Orange" HeightRequest="88" 
+                            WidthRequest="120" CornerRadius="48">
+                                        <StackLayout Orientation="Horizontal">
+                                            
+                                            <StackLayout WidthRequest="100">
+                                                <Label Text="Статус"  TextColor="Black"  FontSize="16"  HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" ></Label>
+                                                <Label Text="Сумма"  FontSize="14" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="EndAndExpand"></Label>
+                                            </StackLayout>
+                                       
+                                    </StackLayout>
+                                    </Frame>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer>
+                            
+                        </TapGestureRecognizer>
+                    </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </ScrollView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
