@@ -58,5 +58,19 @@ namespace BackEnd.Controllers
                 return Ok(user);
             return BadRequest();
         }
+
+        [HttpPut("UpdateData")]
+        public async Task<ActionResult> UpdateData(User user)
+        {
+            var _user = db.Users.FirstOrDefault(u => u.Id == user.Id);
+            if (_user != null)
+            {
+                _user.Name = user.Name;
+                _user.Number = user.Number;
+                await db.SaveChangesAsync();
+                return Ok();
+            }
+            return BadRequest();
+        }
     }
 }
