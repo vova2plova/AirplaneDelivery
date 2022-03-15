@@ -24,6 +24,10 @@ namespace FrontEnd.OnlineServices.UserService
             return await InstanceInterface.SignUp(newUser);
         }
 
+        public async Task<ApiResponse<User>> UpdateData(User newUser)
+        {
+            return await InstanceInterface.UpdateData(newUser);
+        }
     }
 
 }

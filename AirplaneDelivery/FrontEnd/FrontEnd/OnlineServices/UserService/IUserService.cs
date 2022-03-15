@@ -18,5 +18,9 @@ namespace FrontEnd.OnlineServices.UserService
 
         [Get("/User/GetUserById/{id}")]
         Task<ApiResponse<User>> GetUserById(int id);
+
+        [Put("/User/UpdateData")]
+        Task<ApiResponse<User>> UpdateData(
+            [Body] User newUser);
     }
 }
