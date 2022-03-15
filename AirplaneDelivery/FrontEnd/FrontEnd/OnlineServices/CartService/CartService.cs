@@ -14,6 +14,11 @@ namespace FrontEnd.OnlineServices.CartService
             return await InstanceInterface.AddSpotToCart(spot, id);
         }
 
+        public async Task<Spot> EditCountProducts(int idSpot, int NewCount)
+        {
+            return await InstanceInterface.EditCountProducts(idSpot, NewCount);
+        }
+
         public async Task<ApiResponse<List<Spot>>> GetUserCart(int id)
         {
             return await InstanceInterface.GetUserCart(id);

@@ -6,12 +6,12 @@
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <StackLayout>
-            <ScrollView>
+            <StackLayout HeightRequest="30" HorizontalOptions="EndAndExpand" VerticalOptions="Start" Margin="10,0,10,0" Orientation="Horizontal">
+                <Label Text="Очистить корзину" VerticalOptions="Center"/>
+                <Image Source="ClearCart" HeightRequest="30" WidthRequest="30" VerticalOptions="Center"/>
+            </StackLayout>
+            <ScrollView HeightRequest="700">
                 <StackLayout Margin="10,30,10,0" x:Name="List"  Spacing="10">
-                    <StackLayout HeightRequest="30" HorizontalOptions="EndAndExpand" VerticalOptions="Start" Margin="10,0,10,0" Orientation="Horizontal">
-                        <Label Text="Очистить корзину" VerticalOptions="Center"/>
-                        <Image Source="ClearCart" HeightRequest="30" WidthRequest="30" VerticalOptions="Center"/>
-                    </StackLayout>
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
                             <Frame Padding="0" BackgroundColor="Transparent" BorderColor="Orange" HeightRequest="88" 

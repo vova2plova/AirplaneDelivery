@@ -1,9 +1,11 @@
-﻿using DAL.Models;
+﻿using Acr.UserDialogs;
+using DAL.Models;
 using FrontEnd.OnlineServices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Text;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -79,19 +81,32 @@ namespace FrontEnd.ViewsModels
             }
         }
 
-        public Command<Spot> IncSpotCount => new Command<Spot>(Spot =>
+        public Command<Spot> IncSpotCount => new Command<Spot>(async Spot =>
         {
             if (Spot.Count < Spot.Products.CountInStorage)
+            {
                 Spot.Count++;
+                Spots[Spots.IndexOf(Spot)] = Spot;
+            }
+            await MainService.CartService.EditCountProducts(Spot.Id, Spot.Count);
+            OnPropertyChanged("Spots[Spots.IndexOf(Spot)].Count");
+            GetSumPrice();
         });
 
-        public Command<Spot> DecSpotCount => new Command<Spot>(Spot =>
+        public Command<Spot> DecSpotCount => new Command<Spot>(async Spot =>       
         {
-            if (Spot.Count >= 0)
-                Spot.Count--;
-            else
+            Spot.Count--;
+            if (Spot.Count == 0)
+            {
+                UserDialogs.Instance.Toast("Продукт удалён из корзины", new TimeSpan(50));
                 Spots.Remove(Spot);
-            OnPropertyChanged("Count");
+            }
+            else
+            {
+                Spots[Spots.IndexOf(Spot)] = Spot;
+            }
+            await MainService.CartService.EditCountProducts(Spot.Id, Spot.Count);
+            OnPropertyChanged("Spots[Spots.IndexOf(Spot)].Count");
             GetSumPrice();
         });
     }
