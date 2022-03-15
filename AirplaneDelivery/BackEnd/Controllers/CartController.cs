@@ -18,6 +18,18 @@ namespace BackEnd.Controllers
             db = context;
         }
 
+        [HttpPut("EditCountProducts")]
+        public async Task<Spot> EditCountProducts(int idSpot, int NewCount)
+        {
+            var spot = db.Spots.FirstOrDefault(x => x.Id == idSpot);
+            if (NewCount != 0)
+                spot.Count = NewCount;
+            else
+                db.Spots.Remove(spot);
+            await db.SaveChangesAsync();
+            return spot;
+        }
+
         [HttpGet("GetUserCart/{id}")]
         public async Task<ActionResult<List<Spot>>> GetUserSpots(int id)
         {
@@ -48,7 +60,11 @@ namespace BackEnd.Controllers
                         user.Cart.Status = "Shoping";
                         user.Cart.Spots = new List<Spot>();
                     }
-                    user.Cart.Spots.Add(spot);
+                    var spots = db.Spots.FirstOrDefault(s => s.Products.Name == spot.Products.Name);
+                    if (spots != null)
+                        spots.Count += spot.Count;
+                    else
+                        user.Cart.Spots.Add(spot);
                     await db.SaveChangesAsync();
                     return Ok("Продукт добавлен в корзину");
                 }

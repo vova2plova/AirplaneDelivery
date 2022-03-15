@@ -14,5 +14,7 @@ namespace FrontEnd.OnlineServices.CartService
 
         [Post("/Cart/AddSpotToUserCart/{id}")]
         Task<ApiResponse<Spot>> AddSpotToCart(Spot spot, int id);
+        [Put("/Cart/EditCountProducts")]
+        Task<Spot> EditCountProducts(int idSpot, int NewCount);
     }
 }
