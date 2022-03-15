@@ -75,7 +75,8 @@
                         Grid.ColumnSpan="3"
                         Margin="20,10,0,0"
                         HorizontalScrollBarVisibility="Never"
-                        SelectionMode="None">
+                            ItemsSource="{Binding Categories}"
+                        SelectionMode="Single">
                             <CollectionView.ItemsLayout>
                                 <LinearItemsLayout ItemSpacing="0" Orientation="Horizontal" />
                             </CollectionView.ItemsLayout>

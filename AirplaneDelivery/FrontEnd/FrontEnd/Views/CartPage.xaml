@@ -20,8 +20,8 @@
                                     <Image Source="{Binding Products.Image}"  WidthRequest="75" HeightRequest="50"
                                                 HorizontalOptions="Center" VerticalOptions="Center" />
                                     <StackLayout WidthRequest="100">
-                                        <Label Text="{Binding Products.Name}"  TextColor="White"  FontSize="16"  HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" ></Label>
-                                        <Label Text="{Binding Products.Price}"  FontSize="14" TextColor="White" HorizontalOptions="StartAndExpand" VerticalOptions="EndAndExpand"></Label>
+                                        <Label Text="{Binding Products.Name}"  TextColor="Black"  FontSize="16"  HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" ></Label>
+                                        <Label Text="{Binding Products.Price}"  FontSize="14" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="EndAndExpand"></Label>
                                     </StackLayout>
                                     <Label FontSize="25"
                                            HorizontalOptions="EndAndExpand"
@@ -101,7 +101,7 @@
             <StackLayout WidthRequest="150" HorizontalOptions="Center">
                 <Frame Padding="0" BackgroundColor="Transparent" BorderColor="Orange" HeightRequest="60" 
                     WidthRequest="200" CornerRadius="48" Margin="0,20,0,20">
-                    <Label Text="Оплатить"  TextColor="#EBEBEB" HorizontalTextAlignment="Center" FontSize="16"  VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="100"></Label>
+                    <Label Text="Оплатить"  TextColor="Black" HorizontalTextAlignment="Center" FontSize="16"  VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="100"></Label>
                 </Frame>
             </StackLayout>
         </StackLayout>

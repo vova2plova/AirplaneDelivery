@@ -36,8 +36,12 @@ namespace FrontEnd.ViewsModels
             set { menuList = value; }
         }
         public Command<Category> SelectCategoryCommand => new Command<Category>(Category =>
-        {   
+        {
+
+            var index = Category.Id;
+       
             Application.Current.MainPage.DisplayAlert("Selected Plan", "название категории : " + Category.Title, "Ok");
+
         });
 
         public Command<Product> SelectProductCommand => new Command<Product>(async Product =>
