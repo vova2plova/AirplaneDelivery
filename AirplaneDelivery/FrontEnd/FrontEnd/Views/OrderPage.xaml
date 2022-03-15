@@ -3,49 +3,67 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FrontEnd.Views.OrderPage">
     <ContentPage.Content>
-        <Grid >
-            <ScrollView>
-                <StackLayout Margin="10,10,10,0" x:Name="ProductList"  Spacing="10">
-                    <Label Text="Статус заказа" ></Label>
-                    <Frame Padding="0" BackgroundColor="Transparent" BorderColor="Orange" HeightRequest="88" 
-                       WidthRequest="120" CornerRadius="48">
-                        <StackLayout Orientation="Horizontal" >
-                            <Grid  Grid.Row="2" HorizontalOptions="Start" VerticalOptions="Start"
-                                      HeightRequest="90" WidthRequest="90">
-
-                                <Image Source="water.png"  WidthRequest="122" HeightRequest="122" Margin="0,0,0,0"
-                                            HorizontalOptions="Center" VerticalOptions="Center" />
-                            </Grid>
-
-                            <Grid   >
-                                <Label Text="Вода"  TextColor="Black"  FontSize="16"  HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" ></Label>
-                                <Label Text="190р"  FontSize="14" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="EndAndExpand"></Label>
-                            </Grid>
-                            <Label 
-                            FontSize="16"
-                            HorizontalOptions="EndAndExpand"
-                            Margin="0,0,10,0"
-                            Text="2 шт." 
-                            VerticalOptions="Center" />
-                        </StackLayout>
-                    </Frame>
-                </StackLayout>
-            </ScrollView>
-            <StackLayout VerticalOptions="End" HeightRequest="220" HorizontalOptions="Center" WidthRequest="340" >
-                <Label Text="Дата\Время заказа:"></Label>
-                <Entry Text="3 марта в 16:43" IsReadOnly="True"></Entry>
-                <Label Text="Адрес доставки:"></Label>
-                <Entry  Text="Муштари, 32" IsReadOnly="True"></Entry>
-                <Label >
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="Общая цена:"></Span>
-                            <Span Text=" 380 ₽"></Span>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal"  HorizontalOptions="Center">
+                <Label Text="Статус заказа" TextColor="Black" FontSize="18"></Label>
             </StackLayout>
-        </Grid>
+        <ScrollView HeightRequest="700">
+            <StackLayout  Margin="10,30,10,0" x:Name="List"  Spacing="10">
+                
+                        <Frame Padding="0" BackgroundColor="Transparent" BorderColor="Orange" HeightRequest="88" 
+                            WidthRequest="120" CornerRadius="48">
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="картинка"  WidthRequest="75" HeightRequest="50"
+                                                HorizontalOptions="Center" VerticalOptions="Center" />
+                                <StackLayout WidthRequest="100">
+                                    <Label Text="название"  TextColor="Black"  FontSize="16"  HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" ></Label>
+                                    <Label Text="цена"  FontSize="14" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="EndAndExpand"></Label>
+                                </StackLayout>
+                                <Label FontSize="25"
+                                           HorizontalOptions="EndAndExpand"
+                                           Margin="90,0,0,0"
+                                           Text="кол-во" 
+                                           VerticalOptions="Center" />
+
+                            </StackLayout>
+                        </Frame>
+                   
+            </StackLayout>
+        </ScrollView>
+        <StackLayout Margin="10,10,10,0">
+                
+                <StackLayout Orientation="Horizontal">
+                <Frame CornerRadius="15" BackgroundColor="#EBEBEB">
+                    <Label Text="Адрес доставки" FontSize="14" VerticalOptions="Center" TextColor="Black"></Label>
+                </Frame>
+            </StackLayout>
+            <StackLayout>
+                <Frame CornerRadius="15" BackgroundColor="#EBEBEB">
+                    <Label FontSize="14" Text="Адрес" TextColor="Black"></Label>
+                </Frame>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Frame CornerRadius="15" BackgroundColor="#EBEBEB">
+                    <Label Text="Общая стоимость:" FontSize="14" TextColor="Black"></Label>
+                </Frame>
+                <Frame CornerRadius="15" BackgroundColor="#EBEBEB">
+                    <Label Text="Сумма заказа" FontSize="14" TextColor="Black"></Label>
+                </Frame>
+            </StackLayout>
+                <StackLayout WidthRequest="290" HeightRequest="150" HorizontalOptions="Center">
+                    <Frame Padding="0" BackgroundColor="Transparent" BorderColor="Orange" HeightRequest="60" 
+                    WidthRequest="200" CornerRadius="48" Margin="0,20,0,20">
+                        <Label Text="Принять заказ"  TextColor="Black" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="18"></Label>
+                    </Frame>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer>
+
+                        </TapGestureRecognizer>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </StackLayout>
         
+        </StackLayout>
+
     </ContentPage.Content>
 </ContentPage>
