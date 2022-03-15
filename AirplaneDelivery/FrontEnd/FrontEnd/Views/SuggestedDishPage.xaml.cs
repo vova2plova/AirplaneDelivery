@@ -10,11 +10,10 @@ using Xamarin.Forms.Xaml;
 namespace FrontEnd.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class DishPage : ContentPage
+    public partial class SuggestedDishPage : ContentPage
     {
-        public DishPage()
+        public SuggestedDishPage()
         {
-            Title = "Блюда";
             InitializeComponent();
         }
     }

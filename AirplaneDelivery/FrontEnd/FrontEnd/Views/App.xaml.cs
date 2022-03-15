@@ -13,15 +13,16 @@ namespace FrontEnd
     {
         public App()
         {
-            InitializeComponent();
-               Device.SetFlags(new string[] { "MediaElement_Experimental" });
-               MainService.Init();
-               FlowListView.Init();
-               if (Preferences.Get("user_id", 0) == 0)
-                   MainPage = new NavigationPage(new LoginPage());
-               else
-                   MainPage = new NavigationPage(new MainPage());
-           
+            /* InitializeComponent();
+                Device.SetFlags(new string[] { "MediaElement_Experimental" });
+                MainService.Init();
+                FlowListView.Init();
+                if (Preferences.Get("user_id", 0) == 0)
+                    MainPage = new NavigationPage(new LoginPage());
+                else
+                    MainPage = new NavigationPage(new MainPage());
+            */
+            MainPage = new NavigationPage(new DetailDishPage());
         }
 
         protected override void OnStart()
