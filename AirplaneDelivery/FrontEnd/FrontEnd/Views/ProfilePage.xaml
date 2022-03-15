@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:_vm="clr-namespace:FrontEnd.ViewsModels"
              
              x:Class="FrontEnd.Views.ProfilePage">
-   
+    <ContentPage.BindingContext>
+        <_vm:ProfilePageViewModel x:Name="vm"/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <ScrollView>
             
@@ -11,16 +13,26 @@
                     <Grid VerticalOptions="Start">
                         <StackLayout Spacing="0">
                         <Grid WidthRequest="280" Padding="0,15" BackgroundColor="Transparent" HorizontalOptions="Center">
-                            <Image Margin="0,0,220,10" Source="user"></Image>
+                            <Image Margin="0,0,240,10"  Source="user"></Image>
                             <Entry  x:Name="name" Margin="39,0,39,0" FontSize="12" PlaceholderColor="Black" TextColor="Black"/>
                         </Grid>
                         <Grid WidthRequest="280" Padding="10,0" BackgroundColor="Transparent" HorizontalOptions="Center">
-                            <Image Margin="0,0,220,10" Source="phone"></Image>
+                            <Image Margin="0,0,240,10" Source="phone"></Image>
                             <Entry  x:Name="phone" Margin="39,0,39,0" FontSize="12" PlaceholderColor="Black" TextColor="Black"/>
                         </Grid>
+                        <StackLayout WidthRequest="100" HeightRequest="80" HorizontalOptions="Center" >
+                            
+                            <Frame Padding="0" BackgroundColor="Transparent" BorderColor="Orange" HeightRequest="60" 
+                    WidthRequest="100" CornerRadius="48" Margin="0,20,0,20">
+                                <Label Text="Сохранить"  TextColor="Black" HorizontalTextAlignment="Center" FontSize="14"  VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="100"></Label>
+                            </Frame>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="SaveCommand" NumberOfTapsRequired="1"></TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
                     </StackLayout>
                      </Grid>
-                    <Grid VerticalOptions="Center"  Margin="20,0,0,300"  >
+                    <Grid VerticalOptions="Center"  Margin="20,0,0,250"  >
                     <Label Grid.Row="1" Text="История заказов"></Label>
                 </Grid>
                 <Grid  TranslationY="65" VerticalOptions="CenterAndExpand" Margin="20,0,0,80">
