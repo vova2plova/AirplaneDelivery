@@ -41,12 +41,12 @@ namespace BackEnd.Controllers
             return BadRequest("Пользователь с такими данными уже зарегистрирован");
         }
 
-        [HttpGet("SignIn/{login}/{password}")]
+        [HttpGet("SignIn")]
         public ActionResult<User> SignIn(string login, string password)
         {
             var _user = db.Users.FirstOrDefault(x => x.Number == login && x.Password == password);
             if (_user != null)
-                return (Ok(_user));
+                return Ok(_user);
             return NotFound("Пользователь не найден");
         }
 
