@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FrontEnd.Views.DishesMainPage">
+    <ContentPage.Content>
+        <ScrollView Margin="0,-40,0,0" BackgroundColor="White">
+            <StackLayout BackgroundColor="White">
+                
+                    <Path
+                    Margin="0,30,0,0"
+                    Data="M121 151C333.4 37.8 200.167 -72.1667 107 -113L-177.5 -160L-259 347.5C-220.833 329.167 -91.4 264.2 121 151Z"
+                    Fill="#E6E6FA" />
+                <StackLayout HorizontalOptions="Start" VerticalOptions="Start" Margin="20,-320,0,0">
+                    <Label                       >
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span FontSize="23" Text="Рецепты&#10;" />
+                                <Span FontSize="23" Text="Специально&#10;" />
+                                <Span FontSize="23" Text="Для тебя"></Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </StackLayout>
+                
+            
+                <StackLayout x:Name="listDishes">
+
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
