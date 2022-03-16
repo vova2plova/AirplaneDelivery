@@ -32,7 +32,7 @@ namespace FrontEnd.Views
             
             name.Text = user.Content.Name;
             phone.Text = user.Content.Number;
-
+            address.Text = user.Content.Address;
         }
         protected override async void OnAppearing()
         {

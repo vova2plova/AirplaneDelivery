@@ -11,14 +11,21 @@
         <Grid >
             <Grid VerticalOptions="Start">
                 <StackLayout Spacing="0">
-                    <Grid WidthRequest="280" Padding="0,15" BackgroundColor="Transparent" HorizontalOptions="Center">
-                        <Image Margin="0,0,240,10"  Source="user"></Image>
+                    <Grid WidthRequest="320" Padding="0,15" BackgroundColor="Transparent" HorizontalOptions="Center">
+                        <Image Margin="0,0,280,10"  Source="user"></Image>
                         <Entry  x:Name="name" Margin="39,0,39,0" FontSize="12" PlaceholderColor="Black" TextColor="Black"/>
                     </Grid>
-                    <Grid WidthRequest="280" Padding="10,0" BackgroundColor="Transparent" HorizontalOptions="Center">
-                        <Image Margin="0,0,240,10" Source="phone"></Image>
+                    <Grid WidthRequest="320" Padding="10,0" BackgroundColor="Transparent" HorizontalOptions="Center">
+                        <Image Margin="0,0,280,10" Source="phone"></Image>
                         <Entry  x:Name="phone" Margin="39,0,39,0" FontSize="12" PlaceholderColor="Black" TextColor="Black"/>
                     </Grid>
+                    <Grid WidthRequest="320" Padding="10,0" BackgroundColor="Transparent" HorizontalOptions="Center">
+                        <Image Margin="0,0,280,10" Source="address"></Image>
+                        <Entry  x:Name="address" Margin="39,0,39,0" FontSize="12" PlaceholderColor="Black" TextColor="Black"/>
+                    </Grid>
+                    <StackLayout HorizontalOptions="Center" Margin="0,-20,0,0">
+                        <Label Text="Пример: Казань, ул. Пушкина 17, кв.15" Margin="10,20,20,0" FontSize="12" ></Label>
+                    </StackLayout>
                     <StackLayout WidthRequest="100" HeightRequest="80" HorizontalOptions="Center" >
 
                         <Frame Padding="0" BackgroundColor="Transparent" BorderColor="Orange" HeightRequest="60" 
@@ -31,13 +38,13 @@
                     </StackLayout>
                 </StackLayout>
             </Grid>
-            <Grid VerticalOptions="Center"  Margin="20,0,0,250"  >
-                <Label Grid.Row="1" Text="История заказов"></Label>
+            <Grid VerticalOptions="Center"  Margin="20,40,0,180"  >
+                <Label Grid.Row="1" Text="История заказов" TextColor="Black" FontSize="16"></Label>
             </Grid>
         
         <ScrollView HeightRequest="700">
-                        <StackLayout Margin="10,250,10,0" x:Name="List"  Spacing="10">
-                    <Label Text="3123"></Label>
+                        <StackLayout Margin="10,290,10,0" x:Name="List"  Spacing="10">
+                    <Label Text="Заказы"></Label>
                     <BindableLayout.ItemTemplate>
                                 <DataTemplate>
                                     <Frame Padding="0" BackgroundColor="Transparent" BorderColor="Orange" HeightRequest="88" 
