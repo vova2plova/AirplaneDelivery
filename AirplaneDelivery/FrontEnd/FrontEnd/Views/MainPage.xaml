@@ -48,15 +48,14 @@
                             </Image.GestureRecognizers>
                         </Image>
                         <SearchBar  
+                        TextChanged="searchbar_TextChanged"
                         x:Name="searchbar"
                         Margin="50,0,0,0"
                         Placeholder="Поищем..."
                         VerticalOptions="End"      
                         IsVisible="false"
                         >
-
                         </SearchBar>
-
                         <Label
                         Grid.Row="1"
                         Grid.ColumnSpan="3"
@@ -86,7 +85,7 @@
                                         <pancake:PancakeView
                                         Margin="0,15,15,15"
                                         Padding="0,0,0,25"
-                                        BackgroundColor="White"
+                                        BackgroundColor="{Binding isChoosen}"
                                         CornerRadius="40"
                                         HasShadow="False"
                                         WidthRequest="85">

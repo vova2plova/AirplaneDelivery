@@ -21,7 +21,7 @@ namespace BackEnd.Controllers
         [HttpGet("GetAllProducts")]
         public async Task<ActionResult<List<Product>>> GetAllProducts()
         {
-            var products = await db.Products.ToListAsync();
+            var products = await db.Products.Include(p => p.CategoryProduct).ToListAsync();
             return products == null ?
                 NotFound() :
                 Ok(products); 

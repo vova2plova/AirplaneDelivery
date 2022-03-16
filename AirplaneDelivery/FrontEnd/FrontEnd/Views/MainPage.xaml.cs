@@ -66,6 +66,9 @@ namespace FrontEnd
             
         }
 
-      
+        private void searchbar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            vm.SearchBarTextChanged(listProducts, e.NewTextValue);
+        }
     }
 }

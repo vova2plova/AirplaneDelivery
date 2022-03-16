@@ -14,6 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using System.Linq;
 
 namespace FrontEnd.ViewsModels
 {
@@ -21,12 +22,14 @@ namespace FrontEnd.ViewsModels
     {
         public MainPageViewModel()
         {
-
             MenuList = GetMenus();
         }
 
-        public ObservableCollection<Category> Categories;
-        public List<Product> Products;
+        public static ObservableCollection<Category> Categories;
+        public static List<Product> Products;
+        public static List<Product> AllProducts;
+        public static StackLayout stack;
+        public static Category OldCategory;
 
         private Command<int> _selectMenuCommand;
         private ObservableCollection<Menu> menuList;
@@ -37,11 +40,28 @@ namespace FrontEnd.ViewsModels
         }
         public Command<Category> SelectCategoryCommand => new Command<Category>(Category =>
         {
-
-            var index = Category.Id;
-       
-            Application.Current.MainPage.DisplayAlert("Selected Plan", "название категории : " + Category.Title, "Ok");
-
+            bool clear = false;
+            stack.Children.Clear();
+            if (AllProducts != null)
+            {
+                Category.isChoosen = Color.Orange;
+                Categories[Categories.IndexOf(Category)] = Category;
+                Products = AllProducts.Where(p => p.CategoryProduct.Id == Category.Id).ToList();
+                if (OldCategory != null)
+                {
+                    OldCategory.isChoosen = Color.White;
+                    Categories[Categories.IndexOf(OldCategory)] = OldCategory;
+                    if (OldCategory.Id == Category.Id)
+                    {
+                        OldCategory = null;
+                        Products = AllProducts;
+                        clear = true;
+                    }
+                }
+                if (clear == false)
+                    OldCategory = Category;
+                DrawCollection(stack, Products);
+            }        
         });
 
         public Command<Product> SelectProductCommand => new Command<Product>(async Product =>
@@ -63,6 +83,22 @@ namespace FrontEnd.ViewsModels
             };
         }
 
+        public void SearchBarTextChanged(StackLayout stack,string text)
+        {
+            if (OldCategory != null)
+            {
+                OldCategory.isChoosen = Color.White;
+                Categories[Categories.IndexOf(OldCategory)] = OldCategory;
+                OldCategory = null;
+            }
+            stack.Children.Clear();
+            if (AllProducts != null)
+                Products = AllProducts.Where(x => x.Name.Contains(text)).ToList();
+            if (text == "")
+                Products = AllProducts;
+            DrawCollection(stack, Products);
+        }
+
         public static double GetGridContainerHeight(double itemCount, double columnCount, int rowHeight) 
         { 
             var rowCount = Math.Ceiling(itemCount / columnCount);
@@ -73,8 +109,10 @@ namespace FrontEnd.ViewsModels
             var response = await MainService.ProductService.GetAllProducts();
             if (response.IsSuccessStatusCode)
             {
+                stack = ProdutList;
                 Products = new List<Product>(response.Content);
-                DrawCollection(ProdutList);
+                AllProducts = new List<Product>(Products);
+                DrawCollection(stack, Products);
             }
         }
 
@@ -85,6 +123,8 @@ namespace FrontEnd.ViewsModels
             {
                 Categories = new ObservableCollection<Category>(response.Content);
                 CategoryList.ItemsSource = Categories;
+                foreach (var category in Categories)
+                    category.isChoosen = Color.White;
             }
         }
         public Command<int> SelectMenuCommand
@@ -115,9 +155,9 @@ namespace FrontEnd.ViewsModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
-        private void DrawCollection(StackLayout MainStack)
+        private void DrawCollection(StackLayout MainStack, List<Product> products)
         {
-            for (var i = 0; i < Products.Count; i += 2)
+            for (var i = 0; i < products.Count; i += 2)
             {
                 var stack = new StackLayout()
                 {
@@ -153,7 +193,7 @@ namespace FrontEnd.ViewsModels
 
                 var leftImage = new Image
                 {
-                    Source = ImageSource.FromUri(Products[i].Image),
+                    Source = ImageSource.FromUri(products[i].Image),
                     HeightRequest = 100,
                     WidthRequest = 100
                 };
@@ -167,7 +207,7 @@ namespace FrontEnd.ViewsModels
                 var leftName = new Label()
                 {
                     FontSize = 18,
-                    Text = Products[i].Name,
+                    Text = products[i].Name,
                     TextColor = Color.Black
                 };
 
@@ -180,7 +220,7 @@ namespace FrontEnd.ViewsModels
                 var leftPrice = new Label()
                 {
                     FontSize = 16,
-                    Text = Products[i].Price.ToString() + " ₽",
+                    Text = products[i].Price.ToString() + " ₽",
                     TextColor = Color.Black,
                     VerticalOptions = LayoutOptions.EndAndExpand
                 };
@@ -199,7 +239,7 @@ namespace FrontEnd.ViewsModels
                 var leftTap = new TapGestureRecognizer
                 {
                     Command = SelectProductCommand,
-                    CommandParameter = Products[i]
+                    CommandParameter = products[i]
                 };
 
                 leftFrame.GestureRecognizers.Add(leftTap);
@@ -208,9 +248,9 @@ namespace FrontEnd.ViewsModels
 
                 if (i + 1 != Products.Count)
                 {
-                    rightName.Text = Products[i + 1].Name;
-                    rightPrice.Text = Products[i + 1].Price.ToString() + " ₽";
-                    rightImage.Source = ImageSource.FromUri(Products[i + 1].Image);
+                    rightName.Text = products[i + 1].Name;
+                    rightPrice.Text = products[i + 1].Price.ToString() + " ₽";
+                    rightImage.Source = ImageSource.FromUri(products[i + 1].Image);
                     rightStack.Children.Add(rightImage);
                     rightStack.Children.Add(rightName);
                     rightStack.Children.Add(rightPrice);
@@ -218,7 +258,7 @@ namespace FrontEnd.ViewsModels
                     var rightTap = new TapGestureRecognizer()
                     {
                         Command = SelectProductCommand,
-                        CommandParameter = Products[i + 1]
+                        CommandParameter = products[i + 1]
                     };
 
                     rightFrame.Content = rightStack;
