@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FrontEnd.ViewsModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,17 @@ namespace FrontEnd.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SuggestedDishPage : ContentPage
     {
+        SuggestedDishViewModel vm = new SuggestedDishViewModel();
         public SuggestedDishPage()
         {
             InitializeComponent();
+            this.BindingContext = vm;
+        }
+
+        protected override void OnAppearing()
+        {
+            vm.LoadRecipes(List);
+            base.OnAppearing();
         }
     }
 }

@@ -35,5 +35,10 @@ namespace FrontEnd.Views
         {
             vm.AddSlotToCart();
         }
+
+        private void ToRecipePage_Tapped(object sender, EventArgs e)
+        {
+            vm.ToRecipePage();
+        }
     }
 }

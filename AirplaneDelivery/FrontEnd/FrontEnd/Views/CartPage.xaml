@@ -101,7 +101,11 @@
             <StackLayout WidthRequest="150" HorizontalOptions="Center">
                 <Frame Padding="0" BackgroundColor="Transparent" BorderColor="Orange" HeightRequest="60" 
                     WidthRequest="200" CornerRadius="48" Margin="0,20,0,20">
-                    <Label Text="Оплатить"  TextColor="Black" HorizontalTextAlignment="Center" FontSize="16"  VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="100"></Label>
+                    <Label Text="Оплатить"  TextColor="Black" HorizontalTextAlignment="Center" FontSize="16"  VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="100">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="AddToHistory_Tapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
                 </Frame>
             </StackLayout>
         </StackLayout>

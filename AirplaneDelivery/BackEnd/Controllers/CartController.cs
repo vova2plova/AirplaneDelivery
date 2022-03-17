@@ -18,6 +18,122 @@ namespace BackEnd.Controllers
             db = context;
         }
 
+        [HttpPost("AddMissingProductsToCartFromRecipe/{idUser}/{idRecipe}")]
+        public async Task<ActionResult<User>> AddMissingProductsFromRecipe(int idUser, int idRecipe)
+        {
+            var recipe = db.Recipes.Include(p => p.Products).FirstOrDefault(x => x.Id == idRecipe);
+            if (recipe != null)
+            {
+                var users = await db.Users.Include(u => u.Cart).ToListAsync();
+                var user = users.FirstOrDefault(u => u.Id == idUser);
+                user.Cart.Spots = db.Spots.Where(s => s.CartId == user.Cart.Id).ToList();
+                if (user != null)
+                {
+                    if (user.Cart.Spots == null)
+                    {
+                        user.Cart.Status = "Shoping";
+                        user.Cart.Spots = new List<Spot>();
+                    }
+                    int i = 0;
+                    while (i < recipe.Products.Count)
+                    {
+                        var spots = db.Spots.FirstOrDefault(s =>
+                            s.Products.Name == recipe.Products[i].Name
+                            && s.CartId == user.Cart.Id); ;
+                        if (spots == null)
+                        {
+                            var spot = new Spot()
+                            {
+                                Products = recipe.Products[i],
+                                Count = 1
+                            };
+                            user.Cart.Spots.Add(spot);
+                        }
+                        i++;
+                    }
+                    await db.SaveChangesAsync();
+                    return Ok("Продукт добавлен в корзину");
+                }
+            }
+            return BadRequest();
+        }
+
+        [HttpPost("AddProductsToCartFromRecipe/{idUser}/{idRecipe}")]
+        public async Task<ActionResult<User>> AddProductsFromRecipe(int idUser, int idRecipe)
+        {
+            var recipe = db.Recipes.Include(p => p.Products).FirstOrDefault(x => x.Id == idRecipe);
+            if (recipe != null)
+            {
+                var users = await db.Users.Include(u => u.Cart).ToListAsync();
+                var user = users.FirstOrDefault(u => u.Id == idUser);
+                user.Cart.Spots = db.Spots.Where(s => s.CartId == user.Cart.Id).ToList();
+                if (user != null)
+                {
+                    if (user.Cart.Spots == null)
+                    {
+                        user.Cart.Status = "Shoping";
+                        user.Cart.Spots = new List<Spot>();
+                    }
+                    int i = 0;
+                    while (i < recipe.Products.Count)
+                    {
+                        var spots = db.Spots.FirstOrDefault(s => 
+                            s.Products.Name == recipe.Products[i].Name 
+                            && s.CartId == user.Cart.Id);
+                        if (spots != null)
+                            spots.Count++;
+                        else
+                        {
+                            var spot = new Spot()
+                            {
+                                Products = recipe.Products[i],
+                                Count = 1
+                            };
+                            user.Cart.Spots.Add(spot);
+                        }
+                        i++;
+                    }
+                    await db.SaveChangesAsync();
+                    return Ok("Продукт добавлен в корзину");
+                }
+            }
+            return BadRequest();
+        }
+
+        [HttpGet("GetHistoryOrders")]
+        public async Task<ActionResult<List<Cart>>> GetHistoryOrder(int id)
+        {
+            var user = await db.Users.Include(c => c.HistoryOfOrders).ThenInclude(p => p.Spots)
+                .ThenInclude(p => p.Products).FirstOrDefaultAsync(u => u.Id == id);
+            return Ok(user.HistoryOfOrders);
+        }
+
+        [HttpPost("AddOrderToHistory/{idUser}")]
+        public async Task<ActionResult<User>> AddOrderToHistory(int idUser)
+        {
+            var user = await db.Users.Include(c => c.HistoryOfOrders).Include(u => u.Cart).FirstOrDefaultAsync(u => u.Id == idUser);
+            if (user != null)
+            {
+                var cart = db.Carts.FirstOrDefault(c => c.Id == user.Cart.Id);
+                var spots = db.Spots.Include(s => s.Products).Where(s => s.CartId == user.Cart.Id).ToList();
+                if (spots != null)
+                {
+                    cart.Spots = spots;
+                    cart.Status = "В доставке";
+                }
+                else
+                    return BadRequest();
+                user.HistoryOfOrders.Add(cart);
+                user.Cart = new Cart()
+                {
+                    Status = "Покупка"
+                };
+                await db.SaveChangesAsync();
+                return Ok("Успешно");
+            }
+            return BadRequest("Ошибка");
+        }
+
         [HttpPut("EditCountProducts")]
         public async Task<Spot> EditCountProducts(int idSpot, int NewCount)
         {

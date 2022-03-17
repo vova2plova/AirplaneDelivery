@@ -34,9 +34,10 @@ namespace FrontEnd.Views
             phone.Text = user.Content.Number;
             address.Text = user.Content.Address;
         }
-        protected override async void OnAppearing()
+        protected override void OnAppearing()
         {
             Init();
+            vm.LoadHistory(List);
         }
        async private void SaveCommand(object sender, EventArgs e)
         {

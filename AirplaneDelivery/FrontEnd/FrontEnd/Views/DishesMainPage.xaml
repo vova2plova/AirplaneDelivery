@@ -21,8 +21,6 @@
                         </Label.FormattedText>
                     </Label>
                 </StackLayout>
-                
-            
                 <StackLayout x:Name="listDishes">
 
                 </StackLayout>

@@ -3,15 +3,17 @@ using System;
 using BackEnd;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace BackEnd.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220317104223_addRecipes")]
+    partial class addRecipes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,9 +116,6 @@ namespace BackEnd.Migrations
                     b.Property<float>("Fats")
                         .HasColumnType("real");
 
-                    b.Property<string>("Image")
-                        .HasColumnType("text");
-
                     b.Property<float>("Kkal")
                         .HasColumnType("real");
 
@@ -124,9 +123,6 @@ namespace BackEnd.Migrations
                         .HasColumnType("real");
 
                     b.Property<string>("Title")
-                        .HasColumnType("text");
-
-                    b.Property<string>("UrlLink")
                         .HasColumnType("text");
 
                     b.HasKey("Id");

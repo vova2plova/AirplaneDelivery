@@ -7,36 +7,36 @@
     <ContentPage.Content>
         <StackLayout>
             <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                <Label Text="Название блюда" TextColor="Black" FontSize="24"></Label>
+                <Label Text="{Binding Title}" TextColor="Black" FontSize="24"></Label>
             </StackLayout>
             <StackLayout HeightRequest="150" WidthRequest="150">
-                <Image Source="milk" HeightRequest="150" WidthRequest="150"></Image>
+                <Image Source="{Binding Image}" HeightRequest="150" WidthRequest="150"></Image>
                 <Label Text="Вам понадобится:" TextColor="Black" FontSize="16" VerticalOptions="Center" HorizontalOptions="Center"></Label>
             </StackLayout>
             <ScrollView HeightRequest="700">
                 <StackLayout Margin="10,30,10,0" x:Name="List"  Spacing="10">
-                    
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
                             <Frame Padding="0" BackgroundColor="Transparent" BorderColor="Orange" HeightRequest="88" 
                             WidthRequest="120" CornerRadius="48">
                                 <StackLayout Orientation="Horizontal">
-                                    <Image Source="milk"  WidthRequest="75" HeightRequest="50"
+                                    <Image Source="{Binding Image}"  WidthRequest="75" HeightRequest="50"
                                                 HorizontalOptions="Center" VerticalOptions="Center" />
                                     <StackLayout  HorizontalOptions="Center" VerticalOptions="Center" >
-                                        <Label Text="название продукта"  TextColor="Black"  FontSize="16"  HorizontalOptions="Center" VerticalOptions="Center" ></Label>
-                                        
+                                        <Label Text="{Binding Name}"  TextColor="Black"  FontSize="16"  HorizontalOptions="Center" VerticalOptions="Center" ></Label>
                                     </StackLayout >
                             <StackLayout  WidthRequest="90"  HorizontalOptions="EndAndExpand">
                                 <Label FontSize="16"
                                        Margin="20,30,0,0"
                                           VerticalOptions="Center"
                                            TextColor="Black"
-                                           Text="цена" 
-                                            />
+                                           Text="{Binding Price}"/>
                             </StackLayout>
                                     
                                 </StackLayout>
                             </Frame>
-                      
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
                 </StackLayout>
             </ScrollView>
             
@@ -50,12 +50,16 @@
                 </StackLayout >
                 <StackLayout   HorizontalOptions="Start" HeightRequest="20" WidthRequest="85">
                     <Frame CornerRadius="15" BackgroundColor="#EBEBEB">
-                        <Label Text="цена" FontSize="18" TextColor="Black"></Label>
+                        <Label Text="{Binding Sum}" FontSize="18" TextColor="Black"></Label>
                     </Frame>
                     
                 </StackLayout>
                 <StackLayout   BackgroundColor="Black" HorizontalOptions="End" HeightRequest="50" WidthRequest="50" >
-                    <Image Source="milk"></Image>
+                    <Image Source="milk">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="AddProductsToCart_Tapped"/>
+                        </Image.GestureRecognizers>
+                    </Image>
                 </StackLayout>
 
                 

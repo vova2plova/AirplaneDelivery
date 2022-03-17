@@ -41,32 +41,28 @@
             <Grid VerticalOptions="Center"  Margin="20,40,0,180"  >
                 <Label Grid.Row="1" Text="История заказов" TextColor="Black" FontSize="16"></Label>
             </Grid>
-        
-        <ScrollView HeightRequest="700">
-                        <StackLayout Margin="10,290,10,0" x:Name="List"  Spacing="10">
-                    <Label Text="Заказы"></Label>
+            <ScrollView HeightRequest="700">
+               <StackLayout Margin="10,290,10,0" x:Name="List"  Spacing="10">
                     <BindableLayout.ItemTemplate>
-                                <DataTemplate>
-                                    <Frame Padding="0" BackgroundColor="Transparent" BorderColor="Orange" HeightRequest="88" 
+                        <DataTemplate>
+                            <Frame Padding="0" BackgroundColor="Transparent" BorderColor="Orange" HeightRequest="88" 
                             WidthRequest="120" CornerRadius="48">
-                                        <StackLayout Orientation="Horizontal">
-                                            
-                                            <StackLayout WidthRequest="100">
-                                                <Label Text="Статус"  TextColor="Black"  FontSize="16"  HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" ></Label>
-                                                <Label Text="Сумма"  FontSize="14" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="EndAndExpand"></Label>
-                                            </StackLayout>
-                                       
+                                <StackLayout Orientation="Horizontal">
+                                    <StackLayout WidthRequest="100">
+                                        <Label Text="{Binding Status}"  TextColor="Black"  FontSize="16"  HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" ></Label>
+                                        <Label Text="{Binding Sum}"  FontSize="14" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="EndAndExpand"></Label>
                                     </StackLayout>
-                                    </Frame>
-                                </DataTemplate>
-                            </BindableLayout.ItemTemplate>
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer>
                             
-                        </TapGestureRecognizer>
-                    </StackLayout.GestureRecognizers>
-                        </StackLayout>
-                    </ScrollView>
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </ScrollView>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

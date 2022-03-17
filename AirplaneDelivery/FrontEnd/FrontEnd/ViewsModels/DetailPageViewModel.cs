@@ -1,6 +1,7 @@
 ﻿using Acr.UserDialogs;
 using DAL.Models;
 using FrontEnd.OnlineServices;
+using FrontEnd.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +13,7 @@ namespace FrontEnd.ViewsModels
 {
     internal class DetailPageViewModel : INotifyPropertyChanged
     {
-        Product _product;
+        static Product _product;
 
         public event PropertyChangedEventHandler PropertyChanged;
         private int _count;
@@ -57,6 +58,12 @@ namespace FrontEnd.ViewsModels
                     OnPropertyChanged("Count");
                 }
             } 
+        }
+
+        public async void ToRecipePage()
+        {
+            Preferences.Set("current_product", _product.Id);
+            await Application.Current.MainPage.Navigation.PushAsync(new SuggestedDishPage());
         }
 
         public void IncCount()

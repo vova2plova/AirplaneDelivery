@@ -13,6 +13,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Npgsql;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 namespace BackEnd
 {
@@ -28,7 +29,6 @@ namespace BackEnd
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
             services.AddDbContext<DatabaseContext>(options =>
                 options.UseNpgsql("Host=ec2-52-31-201-170.eu-west-1.compute.amazonaws.com;Username=aojlqpycoqjjxf;Password=8f77ecf076dfb48c8d46f7ecba91b731442a3d69dd6aa186fddd0eb33cb638d6;Database=dfgdfsaue79bgm;Pooling=true;SSL Mode=Require;TrustServerCertificate=True;"));

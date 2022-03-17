@@ -93,7 +93,7 @@ namespace FrontEnd.ViewsModels
             }
             stack.Children.Clear();
             if (AllProducts != null)
-                Products = AllProducts.Where(x => x.Name.Contains(text)).ToList();
+                Products = AllProducts.Where(x => x.Name.ToLower().Contains(text.ToLower())).ToList();
             if (text == "")
                 Products = AllProducts;
             DrawCollection(stack, Products);
@@ -104,12 +104,12 @@ namespace FrontEnd.ViewsModels
             var rowCount = Math.Ceiling(itemCount / columnCount);
             return rowCount * rowHeight; 
         }
-        public async void LoadProducts(StackLayout ProdutList)
+        public async void LoadProducts(StackLayout ProductList)
         {
             var response = await MainService.ProductService.GetAllProducts();
             if (response.IsSuccessStatusCode)
             {
-                stack = ProdutList;
+                stack = ProductList;
                 Products = new List<Product>(response.Content);
                 AllProducts = new List<Product>(Products);
                 DrawCollection(stack, Products);

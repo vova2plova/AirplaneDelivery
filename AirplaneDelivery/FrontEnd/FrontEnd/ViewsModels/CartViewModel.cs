@@ -109,5 +109,23 @@ namespace FrontEnd.ViewsModels
             OnPropertyChanged("Spots[Spots.IndexOf(Spot)].Count");
             GetSumPrice();
         });
+
+        public async void AddToHistory()
+        {
+            using (UserDialogs.Instance.Loading("Идёт обработка заказа", null, null, true, MaskType.Black))
+            {
+                var result = await MainService.CartService.AddOrderToHistory(Preferences.Get("user_id", 0));
+                if (result.IsSuccessStatusCode)
+                {
+                    UserDialogs.Instance.Toast("Заказ успешно оплачен", new TimeSpan(50));
+                    Application.Current.MainPage = new NavigationPage(new MainPage());
+                }
+                else
+                {
+                    UserDialogs.Instance.Toast("Ошибка", new TimeSpan(50));
+                    Application.Current.MainPage = new NavigationPage(new MainPage());
+                }
+            }
+        }
     }
 }

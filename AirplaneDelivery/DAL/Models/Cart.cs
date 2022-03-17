@@ -11,5 +11,7 @@ namespace DAL.Models
         public int Id { get; set; }
         public List<Spot> Spots {get;set ;}
         public string Status { get; set; }
+        [NotMapped]
+        public string Sum { get; set; }
     }
 }

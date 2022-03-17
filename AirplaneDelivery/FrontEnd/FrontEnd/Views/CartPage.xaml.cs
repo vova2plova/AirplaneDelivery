@@ -25,5 +25,10 @@ namespace FrontEnd.Views
         {
             base.OnAppearing();
         }
+
+        private void AddToHistory_Tapped(object sender, EventArgs e)
+        {
+            vm.AddToHistory();
+        }
     }
 }

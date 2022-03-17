@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DAL.Models;
+using FrontEnd.ViewsModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +14,23 @@ namespace FrontEnd.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DetailDishPage : ContentPage
     {
-        public DetailDishPage()
+        DetailDishViewModel vm ;
+        public DetailDishPage(Recipe recipe)
         {
             InitializeComponent();
+            vm = new DetailDishViewModel(recipe);
+            BindingContext = vm;
+        }
+
+        protected override void OnAppearing()
+        {
+            vm.LoadProductFromRecipe(List);
+            base.OnAppearing();
+        }
+
+        private void AddProductsToCart_Tapped(object sender, EventArgs e)
+        {
+            vm.AddProductsToCart();
         }
     }
 }

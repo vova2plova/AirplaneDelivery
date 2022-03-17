@@ -36,7 +36,11 @@
                             HeightRequest="40"
                             HorizontalOptions="Start"
                             WidthRequest="270">
-                            <Label Padding="5" TextColor="Black" Text="Узнайте, что вы можете приготовить с этим продуктом!"></Label>
+                            <Label Padding="5" TextColor="Black" Text="Узнайте, что вы можете приготовить с этим продуктом!">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="ToRecipePage_Tapped"/>
+                                </Label.GestureRecognizers>
+                            </Label>
                         </pancake:PancakeView>
                     </shadows:Shadows>
                     <StackLayout Orientation="Horizontal" Margin="20,50,0,15">

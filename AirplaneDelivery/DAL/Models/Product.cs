@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 
 namespace DAL.Models
@@ -28,6 +30,6 @@ namespace DAL.Models
         public Uri Image { get; set; }
         
         public int CountInStorage { get; set; }
-
+        public List<Recipe> Recipe { get; set; }
     }
 }

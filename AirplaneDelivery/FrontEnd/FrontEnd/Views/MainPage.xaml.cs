@@ -39,12 +39,6 @@ namespace FrontEnd
             MenuGrid.IsVisible = false;
         }
 
-        protected override void OnAppearing()
-        {
-
-            base.OnAppearing();
-        }
-
         private void MenuTapped(object sender, EventArgs e)
         {
             OpenMenu();

@@ -1,6 +1,7 @@
 ﻿using FrontEnd.OnlineServices.CartService;
 using FrontEnd.OnlineServices.CategoryService;
 using FrontEnd.OnlineServices.ProductService;
+using FrontEnd.OnlineServices.RecipeService;
 using FrontEnd.OnlineServices.UserService;
 using System;
 using System.Collections.Generic;
@@ -16,12 +17,14 @@ namespace FrontEnd.OnlineServices
             CategoryService = new CategoryService.CategoryService();
             ProductService = new ProductService.ProductService();
             CartService = new CartService.CartService();
+            RecipeService = new RecipeService.RecipeService();
         }
 
         public static IUserService UserService { get; set; }
         public static ICategoryService CategoryService { get; set; }
         public static IProductService ProductService { get; set; }
         public static ICartService CartService { get; set; }
+        public static IRecipeService RecipeService { get; set; }
     }
 
 }

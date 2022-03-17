@@ -8,26 +8,27 @@
            
             <ScrollView HeightRequest="700">
                 <StackLayout  Margin="10,30,10,0" x:Name="List"  Spacing="10">
-
-                    <Frame Padding="0" BackgroundColor="Transparent" BorderColor="Orange" HeightRequest="88" 
-                            WidthRequest="120" CornerRadius="48">
-                        <StackLayout Orientation="Horizontal">
-                            <Image Source="картинка"  WidthRequest="75" HeightRequest="50"
-                                                HorizontalOptions="Center" VerticalOptions="Center" />
-                            <StackLayout WidthRequest="200" >
-                                <Label Text="Название блюда" TextColor="Black" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" FontSize="18"></Label>
-                               
-                            </StackLayout>
-                           
-
-                        </StackLayout>
-                    </Frame>
-
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="0" BackgroundColor="Transparent" BorderColor="Orange" HeightRequest="88" 
+                                    WidthRequest="120" CornerRadius="48">
+                                <StackLayout Orientation="Horizontal">
+                                    <Image Source="{Binding Image}"  WidthRequest="75" HeightRequest="50"
+                                                        HorizontalOptions="Center" VerticalOptions="Center" />
+                                    <StackLayout WidthRequest="200" >
+                                        <Label Text="{Binding Title}" TextColor="Black" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" FontSize="18"></Label>
+                                    </StackLayout>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BindingContext.SelectRecipeCommand, Source={x:Reference List}}"
+                                                              CommandParameter="{Binding .}"/>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
                 </StackLayout>
             </ScrollView>
             <StackLayout Margin="10,10,10,0">
-
-               
                 <StackLayout WidthRequest="290" HeightRequest="150" HorizontalOptions="Center">
                     <Frame Padding="0" BackgroundColor="Transparent" BorderColor="Orange" HeightRequest="60" 
                     WidthRequest="200" CornerRadius="48" Margin="0,20,0,20">
