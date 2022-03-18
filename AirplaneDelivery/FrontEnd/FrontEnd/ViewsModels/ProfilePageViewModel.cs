@@ -15,7 +15,7 @@ namespace FrontEnd.ViewsModels
     {
         public ObservableCollection<Cart> Carts { get; set; }
         public ICommand SaveCommand => new Command<User>(async value =>
-        {
+        { 
             var response = await MainService.UserService.UpdateData(value);
             if (response.IsSuccessStatusCode)
             {
@@ -48,6 +48,7 @@ namespace FrontEnd.ViewsModels
                 BindableLayout.SetItemsSource(List, Carts);
             }
         }
+       
     }
        
     }

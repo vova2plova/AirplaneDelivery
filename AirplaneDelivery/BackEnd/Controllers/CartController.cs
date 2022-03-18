@@ -176,7 +176,7 @@ namespace BackEnd.Controllers
                         user.Cart.Status = "Shoping";
                         user.Cart.Spots = new List<Spot>();
                     }
-                    var spots = db.Spots.FirstOrDefault(s => s.Products.Name == spot.Products.Name);
+                    var spots = db.Spots.FirstOrDefault(s => s.Products.Name == spot.Products.Name && s.CartId == user.Cart.Id);
                     if (spots != null)
                         spots.Count += spot.Count;
                     else
@@ -209,9 +209,12 @@ namespace BackEnd.Controllers
         [HttpDelete("ClearCart/{UserId}")]
         public async Task<ActionResult> ClearCart(int UserId)
         {
-            var user = db.Users.FirstOrDefault(u => u.Id == UserId);
+            /*
+              db.users.include(u => u.cart).ThenInclude(c=>c.spots)FirstOrdefault
+             */
+            var user = db.Users.Include(u => u.Cart).ThenInclude(c=>c.Spots).FirstOrDefault(u => u.Id == UserId);
             if (user != null)
-            {
+            {  
                 var cart = user.Cart;
                 cart.Spots.Clear();
                 await db.SaveChangesAsync();

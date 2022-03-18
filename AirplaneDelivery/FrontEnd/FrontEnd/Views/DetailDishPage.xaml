@@ -5,7 +5,7 @@
              xmlns:shadows="clr-namespace:Sharpnado.Shades;assembly=Sharpnado.Shadows"
              x:Class="FrontEnd.Views.DetailDishPage">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Margin="5">
             <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
                 <Label Text="{Binding Title}" TextColor="Black" FontSize="24"></Label>
             </StackLayout>
@@ -17,7 +17,7 @@
                 <StackLayout Margin="10,30,10,0" x:Name="List"  Spacing="10">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
-                            <Frame Padding="0" BackgroundColor="Transparent" BorderColor="Orange" HeightRequest="88" 
+                            <Frame Padding="0" BackgroundColor="Transparent" BorderColor="#00c2ff" HeightRequest="88" 
                             WidthRequest="120" CornerRadius="48">
                                 <StackLayout Orientation="Horizontal">
                                     <Image Source="{Binding Image}"  WidthRequest="75" HeightRequest="50"
@@ -30,7 +30,7 @@
                                        Margin="20,30,0,0"
                                           VerticalOptions="Center"
                                            TextColor="Black"
-                                           Text="{Binding Price}"/>
+                                           Text="{Binding Price , StringFormat='{0:N0} ₽'}"/>
                             </StackLayout>
                                     
                                 </StackLayout>
@@ -40,30 +40,38 @@
                 </StackLayout>
             </ScrollView>
             
-            <StackLayout Margin="10,10,10,20">
+            <StackLayout Margin="10,0,10,0"   >
 
-                <StackLayout   Orientation="Horizontal" HorizontalOptions="Start" HeightRequest="96" WidthRequest="120" >
-                    <Frame CornerRadius="15" BackgroundColor="#EBEBEB">
-                        <Label Text="Общая стоимость:" TextColor="Black"></Label>
+                <StackLayout Spacing="10"  Orientation="Horizontal" HorizontalOptions="Start" HeightRequest="96" WidthRequest="380" >
+                    <Frame CornerRadius="15" HeightRequest="50" WidthRequest="90" BackgroundColor="#EBEBEB">
+                        <Label Text="Общая стоимость:" FontSize="16" TextColor="Black"></Label>
                     </Frame>
-
-                </StackLayout >
-                <StackLayout   HorizontalOptions="Start" HeightRequest="20" WidthRequest="85">
                     <Frame CornerRadius="15" BackgroundColor="#EBEBEB">
-                        <Label Text="{Binding Sum}" FontSize="18" TextColor="Black"></Label>
+                        <Label Text="{Binding Sum}" FontSize="18" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" TextColor="Black"></Label>
                     </Frame>
                     
-                </StackLayout>
-                <StackLayout   BackgroundColor="Black" HorizontalOptions="End" HeightRequest="50" WidthRequest="50" >
-                    <Image Source="milk">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="AddProductsToCart_Tapped"/>
-                        </Image.GestureRecognizers>
-                    </Image>
+                        <Image Source="cart2" HeightRequest="50" WidthRequest="50" HorizontalOptions="End" VerticalOptions="Center" Margin="30,0,0,0">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="AddProductsToCart_Tapped"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                    
+                </StackLayout >
+
+                <StackLayout  WidthRequest="120" HeightRequest="130" HorizontalOptions="Center" >
+
+                    <Frame Padding="0" BackgroundColor="Transparent" BorderColor="#00c2ff" HeightRequest="60" 
+                    WidthRequest="100" CornerRadius="48" Margin="0,0,10,10">
+                        <Label Text="Узнать как пригтовить"  TextColor="Black" HorizontalTextAlignment="Center" FontSize="14"  VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="100">
+                        </Label>
+                    </Frame>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OpenLink" ></TapGestureRecognizer>
+                    </StackLayout.GestureRecognizers>
                 </StackLayout>
 
-                
-        </StackLayout>
+
+            </StackLayout>
            
         </StackLayout>
         

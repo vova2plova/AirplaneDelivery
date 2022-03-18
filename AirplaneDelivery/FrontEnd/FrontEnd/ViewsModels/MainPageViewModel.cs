@@ -44,7 +44,7 @@ namespace FrontEnd.ViewsModels
             stack.Children.Clear();
             if (AllProducts != null)
             {
-                Category.isChoosen = Color.Orange;
+                Category.isChoosen = Color.FromHex("#00c2ff");
                 Categories[Categories.IndexOf(Category)] = Category;
                 Products = AllProducts.Where(p => p.CategoryProduct.Id == Category.Id).ToList();
                 if (OldCategory != null)

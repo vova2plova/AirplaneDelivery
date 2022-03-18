@@ -127,5 +127,18 @@ namespace FrontEnd.ViewsModels
                 }
             }
         }
+        public async void ClearCartCommand()
+        {
+            var result = await MainService.CartService.ClearCart(Preferences.Get("user_id", 0));
+            if (result.IsSuccessStatusCode){
+                
+                UserDialogs.Instance.Toast("Корзина успешно очищена", new TimeSpan(50));
+            }
+            else
+            {
+                
+                UserDialogs.Instance.Toast("Ошибка", new TimeSpan(50));
+            }
+        }
     }
 }

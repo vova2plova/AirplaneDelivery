@@ -27,7 +27,7 @@
                                 <Entry Placeholder="Номер телефона" x:Name="login"  FontSize="12" PlaceholderColor="Black" TextColor="Black"/>
                             </Grid>
                             <Grid WidthRequest="160" Padding="10,0" BackgroundColor="Transparent" HorizontalOptions="Start">
-                            <Entry Placeholder="Пароль" x:Name="password" FontSize="12" PlaceholderColor="Black" TextColor="Black"/>
+                            <Entry Placeholder="Пароль" IsPassword="True" x:Name="password" FontSize="12" PlaceholderColor="Black" TextColor="Black"/>
                             </Grid>
                         </StackLayout>
                     <Grid HorizontalOptions="Start"  HeightRequest="33" WidthRequest="33">
@@ -97,10 +97,10 @@
                                 <Entry Placeholder="Номер телефона" Keyboard="Telephone" FontSize="12" x:Name="loginNew" PlaceholderColor="Black" TextColor="Black"/>
                             </Grid>
                             <Grid WidthRequest="180" Padding="10,0" BackgroundColor="Transparent" HorizontalOptions="Center">
-                                <Entry Placeholder="Пароль" FontSize="12" x:Name="passwordNew" PlaceholderColor="Black" TextColor="Black"/>
+                                <Entry IsPassword="True" Placeholder="Пароль" FontSize="12" x:Name="passwordNew" PlaceholderColor="Black" TextColor="Black"/>
                             </Grid>
                             <Grid WidthRequest="180" Padding="10,0" BackgroundColor="Transparent" HorizontalOptions="Center">
-                                <Entry Placeholder="Подтвердите пароль" FontSize="12" x:Name="passwordRepeat" PlaceholderColor="Black" TextColor="Black"/>
+                                <Entry IsPassword="True" Placeholder="Подтвердите пароль" FontSize="12" x:Name="passwordRepeat" PlaceholderColor="Black" TextColor="Black"/>
                             </Grid>
                         </StackLayout>
                         <Grid HorizontalOptions="Center" Padding="4" Margin="1" HeightRequest="33" WidthRequest="33">

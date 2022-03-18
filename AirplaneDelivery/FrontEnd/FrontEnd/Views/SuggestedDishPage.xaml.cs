@@ -18,6 +18,7 @@ namespace FrontEnd.Views
         {
             InitializeComponent();
             this.BindingContext = vm;
+            NavigationPage.SetHasNavigationBar(this, false);
         }
 
         protected override void OnAppearing()

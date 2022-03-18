@@ -43,5 +43,10 @@ namespace FrontEnd.OnlineServices.CartService
         {
             return await InstanceInterface.GetUserCart(id);
         }
+
+        public async Task<ApiResponse<User>> ClearCart(int id)
+        {
+            return await InstanceInterface.ClearCart(id);
+        }
     }
 }

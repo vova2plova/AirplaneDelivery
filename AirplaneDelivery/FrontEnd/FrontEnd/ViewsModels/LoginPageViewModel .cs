@@ -20,7 +20,8 @@ namespace FrontEnd.ViewsModels
             var response = await MainService.UserService.SignIn(value.Number,value.Password);
             if (response.IsSuccessStatusCode)
             {
-                Application.Current.MainPage = new NavigationPage(new MainPage());
+                using (UserDialogs.Instance.Loading("Страница загружается", null, null, true, MaskType.Black)) { 
+                Application.Current.MainPage = new NavigationPage(new MainPage()); }
                 Preferences.Set("user_id", response.Content.Id);
             }
             else
@@ -33,7 +34,10 @@ namespace FrontEnd.ViewsModels
             if (response.IsSuccessStatusCode)
             {
                 UserDialogs.Instance.Toast("Вы успешно зарегестрировались!");
-                Application.Current.MainPage = new NavigationPage(new MainPage());
+                using (UserDialogs.Instance.Loading("Страница загружается", null, null, true, MaskType.Black))
+                {
+                    Application.Current.MainPage = new NavigationPage(new MainPage());
+                }
                 Preferences.Set("user_id", response.Content.Id);
             }
             else

@@ -4,31 +4,35 @@
              xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              x:Class="FrontEnd.Views.CartPage"
              NavigationPage.HasNavigationBar="False">
+    
     <ContentPage.Content>
-        <StackLayout>
-            <StackLayout HeightRequest="30" HorizontalOptions="EndAndExpand" VerticalOptions="Start" Margin="10,0,10,0" Orientation="Horizontal">
-                <Label Text="Очистить корзину" VerticalOptions="Center"/>
+        <StackLayout BackgroundColor="White">
+            <StackLayout HeightRequest="30" HorizontalOptions="EndAndExpand" VerticalOptions="Start" Margin="10,15,10,0" Orientation="Horizontal">
+                <Label Text="Очистить корзину" TextColor="Black" VerticalOptions="Center"/>
                 <Image Source="ClearCart" HeightRequest="30" WidthRequest="30" VerticalOptions="Center"/>
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ClearCart" >  </TapGestureRecognizer>
+                </StackLayout.GestureRecognizers>
             </StackLayout>
             <ScrollView HeightRequest="700">
-                <StackLayout Margin="10,30,10,0" x:Name="List"  Spacing="10">
+                <StackLayout Margin="10,10,10,0" x:Name="List"  Spacing="10">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
-                            <Frame Padding="0" BackgroundColor="Transparent" BorderColor="Orange" HeightRequest="88" 
+                            <Frame Padding="0" BackgroundColor="Transparent" BorderColor="#00c2ff" HeightRequest="88" 
                             WidthRequest="120" CornerRadius="48">
-                                <StackLayout Orientation="Horizontal">
-                                    <Image Source="{Binding Products.Image}"  WidthRequest="75" HeightRequest="50"
+                                <StackLayout Orientation="Horizontal" >
+                                    <Image Source="{Binding Products.Image}"  WidthRequest="75" HeightRequest="75"
                                                 HorizontalOptions="Center" VerticalOptions="Center" />
-                                    <StackLayout WidthRequest="100">
-                                        <Label Text="{Binding Products.Name}"  TextColor="Black"  FontSize="16"  HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" ></Label>
-                                        <Label Text="{Binding Products.Price}"  FontSize="14" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="EndAndExpand"></Label>
+                                    <StackLayout WidthRequest="130"   >
+                                        <Label Margin="0,5,0,0" Text="{Binding Products.Name}"  TextColor="Black"  FontSize="16"  HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" ></Label>
+                                        <Label Text="{Binding Products.Price, StringFormat='{0:N0} ₽'}"  FontSize="20" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="EndAndExpand"></Label>
                                     </StackLayout>
                                     <Label FontSize="25"
                                            HorizontalOptions="EndAndExpand"
-                                           Margin="90,0,0,0"
+                                           Margin="0,0,0,0"
                                            Text="{Binding Count}" 
                                            VerticalOptions="Center" /> 
-                                    <Grid 
+                                    <Grid  
                                     HorizontalOptions="EndAndExpand"  VerticalOptions="CenterAndExpand" Margin="0,0,15,0" WidthRequest="65" HeightRequest="45">
                                         <pancake:PancakeView BorderColor="Gray"
                                                                 BorderThickness="1"
@@ -81,7 +85,7 @@
             <StackLayout Margin="10,10,10,0">
                 <StackLayout Orientation="Horizontal">
                     <Frame CornerRadius="15" BackgroundColor="#EBEBEB">
-                        <Label Text="Адрес доставки" FontSize="20" VerticalOptions="Center" TextColor="Black"></Label>
+                        <Label Text="Адрес доставки:" FontSize="16" VerticalOptions="Center" TextColor="Black"></Label>
                     </Frame>
                 </StackLayout>
                 <StackLayout>
@@ -94,19 +98,19 @@
                         <Label Text="Общая стоимость:" TextColor="Black"></Label>
                     </Frame>
                     <Frame CornerRadius="15" BackgroundColor="#EBEBEB">
-                        <Label Text="{Binding Sum}" FontSize="18" TextColor="Black"></Label>
+                        <Label Text="{Binding Sum}" FontSize="16" TextColor="Black"></Label>
                     </Frame>
                 </StackLayout>
             </StackLayout>
-            <StackLayout WidthRequest="150" HorizontalOptions="Center">
-                <Frame Padding="0" BackgroundColor="Transparent" BorderColor="Orange" HeightRequest="60" 
+            <StackLayout WidthRequest="150" HeightRequest="100"  HorizontalOptions="Center">
+                <Frame Padding="0" BackgroundColor="Transparent" BorderColor="#00c2ff" HeightRequest="60" 
                     WidthRequest="200" CornerRadius="48" Margin="0,20,0,20">
                     <Label Text="Оплатить"  TextColor="Black" HorizontalTextAlignment="Center" FontSize="16"  VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="100">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="AddToHistory_Tapped"/>
-                        </Label.GestureRecognizers>
                     </Label>
                 </Frame>
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="AddToHistory_Tapped"/>
+                </StackLayout.GestureRecognizers>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

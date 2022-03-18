@@ -30,6 +30,8 @@ namespace BackEnd.Controllers
                 var newUser = new User {
                     Number = user.Number,
                     Password = user.Password,
+                    Address= "Пусто",
+                    Name="Пусто",
                     Cart = new Cart(),
                     HistoryOfOrders = new List<Cart>()
                 };
@@ -67,6 +69,7 @@ namespace BackEnd.Controllers
             {
                 _user.Name = user.Name;
                 _user.Number = user.Number;
+                _user.Address = user.Address;
                 await db.SaveChangesAsync();
                 return Ok();
             }

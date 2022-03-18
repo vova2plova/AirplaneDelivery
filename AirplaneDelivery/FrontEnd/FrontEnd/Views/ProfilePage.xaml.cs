@@ -31,6 +31,7 @@ namespace FrontEnd.Views
             var user = await MainService.UserService.GetUserById(Preferences.Get("user_id", 0));
             
             name.Text = user.Content.Name;
+            name.IsEnabled = true;
             phone.Text = user.Content.Number;
             address.Text = user.Content.Address;
         }
@@ -46,11 +47,15 @@ namespace FrontEnd.Views
             {
                 Id = _user.Content.Id,
                 Name = name.Text,
-                Number = phone.Text
+                Number = phone.Text,
+                Address = address.Text
+                
                 
             };
             _vm.SaveCommand.Execute(user);
             
         }
+
+       
     }
 }

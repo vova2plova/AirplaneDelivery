@@ -49,9 +49,7 @@
                             TextColor="Black"
                             Text="{Binding Name}"
                             VerticalOptions="Center" />
-                        <Label Text=">Фирма>"
-                               FontSize="20"
-                               TextColor="Black"/>
+                        
                     </StackLayout>
                     <StackLayout Margin="20,0,0,0" BackgroundColor="#EEEBEB" HorizontalOptions="Start">
                     <Label

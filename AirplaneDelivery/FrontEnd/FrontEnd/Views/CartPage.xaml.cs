@@ -30,5 +30,11 @@ namespace FrontEnd.Views
         {
             vm.AddToHistory();
         }
+        private void ClearCart(object sender, EventArgs e)
+        {
+           vm.ClearCartCommand();
+
+            List.Children.Clear();
+        }
     }
 }

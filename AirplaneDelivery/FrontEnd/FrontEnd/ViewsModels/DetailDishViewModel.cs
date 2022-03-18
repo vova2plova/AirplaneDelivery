@@ -8,6 +8,8 @@ using System.ComponentModel;
 using System.Text;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Essentials;
+using System.Threading.Tasks;
 
 namespace FrontEnd.ViewsModels
 {
@@ -43,7 +45,12 @@ namespace FrontEnd.ViewsModels
         {
             get => ImageSource.FromUri(_recipe.Image);
         }
-
+        
+        public string UrlLink
+        {
+            get => _recipe.UrlLink.ToString();
+        }
+       
         public async void AddProductsToCart()
         {
             ConfirmConfig config = new ConfirmConfig();
@@ -98,6 +105,12 @@ namespace FrontEnd.ViewsModels
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
+        }
+        public async Task OpenBrowser()
+        {
+            
+                await Browser.OpenAsync(UrlLink, BrowserLaunchMode.SystemPreferred);
+          
         }
     }
 }

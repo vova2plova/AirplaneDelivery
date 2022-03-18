@@ -63,7 +63,9 @@ namespace FrontEnd.ViewsModels
         public async void ToRecipePage()
         {
             Preferences.Set("current_product", _product.Id);
+            using (UserDialogs.Instance.Loading("Страница загружается", null, null, true, MaskType.Black)) { 
             await Application.Current.MainPage.Navigation.PushAsync(new SuggestedDishPage());
+        }
         }
 
         public void IncCount()

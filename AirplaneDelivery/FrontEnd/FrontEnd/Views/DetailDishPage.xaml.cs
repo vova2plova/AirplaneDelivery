@@ -20,6 +20,7 @@ namespace FrontEnd.Views
             InitializeComponent();
             vm = new DetailDishViewModel(recipe);
             BindingContext = vm;
+            NavigationPage.SetHasNavigationBar(this, false);
         }
 
         protected override void OnAppearing()
@@ -31,6 +32,10 @@ namespace FrontEnd.Views
         private void AddProductsToCart_Tapped(object sender, EventArgs e)
         {
             vm.AddProductsToCart();
+        }
+        private void OpenLink(object sender, EventArgs e)
+        {
+            vm.OpenBrowser();
         }
     }
 }

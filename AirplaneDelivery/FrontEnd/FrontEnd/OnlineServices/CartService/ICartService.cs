@@ -23,5 +23,8 @@ namespace FrontEnd.OnlineServices.CartService
         Task<ApiResponse<User>> AddOrderToHistory(int idUser);
         [Get("/Cart/GetHistoryOrders")]
         Task<ApiResponse<List<Cart>>> GetHistoryOrder(int id);
+
+        [Delete("/Cart/ClearCart/{UserId}")]
+        Task<ApiResponse<User>> ClearCart(int UserId);
     }
 }
