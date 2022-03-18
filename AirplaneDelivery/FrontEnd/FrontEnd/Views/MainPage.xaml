@@ -68,14 +68,15 @@
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
-                        <CollectionView
+                        <CollectionView 
+                            
                         x:Name="listGroups"
                         Grid.Row="2"
                         Grid.ColumnSpan="3"
                         Margin="20,10,0,0"
                         HorizontalScrollBarVisibility="Never"
                             ItemsSource="{Binding Categories}"
-                        SelectionMode="Single">
+                        SelectionMode="None">
                             <CollectionView.ItemsLayout>
                                 <LinearItemsLayout ItemSpacing="0" Orientation="Horizontal" />
                             </CollectionView.ItemsLayout>
@@ -94,8 +95,9 @@
                                                 Grid.Row="0"
                                                 Margin="12,12,12,0"
                                                 Padding="0"
-                                                BackgroundColor="Wheat"
+                                                BackgroundColor="#FFFAFA"
                                                 BorderColor="Gray"
+                                                    
                                                 BorderThickness="1"
                                                 CornerRadius="30"
                                                 HeightRequest="60"
